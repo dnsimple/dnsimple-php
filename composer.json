@@ -1,0 +1,26 @@
+{
+    "name": "dnsimple/dnsimple",
+    "type": "library",
+    "description": "The DNSimple API client for PHP",
+    "keywords": ["dnsimple"],
+    "homepage": "https://github.com/aetrion/dnsimple-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simone Carletti",
+            "email": "simone.carletti@dnsimple.com",
+            "homepage": "https://developer.dnsimple.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Dnsimple": "src/"
+        }
+    }
+}
