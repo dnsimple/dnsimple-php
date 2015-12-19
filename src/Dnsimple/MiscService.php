@@ -7,7 +7,9 @@ class MiscService extends ClientService
 {
     public function whoami()
     {
-        $result = $this->client->get(Client::versioned("whoami"));
-        return $result;
+        $response = $this->client->get(Client::versioned("whoami"));
+
+        $json = json_decode($response->getBody());
+        return $json->data;
     }
 }

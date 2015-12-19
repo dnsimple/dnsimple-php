@@ -10,4 +10,9 @@
         </testsuite>
     </testsuites>
 
+    <groups>
+        <exclude>
+            <group>forReal</group>
+        </exclude>
+    </groups>
 </phpunit>

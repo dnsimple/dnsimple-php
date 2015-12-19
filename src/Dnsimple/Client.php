@@ -40,12 +40,12 @@ class Client
     }
 
 
-    public function __construct($accessToken)
+    public function __construct($accessToken, array $config = array())
     {
         $this->accessToken = $accessToken;
-        $this->httpClient = new \GuzzleHttp\Client([
-            "base_uri" => self::BASE_URL,
-        ]);
+        $this->httpClient = new \GuzzleHttp\Client(
+            array_merge(["base_uri" => self::BASE_URL], $config)
+        );
     }
 
     public function get($path) {
