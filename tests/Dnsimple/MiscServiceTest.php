@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/../ResponseFixture.php";
+
 use Dnsimple\Client;
 
 use GuzzleHttp\Handler\MockHandler;
@@ -35,7 +37,7 @@ class MiscServiceTest extends PHPUnit_Framework_TestCase
 
     public function testWhoami_ReturnsResponse() {
         $this->mockHandler->append(
-            new Response(200, [], '{"data":{"user":null,"account":{"id":24,"email":"example-account@example.com"}}}')
+            (new ResponseFixture(file_get_contents(__DIR__ . "/../fixtures/misc/whoami/success.http")))->getResponse()
         );
 
         $data = $this->service->whoami();
