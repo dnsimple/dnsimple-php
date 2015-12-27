@@ -2,12 +2,11 @@
 
 <phpunit
         colors                      = "true"
-        bootstrap                   = "vendor/autoload.php" >
+        bootstrap                   = "tests/bootstrap.php" >
 
     <testsuites>
-        <testsuite name="Dnsimple tests">
-            <directory>./tests/</directory>
-            <directory>./tests/Dnsimple/</directory>
+        <testsuite name="Dnsimple Test Suite">
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 

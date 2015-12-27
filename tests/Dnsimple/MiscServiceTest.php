@@ -1,8 +1,5 @@
 <?php
 
-require_once __DIR__ . "/ServiceTestCase.php";
-
-
 class MiscServiceTest extends ServiceTestCase
 {
     /**

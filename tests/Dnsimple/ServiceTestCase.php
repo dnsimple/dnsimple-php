@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../ResponseFixture.php";
-
-use Dnsimple\Client;
+//use Dnsimple\Client;
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
