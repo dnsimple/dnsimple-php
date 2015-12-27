@@ -37,7 +37,7 @@ class MiscServiceTest extends PHPUnit_Framework_TestCase
 
     public function testWhoami_ReturnsResponse() {
         $this->mockHandler->append(
-            (new ResponseFixture(file_get_contents(__DIR__ . "/../fixtures/misc/whoami/success.http")))->getResponse()
+            ResponseFixture::newFromFile(__DIR__ . "/../fixtures/misc/whoami/success.http")
         );
 
         $data = $this->service->whoami();
