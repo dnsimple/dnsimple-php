@@ -5,8 +5,10 @@ namespace Dnsimple;
 
 /**
  * The version of this Dnsimple client library.
+ *
+ * @see http://semver.org/ This project uses Semantic Versioning 2.0.0
  */
-const VERSION = "0.0.0.dev";
+const VERSION = "0.0.0-dev";
 
 
 /**
