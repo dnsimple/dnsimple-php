@@ -18,6 +18,6 @@ abstract class ServiceTestCase extends \PHPUnit_Framework_TestCase
         $this->mockHandler = new MockHandler();
         $this->handler = HandlerStack::create($this->mockHandler);
         $this->client = new Dnsimple\Client("a1b2c3", ['handler' => $this->handler]);
-        $this->service = new Dnsimple\MiscService($this->client);
+        $this->service = new Dnsimple\IdentityService($this->client);
     }
 }

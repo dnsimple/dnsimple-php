@@ -3,7 +3,7 @@
 namespace Dnsimple;
 
 
-class MiscService extends ClientService
+class IdentityService extends ClientService
 {
     public function whoami()
     {

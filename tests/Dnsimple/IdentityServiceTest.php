@@ -7,7 +7,7 @@ class MiscServiceTest extends ServiceTestCase
      */
     public function testWhoamiForReal() {
         $this->client = new Dnsimple\Client(getenv('DNSIMPLE_ACCESS_TOKEN'));
-        $service = new \Dnsimple\MiscService($this->client);
+        $service = new \Dnsimple\IdentityService($this->client);
         $data = $service->whoami();
 
         print_r($data);
