@@ -11,9 +11,9 @@ The code is tested with an automated test suite connected to a continuous integr
 
 A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
-[![Build Status](https://travis-ci.org/weppos/dnsimple-php.svg)](https://travis-ci.org/weppos/dnsimple-php)
+[![Build Status](https://travis-ci.org/dnsimple/dnsimple-php.svg)](https://travis-ci.org/dnsimple/dnsimple-php)
 
 
 ## License
 
-Copyright (c) 2015-2016 Aetrion LLC. This is Free Software distributed under the MIT license.
+Copyright (c) 2015-2018 Aetrion LLC. This is Free Software distributed under the MIT license.

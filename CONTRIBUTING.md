@@ -7,7 +7,7 @@
 -   Clone the repository and move into it:
 
     ```
-    $ git clone git@github.com:aetrion/dnsimple-php.git
+    $ git clone git@github.com:dnsimple/dnsimple-php.git
     $ cd dnsimple-php
     ```
 
