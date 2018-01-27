@@ -4,9 +4,9 @@
 
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use PHPUnit\Framework\TestCase;
 
-
-abstract class ServiceTestCase extends \PHPUnit_Framework_TestCase
+abstract class ServiceTestCase extends TestCase
 {
     protected $mockHandler;
     protected $handler;

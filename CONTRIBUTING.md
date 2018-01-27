@@ -24,7 +24,7 @@
 ### Testing
 
 ```
-$ phpunit
+$ ./vendor/bin/phpunit
 ```
 
 ## Tests

@@ -1,8 +1,9 @@
 <?php
 
 use Dnsimple\Client;
+use PHPUnit\Framework\TestCase;
 
-class ClientTest extends PHPUnit_Framework_TestCase
+final class ClientTest extends TestCase
 {
     public function testConstructor() {
         $client = new Client("a1b2c3");

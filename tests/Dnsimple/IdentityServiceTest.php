@@ -1,6 +1,6 @@
 <?php
 
-class MiscServiceTest extends ServiceTestCase
+final class MiscServiceTest extends ServiceTestCase
 {
     /**
      * @group forReal
