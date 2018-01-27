@@ -15,7 +15,7 @@ final class MiscServiceTest extends ServiceTestCase
 
     public function testWhoami_ReturnsResponse() {
         $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures/misc/whoami/success.http"))
+            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/whoami/success.http"))
         );
 
         $data = $this->service->whoami();
