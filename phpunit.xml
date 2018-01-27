@@ -12,7 +12,7 @@
 
     <groups>
         <exclude>
-            <group>forReal</group>
+            <group>live</group>
         </exclude>
     </groups>
 </phpunit>

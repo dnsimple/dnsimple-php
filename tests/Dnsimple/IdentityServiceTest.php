@@ -3,7 +3,7 @@
 final class MiscServiceTest extends ServiceTestCase
 {
     /**
-     * @group forReal
+     * @group live
      */
     public function testWhoamiForReal() {
         $this->client = new Dnsimple\Client(getenv('DNSIMPLE_ACCESS_TOKEN'));
