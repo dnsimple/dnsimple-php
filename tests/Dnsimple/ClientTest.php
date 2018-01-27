@@ -11,6 +11,6 @@ final class ClientTest extends TestCase
     }
 
     public function testVersioned_PrependsDefaultVersionToPath() {
-        $this->assertEquals(Client::API_VERSION."/test", Client::versioned("test"));
+        $this->assertEquals("/" . Client::API_VERSION . "/test", Client::versioned("/test"));
     }
 }

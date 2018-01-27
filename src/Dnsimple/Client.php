@@ -38,7 +38,7 @@ class Client
      * @return string the versioned path
      */
     public static function versioned($path) {
-        return self::API_VERSION."/".$path;
+        return "/" . self::API_VERSION . $path;
     }
 
 
