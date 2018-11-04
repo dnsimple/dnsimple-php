@@ -1,7 +1,12 @@
 <?php
 
-final class MiscServiceTest extends ServiceTestCase
+final class IdentityServiceTest extends ServiceTestCase
 {
+    protected function setUp() {
+        parent::setUp();
+        $this->service = new Dnsimple\IdentityService($this->client);
+    }
+
     /**
      * @group live
      */
