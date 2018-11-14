@@ -14,6 +14,21 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 [![Build Status](https://travis-ci.org/dnsimple/dnsimple-php.svg)](https://travis-ci.org/dnsimple/dnsimple-php)
 
 
+## Usage
+
+```php
+$client = new \Dnsimple\Client("API_TOKEN");
+
+$identity = new \Dnsimple\IdentityService($client);
+$response = $identity->whoami();
+print_r($response->getData());
+
+$domains  = new \Dnsimple\DomainsService($client);
+$response = $domains->listDomains();
+print_r($response->getData());
+```
+
+
 ## License
 
 Copyright (c) 2015-2018 DNSimple Corporation. This is Free Software distributed under the MIT license.
