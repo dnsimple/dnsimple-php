@@ -50,17 +50,23 @@ class Client
         );
     }
 
-    public function get($path) {
-        return $this->request("GET", $path);
+    public function get($path, array $options = []) {
+        return $this->request("GET", $path, $options);
     }
 
-    public function request($method, $path) {
-        return $this->httpClient->request($method, $path, [
+    public function post($path, array $options = []) {
+        return $this->request("POST", $path, $options);
+    }
+
+    public function request($method, $path, array $options = []) {
+        $requestOptions = array_merge_recursive($options, [
             "headers" => [
                 "Authorization" => "Bearer $this->accessToken",
                 "Accept" => "application/json",
                 "User-Agent" => "dnsimple-php/".VERSION,
             ]
         ]);
+
+        return $this->httpClient->request($method, $path, $requestOptions);
     }
 }

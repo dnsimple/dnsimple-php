@@ -20,6 +20,22 @@ final class DomainsServiceTest extends ServiceTestCase
         $this->assertEquals(1, $domain->id);
     }
 
+    public function testCreateDomain() {
+        $this->mockHandler->append(
+            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/createDomain/created.http"))
+        );
+
+        $attrs = [
+            "name" => "example.com",
+        ];
+
+        $data = $this->service->createDomain(1, $attrs);
+        $this->assertInstanceOf("stdClass", $data);
+        $this->assertEquals(1, $data->id);
+        $this->assertEquals(1010, $data->account_id);
+        $this->assertNull($data->registrant_id);
+    }
+
     public function testGetDomain() {
         $this->mockHandler->append(
             GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/getDomain/success.http"))
