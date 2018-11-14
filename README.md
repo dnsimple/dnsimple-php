@@ -16,4 +16,4 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
 ## License
 
-Copyright (c) 2015-2018 Aetrion LLC. This is Free Software distributed under the MIT license.
+Copyright (c) 2015-2018 DNSimple Corporation. This is Free Software distributed under the MIT license.
