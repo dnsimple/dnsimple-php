@@ -14,11 +14,24 @@ class Response
     /**
      * Response constructor.
      *
-     * @param \GuzzleHttp\Psr7\Response $response
+     * @param   \GuzzleHttp\Psr7\Response $response
      */
     public function __construct($response)
     {
         $this->_httpResponse = $response;
+    }
+
+    /**
+     * @return  \GuzzleHttp\Psr7\Response
+     */
+    public function getHttpResponse()
+    {
+        return $this->_httpResponse;
+    }
+
+    public function getStatusCode()
+    {
+        return $this->_httpResponse->getStatusCode();
     }
 
     public function getData()

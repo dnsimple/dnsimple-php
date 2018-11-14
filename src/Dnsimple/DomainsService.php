@@ -47,4 +47,18 @@ class DomainsService extends ClientService
 
         return new Response($response);
     }
+
+    /**
+     * Permanently deletes a domain from the account. It cannot be undone.
+     *
+     * @param   int $accountId account ID
+     * @param   string $domainIdentifier domain name or ID
+     * @return  Response
+     */
+    public function deleteDomain($accountId, $domainIdentifier)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}"));
+
+        return new Response($response);
+    }
 }

@@ -28,6 +28,7 @@ final class IdentityServiceTest extends ServiceTestCase
 
         $resp = $this->service->whoami();
         $this->assertInstanceOf(\Dnsimple\Response::class, $resp);
+        $this->assertEquals(200, $resp->getStatusCode());
 
         $data = $resp->getData();
         $this->assertInstanceOf("stdClass", $data);

@@ -68,6 +68,11 @@ class Client
         return $this->request("POST", $path, $options);
     }
 
+    public function delete($path, array $options = [])
+    {
+        return $this->request("DELETE", $path, $options);
+    }
+
     public function request($method, $path, array $options = [])
     {
         $requestOptions = array_merge_recursive($options, [
