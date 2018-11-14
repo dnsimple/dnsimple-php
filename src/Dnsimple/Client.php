@@ -27,7 +27,14 @@ class Client
     const BASE_URL = "https://api.sandbox.dnsimple.com";
 
 
+    /**
+     * @var string $accessToken the bearer authentication token
+     */
     private $accessToken;
+
+    /**
+     * @var \GuzzleHttp\Client $httpClient the HTTP client
+     */
     private $httpClient;
 
 
@@ -37,7 +44,8 @@ class Client
      * @param  string $path
      * @return string the versioned path
      */
-    public static function versioned($path) {
+    public static function versioned($path)
+    {
         return "/" . self::API_VERSION . $path;
     }
 
@@ -50,15 +58,18 @@ class Client
         );
     }
 
-    public function get($path, array $options = []) {
+    public function get($path, array $options = [])
+    {
         return $this->request("GET", $path, $options);
     }
 
-    public function post($path, array $options = []) {
+    public function post($path, array $options = [])
+    {
         return $this->request("POST", $path, $options);
     }
 
-    public function request($method, $path, array $options = []) {
+    public function request($method, $path, array $options = [])
+    {
         $requestOptions = array_merge_recursive($options, [
             "headers" => [
                 "Authorization" => "Bearer $this->accessToken",

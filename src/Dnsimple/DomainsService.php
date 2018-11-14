@@ -9,14 +9,13 @@ class DomainsService extends ClientService
      * Lists the domains in the account.
      *
      * @param   int $accountId account ID
-     * @return  stdClass
+     * @return  Response
      */
     public function listDomains($accountId)
     {
         $response = $this->client->get(Client::versioned("/{$accountId}/domains"));
 
-        $json = json_decode($response->getBody());
-        return $json->data;
+        return new Response($response);
     }
 
     /**
@@ -24,7 +23,7 @@ class DomainsService extends ClientService
      *
      * @param   int $accountId account ID
      * @param   array $domainAttributes
-     * @return  stdClass
+     * @return  Response
      */
     public function createDomain($accountId, array $domainAttributes)
     {
@@ -32,8 +31,7 @@ class DomainsService extends ClientService
             \GuzzleHttp\RequestOptions::JSON => $domainAttributes,
         ]);
 
-        $json = json_decode($response->getBody());
-        return $json->data;
+        return new Response($response);
     }
 
     /**
@@ -41,13 +39,12 @@ class DomainsService extends ClientService
      *
      * @param   int $accountId account ID
      * @param   string $domainIdentifier domain name or ID
-     * @return  stdClass
+     * @return  Response
      */
     public function getDomain($accountId, $domainIdentifier)
     {
         $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}"));
 
-        $json = json_decode($response->getBody());
-        return $json->data;
+        return new Response($response);
     }
 }
