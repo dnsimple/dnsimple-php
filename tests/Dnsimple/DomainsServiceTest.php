@@ -9,7 +9,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testListDomains() {
         $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/listDomains/success.http"))
+            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/listDomains/success.http"))
         );
 
         $data = $this->service->listDomains(1);
@@ -22,7 +22,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testGetDomain() {
         $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/getDomain/success.http"))
+            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/getDomain/success.http"))
         );
 
         $data = $this->service->getDomain(1, "example.com");
