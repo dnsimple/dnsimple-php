@@ -2,7 +2,7 @@
 
 namespace Dnsimple;
 
-
+use GuzzleHttp;
 /**
  * The version of this Dnsimple client library.
  *
@@ -24,7 +24,7 @@ class Client
     /**
      * The default base URL for API requests.
      */
-    const BASE_URL = "https://api.sandbox.dnsimple.com";
+    const BASE_URL = "https://api.dnsimple.com";
 
 
     /**
@@ -33,7 +33,7 @@ class Client
     private $accessToken;
 
     /**
-     * @var \GuzzleHttp\Client $httpClient the HTTP client
+     * @var GuzzleHttp\Client $httpClient the HTTP client
      */
     private $httpClient;
 
@@ -53,7 +53,7 @@ class Client
     public function __construct($accessToken, array $config = array())
     {
         $this->accessToken = $accessToken;
-        $this->httpClient = new \GuzzleHttp\Client(
+        $this->httpClient = new GuzzleHttp\Client(
             array_merge(["base_uri" => self::BASE_URL], $config)
         );
     }

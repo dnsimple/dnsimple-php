@@ -1,21 +1,20 @@
 <?php
+namespace Dnsimple;
 
 final class DomainsServiceTest extends ServiceTestCase
 {
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
-        $this->service = new Dnsimple\DomainsService($this->client);
+        $this->service = new DomainsService($this->client);
     }
 
     public function testListDomains()
     {
-        $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/listDomains/success.http"))
-        );
+        $this->mockResponse("listDomains/success.http");
 
         $resp = $this->service->listDomains(1);
-        $this->assertInstanceOf(\Dnsimple\Response::class, $resp);
+        $this->assertInstanceOf(Response::class, $resp);
         $this->assertEquals(200, $resp->getStatusCode());
 
         $data = $resp->getData();
@@ -28,16 +27,14 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testCreateDomain()
     {
-        $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/createDomain/created.http"))
-        );
+        $this->mockResponse("createDomain/created.http") ;
 
         $attrs = [
             "name" => "example.com",
         ];
 
         $resp = $this->service->createDomain(1, $attrs);
-        $this->assertInstanceOf(\Dnsimple\Response::class, $resp);
+        $this->assertInstanceOf(Response::class, $resp);
         $this->assertEquals(201, $resp->getStatusCode());
 
         $data = $resp->getData();
@@ -49,12 +46,10 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testGetDomain()
     {
-        $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/getDomain/success.http"))
-        );
+        $this->mockResponse("getDomain/success.http");
 
         $resp = $this->service->getDomain(1, "example.com");
-        $this->assertInstanceOf(\Dnsimple\Response::class, $resp);
+        $this->assertInstanceOf(Response::class, $resp);
         $this->assertEquals(200, $resp->getStatusCode());
 
         $data = $resp->getData();
@@ -66,12 +61,10 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testDeleteDomain()
     {
-        $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/deleteDomain/success.http"))
-        );
+        $this->mockResponse("deleteDomain/success.http");
 
         $resp = $this->service->deleteDomain(1, "example.com");
-        $this->assertInstanceOf(\Dnsimple\Response::class, $resp);
+        $this->assertInstanceOf(Response::class, $resp);
         $this->assertEquals(204, $resp->getStatusCode());
     }
 }

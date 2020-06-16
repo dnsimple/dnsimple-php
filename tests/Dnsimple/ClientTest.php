@@ -1,6 +1,7 @@
 <?php
 
-use Dnsimple\Client;
+namespace Dnsimple;
+
 use PHPUnit\Framework\TestCase;
 
 final class ClientTest extends TestCase

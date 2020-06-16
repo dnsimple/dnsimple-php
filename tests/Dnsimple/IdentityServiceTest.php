@@ -1,11 +1,13 @@
 <?php
 
+namespace Dnsimple;
+
 final class IdentityServiceTest extends ServiceTestCase
 {
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
-        $this->service = new Dnsimple\IdentityService($this->client);
+        $this->service = new IdentityService($this->client);
     }
 
     /**
@@ -13,8 +15,8 @@ final class IdentityServiceTest extends ServiceTestCase
      */
     public function testWhoami_ForReal()
     {
-        $this->client = new Dnsimple\Client(getenv('DNSIMPLE_ACCESS_TOKEN'));
-        $service = new \Dnsimple\IdentityService($this->client);
+        $this->client = new Client(getenv('DNSIMPLE_ACCESS_TOKEN'));
+        $service = new IdentityService($this->client);
         $data = $service->whoami();
 
         print_r($data);
@@ -22,12 +24,10 @@ final class IdentityServiceTest extends ServiceTestCase
 
     public function testWhoami()
     {
-        $this->mockHandler->append(
-            GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/whoami/success.http"))
-        );
+        $this->mockResponse("whoami/success.http");
 
         $resp = $this->service->whoami();
-        $this->assertInstanceOf(\Dnsimple\Response::class, $resp);
+        $this->assertInstanceOf(Response::class, $resp);
         $this->assertEquals(200, $resp->getStatusCode());
 
         $data = $resp->getData();
