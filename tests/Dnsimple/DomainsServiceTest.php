@@ -22,7 +22,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
         $domain = $data[0];
         $this->assertInstanceOf("stdClass", $domain);
-        $this->assertEquals(1, $domain->id);
+        $this->assertEquals(181984, $domain->id);
     }
 
     public function testCreateDomain()
@@ -39,8 +39,8 @@ final class DomainsServiceTest extends ServiceTestCase
 
         $data = $resp->getData();
         $this->assertInstanceOf("stdClass", $data);
-        $this->assertEquals(1, $data->id);
-        $this->assertEquals(1010, $data->account_id);
+        $this->assertEquals(181985, $data->id);
+        $this->assertEquals(1385, $data->account_id);
         $this->assertNull($data->registrant_id);
     }
 
@@ -54,9 +54,9 @@ final class DomainsServiceTest extends ServiceTestCase
 
         $data = $resp->getData();
         $this->assertInstanceOf("stdClass", $data);
-        $this->assertEquals(1, $data->id);
-        $this->assertEquals(1010, $data->account_id);
-        $this->assertNull($data->registrant_id);
+        $this->assertEquals(181984, $data->id);
+        $this->assertEquals(1385, $data->account_id);
+        $this->assertEquals(2715, $data->registrant_id);
     }
 
     public function testDeleteDomain()

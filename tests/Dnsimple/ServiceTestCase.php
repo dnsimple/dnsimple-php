@@ -22,7 +22,7 @@ abstract class ServiceTestCase extends TestCase
 
     protected function fixture($fixture): \GuzzleHttp\Psr7\Response
     {
-        return GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures.http/api/" . $fixture));
+        return GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../fixtures/v2/api/" . $fixture));
     }
 
     protected function mockResponse($fixture) : void
