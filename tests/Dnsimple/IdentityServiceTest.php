@@ -2,6 +2,8 @@
 
 namespace Dnsimple;
 
+use Dnsimple\Struct\Whoami;
+
 final class IdentityServiceTest extends ServiceTestCase
 {
     protected function setUp() : void
@@ -19,7 +21,7 @@ final class IdentityServiceTest extends ServiceTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $data = $response->getData();
-        $this->assertInstanceOf("stdClass", $data);
+        $this->assertInstanceOf(Whoami::class, $data);
         $this->assertObjectHasAttribute("user", $data);
         $this->assertObjectHasAttribute("account", $data);
     }

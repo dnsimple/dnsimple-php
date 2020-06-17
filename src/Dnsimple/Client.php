@@ -9,11 +9,17 @@ use GuzzleHttp;
  *
  * @see http://semver.org/ This project uses Semantic Versioning 2.0.0
  */
-const VERSION = "0.0.0-dev";
+const VERSION = "0.1.0-dev";
 
 
 /**
- * A PHP client for the DNSimple API v2.
+ * PHP Client for the DNSimple API
+ *
+ * You can use this service to consume the services the DNSimple API offers. All requests have to be done authenticated.
+ * You can either use basic authentication (email and password combination) or an oauth token
+ * (see https://developer.dnsimple.com/v2/oauth/).
+ *
+ * For more information on how to use the DNSimple API refer to https://developer.dnsimple.com
  */
 class Client
 {
@@ -23,7 +29,7 @@ class Client
     const API_VERSION = "v2";
 
     /**
-     * The default base URL for API requests.
+     * URL to the production environment
      */
     const BASE_URL = "https://api.dnsimple.com";
 
@@ -34,11 +40,33 @@ class Client
     private string $accessToken;
 
     /**
+     * The http client we are using to send requests to the DNSimple API.
+     *
      * @var GuzzleHttp\Client $httpClient the HTTP client
      */
     private GuzzleHttp\Client $httpClient;
 
+    /**
+     * @var IdentityService The service handling the Identity API
+     */
     public IdentityService $Identity;
+    /**
+     * @var AccountsService The service handling the Accounts API
+     */
+    public AccountsService $Accounts;
+    /**
+     * @var DomainsService The service handling the Domains API
+     */
+    public DomainsService $Domains;
+
+    public function __construct($accessToken, array $config = array())
+    {
+        $this->accessToken = $accessToken;
+        $this->httpClient = new GuzzleHttp\Client(
+            array_merge(["base_uri" => self::BASE_URL], $config)
+        );
+        $this->attachServicesToClient();
+    }
 
     /**
      * Prepends the current API version to $path, and returns the value.
@@ -51,19 +79,11 @@ class Client
         return "/" . self::API_VERSION . $path;
     }
 
-
-    public function __construct($accessToken, array $config = array())
+    public function get($path, array $filters = [], array $sorting = [], array $options = [])
     {
-        $this->accessToken = $accessToken;
-        $this->httpClient = new GuzzleHttp\Client(
-            array_merge(["base_uri" => self::BASE_URL], $config)
-        );
-        $this->attachServices();
-    }
+        $query = ['query' => array_merge($filters, $sorting)];
 
-    public function get($path, array $options = [])
-    {
-        return $this->request("GET", $path, $options);
+        return $this->request("GET", $path, array_merge($options, $query));
     }
 
     public function post($path, array $options = [])
@@ -82,15 +102,22 @@ class Client
             "headers" => [
                 "Authorization" => "Bearer $this->accessToken",
                 "Accept" => "application/json",
-                "User-Agent" => "dnsimple-php/".VERSION,
+                "User-Agent" => $this->getUserAgent(),
             ]
         ]);
 
         return $this->httpClient->request($method, $path, $requestOptions);
     }
 
-    private function attachServices()
+    public function getUserAgent(): string
     {
-       $this->Identity = new IdentityService($this);
+        return "dnsimple-php/" . VERSION;
+    }
+
+    private function attachServicesToClient()
+    {
+        $this->Accounts = new AccountsService($this);
+        $this->Identity = new IdentityService($this);
+        $this->Domains = new DomainsService($this);
     }
 }

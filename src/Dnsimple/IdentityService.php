@@ -3,6 +3,8 @@
 namespace Dnsimple;
 
 
+use Dnsimple\Struct\Whoami;
+
 /**
  * The Identity Service handles the identity (whoami) endpoint of the DNSimple API.
  *
@@ -21,6 +23,6 @@ class IdentityService extends ClientService
     {
         $response = $this->client->get(Client::versioned("/whoami"));
 
-        return new Response($response);
+        return new Response($response, Whoami::class);
     }
 }
