@@ -3,18 +3,20 @@
 namespace Dnsimple;
 
 
+use Psr\Http\Message\ResponseInterface;
+
 class Response
 {
     /**
-     * @var \GuzzleHttp\Psr7\Response $_httpResponse
+     * @var ResponseInterface $_httpResponse
      */
-    private $_httpResponse;
+    private ResponseInterface $_httpResponse;
 
 
     /**
      * Response constructor.
      *
-     * @param   \GuzzleHttp\Psr7\Response $response
+     * @param ResponseInterface $response
      */
     public function __construct($response)
     {
@@ -22,14 +24,14 @@ class Response
     }
 
     /**
-     * @return  \GuzzleHttp\Psr7\Response
+     * @return  ResponseInterface
      */
-    public function getHttpResponse()
+    public function getHttpResponse(): ResponseInterface
     {
         return $this->_httpResponse;
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->_httpResponse->getStatusCode();
     }
@@ -37,5 +39,20 @@ class Response
     public function getData()
     {
         return json_decode($this->_httpResponse->getBody())->data;
+    }
+
+    public function getRateLimit(): int
+    {
+        return $this->_httpResponse->getHeaderLine("X-RateLimit-Limit");
+    }
+
+    public function getRateLimitRemaining(): int
+    {
+        return $this->_httpResponse->getHeaderLine("X-RateLimit-Remaining");
+    }
+
+    public function getRateLimitReset(): int
+    {
+        return $this->_httpResponse->getHeaderLine("X-RateLimit-Reset");
     }
 }

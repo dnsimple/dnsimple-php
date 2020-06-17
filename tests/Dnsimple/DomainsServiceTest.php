@@ -1,7 +1,7 @@
 <?php
 namespace Dnsimple;
 
-final class DomainsServiceTest extends ServiceTestCase
+class DomainsServiceTest extends ServiceTestCase
 {
     protected function setUp() : void
     {
@@ -11,7 +11,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testListDomains()
     {
-        $this->mockResponse("listDomains/success.http");
+        $this->mockResponseWith("listDomains/success");
 
         $resp = $this->service->listDomains(1);
         $this->assertInstanceOf(Response::class, $resp);
@@ -27,7 +27,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testCreateDomain()
     {
-        $this->mockResponse("createDomain/created.http") ;
+        $this->mockResponseWith("createDomain/created") ;
 
         $attrs = [
             "name" => "example.com",
@@ -46,7 +46,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testGetDomain()
     {
-        $this->mockResponse("getDomain/success.http");
+        $this->mockResponseWith("getDomain/success");
 
         $resp = $this->service->getDomain(1, "example.com");
         $this->assertInstanceOf(Response::class, $resp);
@@ -61,7 +61,7 @@ final class DomainsServiceTest extends ServiceTestCase
 
     public function testDeleteDomain()
     {
-        $this->mockResponse("deleteDomain/success.http");
+        $this->mockResponseWith("deleteDomain/success");
 
         $resp = $this->service->deleteDomain(1, "example.com");
         $this->assertInstanceOf(Response::class, $resp);

@@ -3,6 +3,8 @@
 namespace Dnsimple;
 
 
+use GuzzleHttp\RequestOptions;
+
 class DomainsService extends ClientService
 {
     /**
@@ -11,7 +13,7 @@ class DomainsService extends ClientService
      * @param   int $accountId account ID
      * @return  Response
      */
-    public function listDomains($accountId)
+    public function listDomains($accountId): Response
     {
         $response = $this->client->get(Client::versioned("/{$accountId}/domains"));
 
@@ -25,10 +27,10 @@ class DomainsService extends ClientService
      * @param   array $domainAttributes
      * @return  Response
      */
-    public function createDomain($accountId, array $domainAttributes)
+    public function createDomain($accountId, array $domainAttributes): Response
     {
         $response = $this->client->post(Client::versioned("/{$accountId}/domains"), [
-            \GuzzleHttp\RequestOptions::JSON => $domainAttributes,
+            RequestOptions::JSON => $domainAttributes,
         ]);
 
         return new Response($response);
@@ -41,7 +43,7 @@ class DomainsService extends ClientService
      * @param   string $domainIdentifier domain name or ID
      * @return  Response
      */
-    public function getDomain($accountId, $domainIdentifier)
+    public function getDomain($accountId, $domainIdentifier): Response
     {
         $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}"));
 
@@ -55,7 +57,7 @@ class DomainsService extends ClientService
      * @param   string $domainIdentifier domain name or ID
      * @return  Response
      */
-    public function deleteDomain($accountId, $domainIdentifier)
+    public function deleteDomain($accountId, $domainIdentifier): Response
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}"));
 

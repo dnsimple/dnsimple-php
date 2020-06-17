@@ -10,29 +10,40 @@ final class IdentityServiceTest extends ServiceTestCase
         $this->service = new IdentityService($this->client);
     }
 
-    /**
-     * @group live
-     */
-    public function testWhoami_ForReal()
-    {
-        $this->client = new Client(getenv('DNSIMPLE_ACCESS_TOKEN'));
-        $service = new IdentityService($this->client);
-        $data = $service->whoami();
-
-        print_r($data);
-    }
-
     public function testWhoami()
     {
-        $this->mockResponse("whoami/success.http");
+        $this->mockResponseWith("whoami/success");
 
-        $resp = $this->service->whoami();
-        $this->assertInstanceOf(Response::class, $resp);
-        $this->assertEquals(200, $resp->getStatusCode());
+        $response = $this->service->whoami();
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(200, $response->getStatusCode());
 
-        $data = $resp->getData();
+        $data = $response->getData();
         $this->assertInstanceOf("stdClass", $data);
         $this->assertObjectHasAttribute("user", $data);
         $this->assertObjectHasAttribute("account", $data);
+    }
+
+    public function testUser()
+    {
+        $this->mockResponseWith("whoami/success-user");
+        $user = $this->service->whoami()->getData()->user;
+
+        $this->assertEquals(1, $user->id);
+        $this->assertEquals("example-user@example.com", $user->email);
+        $this->assertEquals("2015-09-18T23:04:37Z", $user->created_at);
+        $this->assertEquals("2016-06-09T20:03:39Z", $user->updated_at);
+    }
+
+    public function testAccount()
+    {
+        $this->mockResponseWith("whoami/success-account");
+        $account = $this->service->whoami()->getData()->account;
+
+        $this->assertEquals(1, $account->id);
+        $this->assertEquals("example-account@example.com", $account->email);
+        $this->assertEquals("dnsimple-professional", $account->plan_identifier);
+        $this->assertEquals("2015-09-18T23:04:37Z", $account->created_at);
+        $this->assertEquals("2016-06-09T20:03:39Z", $account->updated_at);
     }
 }

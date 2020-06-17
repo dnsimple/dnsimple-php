@@ -3,6 +3,7 @@
 namespace Dnsimple;
 
 use GuzzleHttp;
+
 /**
  * The version of this Dnsimple client library.
  *
@@ -30,13 +31,14 @@ class Client
     /**
      * @var string $accessToken the bearer authentication token
      */
-    private $accessToken;
+    private string $accessToken;
 
     /**
      * @var GuzzleHttp\Client $httpClient the HTTP client
      */
-    private $httpClient;
+    private GuzzleHttp\Client $httpClient;
 
+    public IdentityService $Identity;
 
     /**
      * Prepends the current API version to $path, and returns the value.
@@ -56,6 +58,7 @@ class Client
         $this->httpClient = new GuzzleHttp\Client(
             array_merge(["base_uri" => self::BASE_URL], $config)
         );
+        $this->attachServices();
     }
 
     public function get($path, array $options = [])
@@ -84,5 +87,10 @@ class Client
         ]);
 
         return $this->httpClient->request($method, $path, $requestOptions);
+    }
+
+    private function attachServices()
+    {
+       $this->Identity = new IdentityService($this);
     }
 }
