@@ -1,7 +1,9 @@
 <?php
 
-namespace Dnsimple;
+namespace Dnsimple\Service;
 
+
+use Dnsimple\Client;
 
 class ClientService
 {

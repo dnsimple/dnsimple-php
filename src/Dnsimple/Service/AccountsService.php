@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Dnsimple;
+namespace Dnsimple\Service;
 
+use Dnsimple\Client;
+use Dnsimple\Response;
 use Dnsimple\Struct\Account;
 
 /**

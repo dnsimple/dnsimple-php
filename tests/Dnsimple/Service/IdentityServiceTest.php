@@ -1,7 +1,8 @@
 <?php
 
-namespace Dnsimple;
+namespace Dnsimple\Service;
 
+use Dnsimple\Response;
 use Dnsimple\Struct\Whoami;
 
 final class IdentityServiceTest extends ServiceTestCase

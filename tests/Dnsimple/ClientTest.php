@@ -2,6 +2,8 @@
 
 namespace Dnsimple;
 
+use Dnsimple\Service\ServiceTestCase;
+
 final class ClientTest extends ServiceTestCase
 {
     public function testConstructor()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsimple;
+namespace Dnsimple\Service;
 
 
 class AccountsServiceTest extends ServiceTestCase

@@ -1,6 +1,7 @@
 <?php
-namespace Dnsimple;
+namespace Dnsimple\Service;
 
+use Dnsimple\Response;
 use Dnsimple\Struct\Domain;
 
 class DomainsServiceTest extends ServiceTestCase

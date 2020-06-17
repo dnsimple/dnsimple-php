@@ -2,6 +2,9 @@
 
 namespace Dnsimple;
 
+use Dnsimple\Service\AccountsService;
+use Dnsimple\Service\DomainsService;
+use Dnsimple\Service\IdentityService;
 use GuzzleHttp;
 
 /**
