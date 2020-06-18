@@ -8,6 +8,7 @@ use Dnsimple\Struct\Collaborator;
 use Dnsimple\Struct\DelegationSignerRecord;
 use Dnsimple\Struct\Dnssec;
 use Dnsimple\Struct\Domain;
+use Dnsimple\Struct\EmailForward;
 use GuzzleHttp\RequestOptions;
 
 /**
@@ -282,5 +283,84 @@ class DomainsService extends ClientService
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records/{$dsRecordId}"));
         return new Response($response,  null);
+    }
+
+    /**
+     * List email forwards for the domain in the account.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/email-forwards/#listEmailForwards
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
+     *
+     * Possible options:
+     *  - sorting:
+     *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
+     *    descending).
+     *    Sort criteria:
+     *      - id: Sort email forwards by ID (i.e. 'id:asc')
+     *      - from: Sort email forwards by sender (i.e. 'from:desc')
+     *      - to: Sort email forwards by recipient (i.e. 'to:asc')
+     *  - pagination:
+     *      - page: The page to return (default: 1)
+     *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
+     * @return Response The list of email forwards for the domain in the account
+     */
+    public function listEmailForwards($accountId, $domainIdentifier, array $options =[])
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards"), $options);
+        return new Response($response, EmailForward::class);
+    }
+
+    /**
+     * Create an email forward under the domain in the account
+     *
+     * @see https://developer.dnsimple.com/v2/domains/email-forwards/#createEmailForward
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param array $attributes The email forwards attributes
+     *  Required Fields
+     *      - from: The email address the emails are sent to.
+     *      - to: The email address the email address the emails are forwarded to.
+     * @return Response The newly created email forward under the domain in the account
+     */
+    public function createEmailForward($accountId, $domainIdentifier, $attributes)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards"), $attributes);
+        return new Response($response, EmailForward::class);
+    }
+
+    /**
+     * Get the email forward in the domain in the account
+     *
+     * @see https://developer.dnsimple.com/v2/domains/email-forwards/#getEmailForward
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param int $emailForward The email forward id
+     * @return Response The email forward requested
+     */
+    public function getEmailForward($accountId, $domainIdentifier, $emailForward)
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards/{$emailForward}"));
+        return new Response($response, EmailForward::class);
+    }
+
+    /**
+     * Delete the email forward from the domain.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/email-forwards/#deleteEmailForward
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param int $emailForward The email forward id
+     * @return Response An empty response
+     */
+    public function deleteEmailForward($accountId, $domainIdentifier, $emailForward)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards/{$emailForward}"));
+        return new Response($response, null);
     }
 }
