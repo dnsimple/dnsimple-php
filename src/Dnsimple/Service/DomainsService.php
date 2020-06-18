@@ -8,6 +8,7 @@ use Dnsimple\Struct\Collaborator;
 use Dnsimple\Struct\DelegationSignerRecord;
 use Dnsimple\Struct\Dnssec;
 use Dnsimple\Struct\Domain;
+use Dnsimple\Struct\DomainPush;
 use Dnsimple\Struct\EmailForward;
 use GuzzleHttp\RequestOptions;
 
@@ -39,8 +40,8 @@ class DomainsService extends ClientService
      *  - pagination:
      *      - page: The page to return (default: 1)
      *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
-     * @example listDomains(1010, ["name_like" => "example.com", "sort" => "id:desc,expiration:asc"]
      * @return  Response The list of domains
+     * @example listDomains(1010, ["name_like" => "example.com", "sort" => "id:desc,expiration:asc"]
      */
     public function listDomains($accountId, $options = []): Response
     {
@@ -54,14 +55,14 @@ class DomainsService extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/domains/#create
      *
-     * @param   int $accountId The account ID
-     * @param   array $domainAttributes The domain attributes (currently ["name" => "domain_name.com"])
+     * @param int $accountId The account ID
+     * @param array $attributes The domain attributes (currently ["name" => "domain_name.com"])
      * @return  Response The newly created domain
      */
-    public function createDomain($accountId, array $domainAttributes): Response
+    public function createDomain($accountId, array $attributes): Response
     {
         $response = $this->client->post(Client::versioned("/{$accountId}/domains"), [
-            RequestOptions::JSON => $domainAttributes,
+            RequestOptions::JSON => $attributes,
         ]);
 
         return new Response($response, Domain::class);
@@ -72,8 +73,8 @@ class DomainsService extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/domains/#getDomain
      *
-     * @param   int $accountId The account ID
-     * @param   int|string $domainIdentifier The domain name or ID
+     * @param int $accountId The account ID
+     * @param int|string $domainIdentifier The domain name or ID
      * @return  Response The domain requested
      */
     public function getDomain($accountId, $domainIdentifier): Response
@@ -91,8 +92,8 @@ class DomainsService extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/domains/#deleteDomain
      *
-     * @param   int $accountId The account ID
-     * @param   int|string $domainIdentifier The domain name or ID
+     * @param int $accountId The account ID
+     * @param int|string $domainIdentifier The domain name or ID
      * @return  Response An empty response
      */
     public function deleteDomain($accountId, $domainIdentifier): Response
@@ -136,12 +137,12 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account ID
      * @param int|string $domainIdentifier The domain name or ID
-     * @param array $collaboratorAttributes The collaborator attributes (i.e. ["email" => "user@example.com"])
+     * @param array $attributes The collaborator attributes (i.e. ["email" => "user@example.com"])
      * @return Response The collaborator added to the domain in the account
      */
-    public function addCollaborator($accountId, $domainIdentifier, array $collaboratorAttributes)
+    public function addCollaborator($accountId, $domainIdentifier, array $attributes)
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/collaborators"), $collaboratorAttributes);
+        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/collaborators"), $attributes);
         return new Response($response, Collaborator::class);
     }
 
@@ -222,7 +223,7 @@ class DomainsService extends ClientService
      *      - created_at: Sort delegation signer records by creation date (i.e. 'created_at:desc')
      * @return Response A list of delegation signer records for the domain in the account
      */
-    public function listDomainDelegationSignerRecords($accountId, $domainIdentifier, array $options=[])
+    public function listDomainDelegationSignerRecords($accountId, $domainIdentifier, array $options = [])
     {
         $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records"), $options);
         return new Response($response, DelegationSignerRecord::class);
@@ -282,7 +283,7 @@ class DomainsService extends ClientService
     public function deleteDomainDelegationSignerRecord($accountId, $domainIdentifier, $dsRecordId)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records/{$dsRecordId}"));
-        return new Response($response,  null);
+        return new Response($response, null);
     }
 
     /**
@@ -307,7 +308,7 @@ class DomainsService extends ClientService
      *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
      * @return Response The list of email forwards for the domain in the account
      */
-    public function listEmailForwards($accountId, $domainIdentifier, array $options =[])
+    public function listEmailForwards($accountId, $domainIdentifier, array $options = [])
     {
         $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards"), $options);
         return new Response($response, EmailForward::class);
@@ -361,6 +362,78 @@ class DomainsService extends ClientService
     public function deleteEmailForward($accountId, $domainIdentifier, $emailForward)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards/{$emailForward}"));
+        return new Response($response, null);
+    }
+
+    /**
+     * Initiate a push for the domain.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/pushes/#initiate
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param array $attributes The data to send to initiate the push
+     *  Required field:
+     *      - new_account_email: The email address of the target DNSimple account.
+     * @return Response The newly created domain push
+     */
+    public function initiatePush($accountId, $domainIdentifier, array $attributes)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/pushes"), $attributes);
+        return new Response($response, DomainPush::class);
+    }
+
+    /**
+     * List pending pushes for the target account.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/pushes/#listPushes
+     *
+     * @param int $accountId The account id
+     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
+     *
+     * Possible options:
+     *  - pagination:
+     *      - page: The page to return (default: 1)
+     *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
+     * @return Response The list of pushes for the domain
+     */
+    public function listPushes($accountId, array $options = [])
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/pushes"), $options);
+        return new Response($response, DomainPush::class);
+    }
+
+    /**
+     * Accept a push for the target account
+     *
+     * @see https://developer.dnsimple.com/v2/domains/pushes/#acceptPush
+     *
+     * @param int $accountId The account id
+     * @param int $pushId The push id
+     * @param array $attributes The data to send to accept the push
+     *  Required field:
+     *      - contact_id: A contact that belongs to the target DNSimple account. The contact will be used as new
+     *                    registrant for the domain, if the domain is registered with DNSimple.
+     * @return Response An empty response
+     */
+    public function acceptPush($accountId, $pushId, array $attributes)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/pushes/{$pushId}"), $attributes);
+        return new Response($response, null);
+    }
+
+    /**
+     * Reject a push for the target account
+     *
+     * @see https://developer.dnsimple.com/v2/domains/pushes/#rejectPush
+     *
+     * @param int $accountId The account id
+     * @param int $pushId The push id
+     * @return Response An empty response
+     */
+    public function rejectPush($accountId, $pushId)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/pushes/{$pushId}"));
         return new Response($response, null);
     }
 }
