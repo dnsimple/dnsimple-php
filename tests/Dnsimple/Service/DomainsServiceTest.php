@@ -31,7 +31,7 @@ class DomainsServiceTest extends ServiceTestCase
     public function testListDomainsSupportsFilters()
     {
         $this->mockResponseWith("listDomains/success");
-        $this->service->listDomains(1, $filters=['name_like'=>'example.com', 'registrant_id'=>42]);
+        $this->service->listDomains(1, ['name_like'=>'example.com', 'registrant_id'=>42]);
 
         $this->assertEquals("name_like=example.com&registrant_id=42", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
@@ -39,12 +39,13 @@ class DomainsServiceTest extends ServiceTestCase
     public function testListDomainsSupportsSorting()
     {
         $this->mockResponseWith("listDomains/success");
-        $this->service->listDomains(1, [], 'id:asc,name:desc,expiration:asc');
+        $this->service->listDomains(1, ['sort' => 'id:asc,name:desc,expiration:asc']);
 
         $this->assertEquals("sort=id%3Aasc%2Cname%3Adesc%2Cexpiration%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
-    public function testListDomainsSupportsPagination() {
+    public function testListDomainsHasPaginationObject()
+    {
         $this->mockResponseWith("listDomains/success");
         $response = $this->service->listDomains(1);
         $pagination = $response->getPagination();
@@ -53,6 +54,14 @@ class DomainsServiceTest extends ServiceTestCase
         $this->assertEquals(30, $pagination->per_page);
         $this->assertEquals(2, $pagination->total_entries);
         $this->assertEquals(1, $pagination->total_pages);
+    }
+
+    public function testListDomainsSupportsPagination()
+    {
+        $this->mockResponseWith("listDomains/success");
+        $this->service->listDomains(1, ['page' => 1, 'per_page' => 4]);
+
+        $this->assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testCreateDomain()

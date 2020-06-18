@@ -9,7 +9,7 @@ final class ClientTest extends ServiceTestCase
     public function testConstructor()
     {
         $client = new Client("a1b2c3");
-        $this->assertInstanceOf('Dnsimple\Client', $client);
+        $this->assertInstanceOf(Client::class, $client);
     }
 
     public function testVersioned_PrependsDefaultVersionToPath()

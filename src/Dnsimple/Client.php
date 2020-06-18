@@ -82,11 +82,11 @@ class Client
         return "/" . self::API_VERSION . $path;
     }
 
-    public function get($path, array $filters = [], array $sorting = [], array $options = [])
+    public function get($path, array $options = [])
     {
-        $query = ['query' => array_merge($filters, $sorting)];
+        $query = ['query' => $options];
 
-        return $this->request("GET", $path, array_merge($options, $query));
+        return $this->request("GET", $path, $query);
     }
 
     public function post($path, array $options = [])
