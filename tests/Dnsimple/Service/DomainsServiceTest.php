@@ -31,7 +31,7 @@ class DomainsServiceTest extends ServiceTestCase
     public function testListDomainsSupportsFilters()
     {
         $this->mockResponseWith("listDomains/success");
-        $this->service->listDomains(1, ['name_like'=>'example.com', 'registrant_id'=>42]);
+        $this->service->listDomains(1, ["name_like"=>"example.com", "registrant_id"=>42]);
 
         $this->assertEquals("name_like=example.com&registrant_id=42", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
@@ -39,7 +39,7 @@ class DomainsServiceTest extends ServiceTestCase
     public function testListDomainsSupportsSorting()
     {
         $this->mockResponseWith("listDomains/success");
-        $this->service->listDomains(1, ['sort' => 'id:asc,name:desc,expiration:asc']);
+        $this->service->listDomains(1, ["sort" => "id:asc,name:desc,expiration:asc"]);
 
         $this->assertEquals("sort=id%3Aasc%2Cname%3Adesc%2Cexpiration%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
@@ -50,10 +50,10 @@ class DomainsServiceTest extends ServiceTestCase
         $response = $this->service->listDomains(1);
         $pagination = $response->getPagination();
 
-        $this->assertEquals(1, $pagination->current_page);
-        $this->assertEquals(30, $pagination->per_page);
-        $this->assertEquals(2, $pagination->total_entries);
-        $this->assertEquals(1, $pagination->total_pages);
+        $this->assertEquals(1, $pagination->currentPage);
+        $this->assertEquals(30, $pagination->perPage);
+        $this->assertEquals(2, $pagination->totalEntries);
+        $this->assertEquals(1, $pagination->totalPages);
     }
 
     public function testListDomainsSupportsPagination()
@@ -79,8 +79,8 @@ class DomainsServiceTest extends ServiceTestCase
         $data = $response->getData();
         $this->assertInstanceOf(Domain::class, $data);
         $this->assertEquals(181985, $data->id);
-        $this->assertEquals(1385, $data->account_id);
-        $this->assertNull($data->registrant_id);
+        $this->assertEquals(1385, $data->accountId);
+        $this->assertNull($data->registrantId);
     }
 
     public function testGetDomain()
@@ -94,8 +94,8 @@ class DomainsServiceTest extends ServiceTestCase
         $data = $response->getData();
         $this->assertInstanceOf(Domain::class, $data);
         $this->assertEquals(181984, $data->id);
-        $this->assertEquals(1385, $data->account_id);
-        $this->assertEquals(2715, $data->registrant_id);
+        $this->assertEquals(1385, $data->accountId);
+        $this->assertEquals(2715, $data->registrantId);
     }
 
     public function testDeleteDomain()

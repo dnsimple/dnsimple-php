@@ -34,8 +34,8 @@ final class IdentityServiceTest extends ServiceTestCase
 
         $this->assertEquals(1, $user->id);
         $this->assertEquals("example-user@example.com", $user->email);
-        $this->assertEquals("2015-09-18T23:04:37Z", $user->created_at);
-        $this->assertEquals("2016-06-09T20:03:39Z", $user->updated_at);
+        $this->assertEquals("2015-09-18T23:04:37Z", $user->createdAt);
+        $this->assertEquals("2016-06-09T20:03:39Z", $user->updatedAt);
     }
 
     public function testAccount()
@@ -45,8 +45,8 @@ final class IdentityServiceTest extends ServiceTestCase
 
         $this->assertEquals(1, $account->id);
         $this->assertEquals("example-account@example.com", $account->email);
-        $this->assertEquals("dnsimple-professional", $account->plan_identifier);
-        $this->assertEquals("2015-09-18T23:04:37Z", $account->created_at);
-        $this->assertEquals("2016-06-09T20:03:39Z", $account->updated_at);
+        $this->assertEquals("dnsimple-professional", $account->planIdentifier);
+        $this->assertEquals("2015-09-18T23:04:37Z", $account->createdAt);
+        $this->assertEquals("2016-06-09T20:03:39Z", $account->updatedAt);
     }
 }

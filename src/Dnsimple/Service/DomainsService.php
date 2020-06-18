@@ -5,6 +5,8 @@ namespace Dnsimple\Service;
 use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Collaborator;
+use Dnsimple\Struct\DelegationSignerRecord;
+use Dnsimple\Struct\Dnssec;
 use Dnsimple\Struct\Domain;
 use GuzzleHttp\RequestOptions;
 
@@ -156,5 +158,129 @@ class DomainsService extends ClientService
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/collaborators/{$collaboratorId}"));
         return new Response($response, null);
+    }
+
+    /**
+     * Enable DNSSEC for the domain in the account. This will sign the zone. If the domain is registered it will also
+     * add the DS record to the corresponding registry.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#enableDomainDnssec
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @return Response The DNSSEC status
+     */
+    public function enableDnssec($accountId, $domainIdentifier)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/dnssec"));
+        return new Response($response, Dnssec::class);
+    }
+
+    /**
+     * Disable DNSSEC for the domain in the account.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#disableDomainDnssec
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @return Response An empty response
+     */
+    public function disableDnssec($accountId, $domainIdentifier)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/dnssec"));
+        return new Response($response, null);
+    }
+
+    /**
+     * Get the status of DNSSEC, indicating whether it is currently enabled or disabled.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#getDomainDnssec
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @return Response The DNSSEC status requested
+     */
+    public function getDnssec($accountId, $domainIdentifier)
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/dnssec"));
+        return new Response($response, Dnssec::class);
+    }
+
+    /**
+     * List delegation signer records for the domain in the account.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#listDomainDelegationSignerRecords
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
+     *
+     * Possible options:
+     *    Sort criteria:
+     *      - id: Sort delegation signer records by ID (i.e. 'id:asc')
+     *      - created_at: Sort delegation signer records by creation date (i.e. 'created_at:desc')
+     * @return Response A list of delegation signer records for the domain in the account
+     */
+    public function listDomainDelegationSignerRecords($accountId, $domainIdentifier, array $options=[])
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records"), $options);
+        return new Response($response, DelegationSignerRecord::class);
+    }
+
+    /**
+     * Create a delegation signer record
+     *
+     * You only need to create a delegation signer record manually if your domain is registered with DNSimple but
+     * hosted with another DNS provider that is signing your zone. To enable DNSSEC on a domain that is hosted with
+     * DNSimple, use the DNSSEC enable endpoint.
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#createDomainDelegationSignerRecord
+     *
+     * @param int $accountId The account id
+     * @param int|string $domainIdentifier The domain name or id
+     * @param array $attributes The delegation signer record attributes to create the delegation signer record
+     *  Required Fields
+     *      - algorithm: DNSSEC algorithms defined in http://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml - pass the Number value as a string (i.e. “8”).
+     *      - digest: The hexidecimal representation of the digest of the corresponding DNSKEY record.
+     *      - digest_type: DNSSEC digest types defined in http://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml - pass the Number value as string (i.e. “2”).
+     *      - keytag: A keytag that references the corresponding DNSKEY record.
+     * @return Response The newly created domain delegation signer record
+     */
+    public function createDomainDelegationSignerRecord($accountId, $domainIdentifier, $attributes)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records"), $attributes);
+        return new Response($response, DelegationSignerRecord::class);
+    }
+
+    /**
+     * Get the delegation signer record under the domain in the account
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#getDomainDelegationSignerRecord
+     *
+     * @param int $accountId The account ID
+     * @param int|string $domainIdentifier The domain name or id
+     * @param int $dsRecordId The delegation signer record id
+     * @return Response The domain delegation signer record requested
+     */
+    public function getDomainDelegationSignerRecord($accountId, $domainIdentifier, $dsRecordId)
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records/{$dsRecordId}"));
+        return new Response($response, DelegationSignerRecord::class);
+    }
+
+    /**
+     * Delete the delegation signer record under the domain in the account
+     *
+     * @see https://developer.dnsimple.com/v2/domains/dnssec/#deleteDomainDelegationSignerRecord
+     *
+     * @param int $accountId The account ID
+     * @param int|string $domainIdentifier The domain name or id
+     * @param int $dsRecordId The delegation signer record id
+     * @return Response An empty response
+     */
+    public function deleteDomainDelegationSignerRecord($accountId, $domainIdentifier, $dsRecordId)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records/{$dsRecordId}"));
+        return new Response($response,  null);
     }
 }

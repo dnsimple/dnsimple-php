@@ -20,25 +20,25 @@ class Pagination
     /**
      * @var int The page currently returned (default: 1)
      */
-    public int $current_page;
+    public int $currentPage;
     /**
      * @var int The number of entries returned per page (default: 30)
      */
-    public int $per_page;
+    public int $perPage;
     /**
      * @var int The total number of entries available in the entire collection
      */
-    public int $total_entries;
+    public int $totalEntries;
     /**
      * @var int The total number of pages available given the current per_page value
      */
-    public int $total_pages;
+    public int $totalPages;
 
     public function __construct($data)
     {
-        $this->current_page = $data->current_page;
-        $this->per_page = $data->per_page;
-        $this->total_entries = $data->total_entries;
-        $this->total_pages = $data->total_pages;
+        $this->currentPage = $data->current_page;
+        $this->perPage = $data->per_page;
+        $this->totalEntries = $data->total_entries;
+        $this->totalPages = $data->total_pages;
     }
 }

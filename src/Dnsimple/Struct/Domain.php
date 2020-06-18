@@ -18,11 +18,11 @@ class Domain
     /**
      * @var int The associated account ID in DNSimple
      */
-    public int $account_id;
+    public int $accountId;
     /**
      * @var int|null The associated registrant (contact) ID in DNSimple
      */
-    public ?int $registrant_id;
+    public ?int $registrantId;
     /**
      * @var string The domain name
      */
@@ -30,7 +30,7 @@ class Domain
     /**
      * @var string The domain unicode name
      */
-    public string $unicode_name;
+    public string $unicodeName;
     /**
      * @var string The domain state
      */
@@ -38,36 +38,36 @@ class Domain
     /**
      * @var bool True if the domain is set to auto-renew, false otherwise
      */
-    public bool $auto_renew;
+    public bool $autoRenew;
     /**
      * @var bool True if the domain WHOIS privacy is enabled, false otherwise
      */
-    public bool $private_whois;
+    public bool $privateWhois;
     /**
      * @var string|null The date the domain will expire
      */
-    public ?string $expires_at;
+    public ?string $expiresAt;
     /**
      * @var string When the domain was created in DNSimple
      */
-    public string $created_at;
+    public string $createdAt;
     /**
      * @var string When the domain was last updated in DNSimple
      */
-    public string $updated_at;
+    public string $updatedAt;
 
     public function __construct($data)
     {
         $this->id = $data->id;
-        $this->account_id = $data->account_id;
-        $this->registrant_id = $data->registrant_id;
+        $this->accountId = $data->account_id;
+        $this->registrantId = $data->registrant_id;
         $this->name = $data->name;
-        $this->unicode_name = $data->unicode_name;
+        $this->unicodeName = $data->unicode_name;
         $this->state = $data->state;
-        $this->auto_renew = $data->auto_renew;
-        $this->private_whois = $data->private_whois;
-        $this->expires_at = $data->expires_at;
-        $this->created_at = $data->created_at;
-        $this->updated_at = $data->updated_at;
+        $this->autoRenew = $data->auto_renew;
+        $this->privateWhois = $data->private_whois;
+        $this->expiresAt = $data->expires_at;
+        $this->createdAt = $data->created_at;
+        $this->updatedAt = $data->updated_at;
     }
 }

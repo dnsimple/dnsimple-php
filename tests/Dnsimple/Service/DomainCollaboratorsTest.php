@@ -31,16 +31,16 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $response = $this->service->listCollaborators(1010, 100);
         $pagination = $response->getPagination();
 
-        $this->assertEquals(1, $pagination->current_page);
-        $this->assertEquals(30, $pagination->per_page);
-        $this->assertEquals(2, $pagination->total_entries);
-        $this->assertEquals(1, $pagination->total_pages);
+        $this->assertEquals(1, $pagination->currentPage);
+        $this->assertEquals(30, $pagination->perPage);
+        $this->assertEquals(2, $pagination->totalEntries);
+        $this->assertEquals(1, $pagination->totalPages);
     }
 
     public function testListCollaboratorsSupportsPagination()
     {
         $this->mockResponseWith("listCollaborators/success");
-        $this->service->listCollaborators(1010, 100, ['page' => 1, 'per_page' => 4]);
+        $this->service->listCollaborators(1010, 100, ["page" => 1, "per_page" => 4]);
 
         $this->assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
@@ -51,14 +51,14 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $collaborator = $this->service->addCollaborator(1010, 1, [ "email" => "existing-user@example.com"])->getData();
 
         $this->assertEquals(100, $collaborator->id);
-        $this->assertEquals(1, $collaborator->domain_id);
-        $this->assertEquals("example.com", $collaborator->domain_name);
-        $this->assertEquals(999, $collaborator->user_id);
-        $this->assertEquals("existing-user@example.com", $collaborator->user_email);
+        $this->assertEquals(1, $collaborator->domainId);
+        $this->assertEquals("example.com", $collaborator->domainName);
+        $this->assertEquals(999, $collaborator->userId);
+        $this->assertEquals("existing-user@example.com", $collaborator->userEmail);
         $this->assertFalse($collaborator->invitation);
-        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->created_at);
-        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->updated_at);
-        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->accepted_at);
+        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->createdAt);
+        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->updatedAt);
+        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->acceptedAt);
     }
 
     public function testAddInvitedCollaborator()

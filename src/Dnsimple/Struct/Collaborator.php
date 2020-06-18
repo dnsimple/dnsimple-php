@@ -18,19 +18,19 @@ class Collaborator
     /**
      * @var int The associated domain ID
      */
-    public int $domain_id;
+    public int $domainId;
     /**
      * @var string The associated domain name
      */
-    public string $domain_name;
+    public string $domainName;
     /**
      * @var int|null The user ID (if the collaborator accepted the invitation).
      */
-    public ?int $user_id;
+    public ?int $userId;
     /**
      * @var string The user email
      */
-    public string $user_email;
+    public string $userEmail;
     /**
      * @var bool Invitation
      */
@@ -38,26 +38,26 @@ class Collaborator
     /**
      * @var string When the collaborator was created in DNSimple
      */
-    public string $created_at;
+    public string $createdAt;
     /**
      * @var string When the collaborator was last updated in DNSimple
      */
-    public string $updated_at;
+    public string $updatedAt;
     /**
      * @var string|null When the collaborator accepted the invitation
      */
-    public ?string $accepted_at;
+    public ?string $acceptedAt;
 
     public function __construct($data)
     {
         $this->id = $data->id;
-        $this->domain_id = $data->domain_id;
-        $this->domain_name = $data->domain_name;
-        $this->user_id = $data->user_id;
-        $this->user_email = $data->user_email;
+        $this->domainId = $data->domain_id;
+        $this->domainName = $data->domain_name;
+        $this->userId = $data->user_id;
+        $this->userEmail = $data->user_email;
         $this->invitation = $data->invitation;
-        $this->created_at = $data->created_at;
-        $this->updated_at = $data->updated_at;
-        $this->accepted_at = $data->accepted_at;
+        $this->createdAt = $data->created_at;
+        $this->updatedAt = $data->updated_at;
+        $this->acceptedAt = $data->accepted_at;
     }
 }

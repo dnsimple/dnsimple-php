@@ -22,17 +22,17 @@ class User
     /**
      * @var string When the user was created in DNSimple
      */
-    public string $created_at;
+    public string $createdAt;
     /**
      * @var string When the user was last updated in DNSimple
      */
-    public string $updated_at;
+    public string $updatedAt;
 
     public function __construct($data)
     {
         $this->id = $data->id;
         $this->email = $data->email;
-        $this->created_at = $data->created_at;
-        $this->updated_at = $data->updated_at;
+        $this->createdAt = $data->created_at;
+        $this->updatedAt = $data->updated_at;
     }
 }

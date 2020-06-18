@@ -22,22 +22,22 @@ class Account
     /**
      * @var string The identifier of the plan the account is subscribed to
      */
-    public string $plan_identifier;
+    public string $planIdentifier;
     /**
      * @var string When the account was created in DNSimple
      */
-    public string $created_at;
+    public string $createdAt;
     /**
      * @var string When the account was last updated in DNSimple
      */
-    public string $updated_at;
+    public string $updatedAt;
 
     public function __construct($data)
     {
         $this->id = $data->id;
         $this->email = $data->email;
-        $this->plan_identifier = $data->plan_identifier;
-        $this->created_at = $data->created_at;
-        $this->updated_at = $data->updated_at;
+        $this->planIdentifier = $data->plan_identifier;
+        $this->createdAt = $data->created_at;
+        $this->updatedAt = $data->updated_at;
     }
 }

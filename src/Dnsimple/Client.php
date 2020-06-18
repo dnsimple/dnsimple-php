@@ -109,7 +109,11 @@ class Client
             ]
         ]);
 
-        return $this->httpClient->request($method, $path, $requestOptions);
+        try {
+            return $this->httpClient->request($method, $path, $requestOptions);
+        } catch (GuzzleHttp\Exception\GuzzleException $e) {
+            throw new DnsimpleException($e);
+        }
     }
 
     public function getUserAgent(): string
