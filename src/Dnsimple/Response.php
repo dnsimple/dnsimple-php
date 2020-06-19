@@ -28,7 +28,7 @@ class Response
      * @param ResponseInterface $response
      * @param $data_class
      */
-    public function __construct($response, $data_class)
+    public function __construct($response, $data_class = null)
     {
         $this->_httpResponse = $response;
         $this->_data_class = $data_class;

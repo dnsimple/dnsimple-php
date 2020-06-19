@@ -84,7 +84,7 @@ class Client
 
     public function get($path, array $options = [])
     {
-        $query = ['query' => $options];
+        $query = ["query" => $options];
 
         return $this->request("GET", $path, $query);
     }
@@ -97,6 +97,11 @@ class Client
     public function delete($path, array $options = [])
     {
         return $this->request("DELETE", $path, $options);
+    }
+
+    public function patch($path, array $options = [])
+    {
+        return $this->request("PATCH", $path, $options);
     }
 
     public function request($method, $path, array $options = [])

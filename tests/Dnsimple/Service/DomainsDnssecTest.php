@@ -17,9 +17,9 @@ class DomainsDnssecTest extends ServiceTestCase
         $this->mockResponseWith("enableDnssec/success");
         $dnssec = $this->service->enableDnssec(1010, 1)->getData();
 
-        $this->assertTrue($dnssec->enabled);
-        $this->assertEquals("2017-03-03T13:49:58Z", $dnssec->createdAt);
-        $this->assertEquals("2017-03-03T13:49:58Z", $dnssec->updatedAt);
+        self::assertTrue($dnssec->enabled);
+        self::assertEquals("2017-03-03T13:49:58Z", $dnssec->createdAt);
+        self::assertEquals("2017-03-03T13:49:58Z", $dnssec->updatedAt);
     }
 
     public function testDisableDnssec()
@@ -27,8 +27,8 @@ class DomainsDnssecTest extends ServiceTestCase
         $this->mockResponseWith("disableDnssec/success");
         $response = $this->service->disableDnssec(1010, 1);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(204, $response->getStatusCode());
     }
 
     public function testGetDnssec()
@@ -36,8 +36,8 @@ class DomainsDnssecTest extends ServiceTestCase
         $this->mockResponseWith("getDnssec/success");
         $dnssec = $this->service->getDnssec(1010, 1)->getData();
 
-        $this->assertTrue($dnssec->enabled);
-        $this->assertEquals("2017-02-03T17:43:22Z", $dnssec->createdAt);
-        $this->assertEquals("2017-02-03T17:43:22Z", $dnssec->updatedAt);
+        self::assertTrue($dnssec->enabled);
+        self::assertEquals("2017-02-03T17:43:22Z", $dnssec->createdAt);
+        self::assertEquals("2017-02-03T17:43:22Z", $dnssec->updatedAt);
     }
 }

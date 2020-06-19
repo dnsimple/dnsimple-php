@@ -19,7 +19,7 @@ abstract class ServiceTestCase extends TestCase
     {
         $this->mockHandler = new MockHandler();
         $this->handler = HandlerStack::create($this->mockHandler);
-        $this->client = new Client("a1b2c3", ['handler' => $this->handler]);
+        $this->client = new Client("a1b2c3", ["handler" => $this->handler]);
     }
 
     protected function fixture($fixture): Response
@@ -30,5 +30,10 @@ abstract class ServiceTestCase extends TestCase
     protected function mockResponseWith($fixture) : void
     {
         $this->mockHandler->append($this->fixture($fixture));
+    }
+
+    protected function queryContent()
+    {
+        return $this->mockHandler->getLastRequest()->getUri()->getQuery();
     }
 }

@@ -18,13 +18,13 @@ final class IdentityServiceTest extends ServiceTestCase
         $this->mockResponseWith("whoami/success");
 
         $response = $this->service->whoami();
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(200, $response->getStatusCode());
 
         $data = $response->getData();
-        $this->assertInstanceOf(Whoami::class, $data);
-        $this->assertObjectHasAttribute("user", $data);
-        $this->assertObjectHasAttribute("account", $data);
+        self::assertInstanceOf(Whoami::class, $data);
+        self::assertObjectHasAttribute("user", $data);
+        self::assertObjectHasAttribute("account", $data);
     }
 
     public function testUser()
@@ -32,10 +32,10 @@ final class IdentityServiceTest extends ServiceTestCase
         $this->mockResponseWith("whoami/success-user");
         $user = $this->service->whoami()->getData()->user;
 
-        $this->assertEquals(1, $user->id);
-        $this->assertEquals("example-user@example.com", $user->email);
-        $this->assertEquals("2015-09-18T23:04:37Z", $user->createdAt);
-        $this->assertEquals("2016-06-09T20:03:39Z", $user->updatedAt);
+        self::assertEquals(1, $user->id);
+        self::assertEquals("example-user@example.com", $user->email);
+        self::assertEquals("2015-09-18T23:04:37Z", $user->createdAt);
+        self::assertEquals("2016-06-09T20:03:39Z", $user->updatedAt);
     }
 
     public function testAccount()
@@ -43,10 +43,10 @@ final class IdentityServiceTest extends ServiceTestCase
         $this->mockResponseWith("whoami/success-account");
         $account = $this->service->whoami()->getData()->account;
 
-        $this->assertEquals(1, $account->id);
-        $this->assertEquals("example-account@example.com", $account->email);
-        $this->assertEquals("dnsimple-professional", $account->planIdentifier);
-        $this->assertEquals("2015-09-18T23:04:37Z", $account->createdAt);
-        $this->assertEquals("2016-06-09T20:03:39Z", $account->updatedAt);
+        self::assertEquals(1, $account->id);
+        self::assertEquals("example-account@example.com", $account->email);
+        self::assertEquals("dnsimple-professional", $account->planIdentifier);
+        self::assertEquals("2015-09-18T23:04:37Z", $account->createdAt);
+        self::assertEquals("2016-06-09T20:03:39Z", $account->updatedAt);
     }
 }

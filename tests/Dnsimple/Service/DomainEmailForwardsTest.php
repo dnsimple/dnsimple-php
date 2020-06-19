@@ -19,10 +19,10 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $response = $this->service->listEmailForwards(1010, 1);
 
         $data = $response->getData();
-        $this->assertCount(2, $data);
+        self::assertCount(2, $data);
 
         $record = $data[0];
-        $this->assertInstanceOf(EmailForward::class, $record);
+        self::assertInstanceOf(EmailForward::class, $record);
     }
 
     public function testListDomainEmailForwardsSupportsSorting()
@@ -30,7 +30,7 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $this->mockResponseWith("listEmailForwards/success");
         $this->service->listEmailForwards(1010, 1, ["sort" => "id:asc,from:desc,to:asc"]);
 
-        $this->assertEquals("sort=id%3Aasc%2Cfrom%3Adesc%2Cto%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("sort=id%3Aasc%2Cfrom%3Adesc%2Cto%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testListDomainsEmailForwardsHasPaginationObject()
@@ -39,18 +39,18 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $response = $this->service->listEmailForwards(1010, 1);
         $pagination = $response->getPagination();
 
-        $this->assertEquals(1, $pagination->currentPage);
-        $this->assertEquals(30, $pagination->perPage);
-        $this->assertEquals(2, $pagination->totalEntries);
-        $this->assertEquals(1, $pagination->totalPages);
+        self::assertEquals(1, $pagination->currentPage);
+        self::assertEquals(30, $pagination->perPage);
+        self::assertEquals(2, $pagination->totalEntries);
+        self::assertEquals(1, $pagination->totalPages);
     }
 
     public function testListDomainEmailForwardsSupportsPagination()
     {
         $this->mockResponseWith("listEmailForwards/success");
-        $this->service->listEmailForwards(1010, 1, ['page' => 1, 'per_page' => 4]);
+        $this->service->listEmailForwards(1010, 1, ["page" => 1, "per_page" => 4]);
 
-        $this->assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testCreateEmailForward()
@@ -63,11 +63,11 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $response = $this->service->createEmailForward(1010, 228963, $attributes);
 
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(201, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(201, $response->getStatusCode());
 
         $data = $response->getData();
-        $this->assertInstanceOf(EmailForward::class, $data);
+        self::assertInstanceOf(EmailForward::class, $data);
     }
 
     public function testGetEmailForward()
@@ -75,12 +75,12 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $this->mockResponseWith("getEmailForward/success");
         $emailForward = $this->service->getEmailForward(1010, 228963, 17706)->getData();
 
-        $this->assertEquals(17706, $emailForward->id);
-        $this->assertEquals(228963, $emailForward->domainId);
-        $this->assertEquals("jim@a-domain.com", $emailForward->from);
-        $this->assertEquals("jim@another.com", $emailForward->to);
-        $this->assertEquals("2016-02-04T14:26:50Z", $emailForward->createdAt);
-        $this->assertEquals("2016-02-04T14:26:50Z", $emailForward->updatedAt);
+        self::assertEquals(17706, $emailForward->id);
+        self::assertEquals(228963, $emailForward->domainId);
+        self::assertEquals("jim@a-domain.com", $emailForward->from);
+        self::assertEquals("jim@another.com", $emailForward->to);
+        self::assertEquals("2016-02-04T14:26:50Z", $emailForward->createdAt);
+        self::assertEquals("2016-02-04T14:26:50Z", $emailForward->updatedAt);
     }
 
     public function testDeleteEmailForward()
@@ -88,8 +88,8 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $this->mockResponseWith("deleteEmailForward/success");
 
         $response = $this->service->deleteEmailForward(1010, 228963, 17706);
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(204, $response->getStatusCode());
     }
 
 }

@@ -28,15 +28,15 @@ class DomainsService extends ClientService
      *
      * Possible options:
      *  - filters:
-     *      - name_like: Only include domains containing given string (i.e. ['name_like' => 'example.com'] )
-     *      - registrant_id: Only include domains containing given registrant ID (i.e. ['registrant_id' => 1010] )
+     *      - name_like: Only include domains containing given string (i.e. ["name_like" => "example.com"] )
+     *      - registrant_id: Only include domains containing given registrant ID (i.e. ["registrant_id" => 1010] )
      *  - sorting:
      *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
-     *    descending).
+     *    descending).  ["sort" => "sort criteria here"]
      *    Sort criteria:
-     *      - id: Sort domains by ID (i.e. 'id:asc')
-     *      - name: Sort domains by name (alphabetical order) (i.e. 'name:desc')
-     *      - expiration: Sort domains by expiration date (i.e. 'expiration:asc')
+     *      - id: Sort domains by ID (i.e. "id:asc")
+     *      - name: Sort domains by name (alphabetical order) (i.e. "name:desc")
+     *      - expiration: Sort domains by expiration date (i.e. "expiration:asc")
      *  - pagination:
      *      - page: The page to return (default: 1)
      *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
@@ -100,7 +100,7 @@ class DomainsService extends ClientService
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}"));
 
-        return new Response($response, null);
+        return new Response($response);
     }
 
     /**
@@ -127,7 +127,7 @@ class DomainsService extends ClientService
      *
      * At the time of the add, a collaborator may or may not have a DNSimple account.
      *
-     * In case the collaborator doesn't have a DNSimple account, the system will invite her/him to register to
+     * In case the collaborator doesn"t have a DNSimple account, the system will invite her/him to register to
      * DNSimple first and then to accept the collaboration invitation.
      *
      * In the other case, she/he is automatically added to the domain as collaborator. She/he can decide to reject
@@ -159,7 +159,7 @@ class DomainsService extends ClientService
     public function removeCollaborator($accountId, $domainIdentifier, $collaboratorId)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/collaborators/{$collaboratorId}"));
-        return new Response($response, null);
+        return new Response($response);
     }
 
     /**
@@ -190,7 +190,7 @@ class DomainsService extends ClientService
     public function disableDnssec($accountId, $domainIdentifier)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/dnssec"));
-        return new Response($response, null);
+        return new Response($response);
     }
 
     /**
@@ -218,9 +218,12 @@ class DomainsService extends ClientService
      * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
      *
      * Possible options:
+     *  - sorting:
+     *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
+     *    descending).  ["sort" => "sort criteria here"]
      *    Sort criteria:
-     *      - id: Sort delegation signer records by ID (i.e. 'id:asc')
-     *      - created_at: Sort delegation signer records by creation date (i.e. 'created_at:desc')
+     *      - id: Sort delegation signer records by ID (i.e. "id:asc")
+     *      - created_at: Sort delegation signer records by creation date (i.e. "created_at:desc")
      * @return Response A list of delegation signer records for the domain in the account
      */
     public function listDomainDelegationSignerRecords($accountId, $domainIdentifier, array $options = [])
@@ -283,7 +286,7 @@ class DomainsService extends ClientService
     public function deleteDomainDelegationSignerRecord($accountId, $domainIdentifier, $dsRecordId)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/ds_records/{$dsRecordId}"));
-        return new Response($response, null);
+        return new Response($response);
     }
 
     /**
@@ -298,11 +301,11 @@ class DomainsService extends ClientService
      * Possible options:
      *  - sorting:
      *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
-     *    descending).
+     *    descending).  ["sort" => "sort criteria here"]
      *    Sort criteria:
-     *      - id: Sort email forwards by ID (i.e. 'id:asc')
-     *      - from: Sort email forwards by sender (i.e. 'from:desc')
-     *      - to: Sort email forwards by recipient (i.e. 'to:asc')
+     *      - id: Sort email forwards by ID (i.e. "id:asc")
+     *      - from: Sort email forwards by sender (i.e. "from:desc")
+     *      - to: Sort email forwards by recipient (i.e. "to:asc")
      *  - pagination:
      *      - page: The page to return (default: 1)
      *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
@@ -362,7 +365,7 @@ class DomainsService extends ClientService
     public function deleteEmailForward($accountId, $domainIdentifier, $emailForward)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/domains/{$domainIdentifier}/email_forwards/{$emailForward}"));
-        return new Response($response, null);
+        return new Response($response);
     }
 
     /**
@@ -419,7 +422,7 @@ class DomainsService extends ClientService
     public function acceptPush($accountId, $pushId, array $attributes)
     {
         $response = $this->client->post(Client::versioned("/{$accountId}/pushes/{$pushId}"), $attributes);
-        return new Response($response, null);
+        return new Response($response);
     }
 
     /**
@@ -434,6 +437,6 @@ class DomainsService extends ClientService
     public function rejectPush($accountId, $pushId)
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/pushes/{$pushId}"));
-        return new Response($response, null);
+        return new Response($response);
     }
 }

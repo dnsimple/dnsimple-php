@@ -21,13 +21,13 @@ class DomainPushesTest extends ServiceTestCase
         ];
         $push = $this->service->initiatePush(2020, 100, $attributes)->getData();
 
-        $this->assertEquals(1, $push->id);
-        $this->assertEquals(100, $push->domainId);
-        $this->assertNull($push->contactId);
-        $this->assertEquals(2020, $push->accountId);
-        $this->assertEquals("2016-08-11T10:16:03Z", $push->createdAt);
-        $this->assertEquals("2016-08-11T10:16:03Z", $push->updatedAt);
-        $this->assertNull($push->acceptedAt);
+        self::assertEquals(1, $push->id);
+        self::assertEquals(100, $push->domainId);
+        self::assertNull($push->contactId);
+        self::assertEquals(2020, $push->accountId);
+        self::assertEquals("2016-08-11T10:16:03Z", $push->createdAt);
+        self::assertEquals("2016-08-11T10:16:03Z", $push->updatedAt);
+        self::assertNull($push->acceptedAt);
     }
 
     public function testListPushes()
@@ -36,10 +36,10 @@ class DomainPushesTest extends ServiceTestCase
         $response = $this->service->listPushes(2020);
 
         $data = $response->getData();
-        $this->assertCount(2, $data);
+        self::assertCount(2, $data);
 
         $record = $data[0];
-        $this->assertInstanceOf(DomainPush::class, $record);
+        self::assertInstanceOf(DomainPush::class, $record);
     }
 
     public function testListPushesHasPagination() {
@@ -48,18 +48,18 @@ class DomainPushesTest extends ServiceTestCase
 
         $pagination = $response->getPagination();
 
-        $this->assertEquals(1, $pagination->currentPage);
-        $this->assertEquals(30, $pagination->perPage);
-        $this->assertEquals(2, $pagination->totalEntries);
-        $this->assertEquals(1, $pagination->totalPages);
+        self::assertEquals(1, $pagination->currentPage);
+        self::assertEquals(30, $pagination->perPage);
+        self::assertEquals(2, $pagination->totalEntries);
+        self::assertEquals(1, $pagination->totalPages);
     }
 
     public function testListPushesSupportsPagination()
     {
         $this->mockResponseWith("listPushes/success");
-        $this->service->listPushes(2020, ['page' => 1, 'per_page' => 4]);
+        $this->service->listPushes(2020, ["page" => 1, "per_page" => 4]);
 
-        $this->assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testAcceptPush()
@@ -70,8 +70,8 @@ class DomainPushesTest extends ServiceTestCase
         ];
         $response = $this->service->acceptPush(2020, 1, $attributes);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(204, $response->getStatusCode());
     }
 
     public function testRejectPush()
@@ -79,7 +79,7 @@ class DomainPushesTest extends ServiceTestCase
         $this->mockResponseWith("rejectPush/success");
         $response = $this->service->rejectPush(2020, 1);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(204, $response->getStatusCode());
     }
 }

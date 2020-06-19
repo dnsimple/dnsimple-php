@@ -16,8 +16,8 @@ class AccountsServiceTest extends ServiceTestCase
         $this->mockResponseWith("listAccounts/success-account");
         $accounts = $this->service->listAccounts()->getData();
 
-        $this->assertCount(1, $accounts);
-        $this->assertEquals("john@example.com", $accounts[0]->email);
+        self::assertCount(1, $accounts);
+        self::assertEquals("john@example.com", $accounts[0]->email);
     }
 
     function testListAccountsUser()
@@ -25,7 +25,7 @@ class AccountsServiceTest extends ServiceTestCase
         $this->mockResponseWith("listAccounts/success-user");
         $accounts = $this->service->listAccounts()->getData();
 
-        $this->assertCount(2, $accounts);
-        $this->assertEquals("ops@company.com", $accounts[1]->email);
+        self::assertCount(2, $accounts);
+        self::assertEquals("ops@company.com", $accounts[1]->email);
     }
 }

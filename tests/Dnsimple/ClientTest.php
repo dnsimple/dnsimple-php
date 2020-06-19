@@ -9,12 +9,12 @@ final class ClientTest extends ServiceTestCase
     public function testConstructor()
     {
         $client = new Client("a1b2c3");
-        $this->assertInstanceOf(Client::class, $client);
+        self::assertInstanceOf(Client::class, $client);
     }
 
     public function testVersioned_PrependsDefaultVersionToPath()
     {
-        $this->assertEquals("/" . Client::API_VERSION . "/test", Client::versioned("/test"));
+        self::assertEquals("/" . Client::API_VERSION . "/test", Client::versioned("/test"));
     }
 
     public function testRateLimits() {
@@ -22,8 +22,8 @@ final class ClientTest extends ServiceTestCase
         $this->mockResponseWith("whoami/success");
         $response = $this->client->Identity->whoami();
 
-        $this->assertEquals(4000, $response->getRateLimit());
-        $this->assertEquals(3991, $response->getRateLimitRemaining());
-        $this->assertEquals(1450451976, $response->getRateLimitReset());
+        self::assertEquals(4000, $response->getRateLimit());
+        self::assertEquals(3991, $response->getRateLimitRemaining());
+        self::assertEquals(1450451976, $response->getRateLimitReset());
     }
 }

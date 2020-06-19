@@ -19,10 +19,10 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $response = $this->service->listCollaborators(1010, 100);
 
         $data = $response->getData();
-        $this->assertCount(2, $data);
+        self::assertCount(2, $data);
 
         $collaborator = $data[0];
-        $this->assertInstanceOf(Collaborator::class, $collaborator);
+        self::assertInstanceOf(Collaborator::class, $collaborator);
     }
 
     public function testListCollaboratorsHasPaginationObject()
@@ -31,10 +31,10 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $response = $this->service->listCollaborators(1010, 100);
         $pagination = $response->getPagination();
 
-        $this->assertEquals(1, $pagination->currentPage);
-        $this->assertEquals(30, $pagination->perPage);
-        $this->assertEquals(2, $pagination->totalEntries);
-        $this->assertEquals(1, $pagination->totalPages);
+        self::assertEquals(1, $pagination->currentPage);
+        self::assertEquals(30, $pagination->perPage);
+        self::assertEquals(2, $pagination->totalEntries);
+        self::assertEquals(1, $pagination->totalPages);
     }
 
     public function testListCollaboratorsSupportsPagination()
@@ -42,7 +42,7 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $this->mockResponseWith("listCollaborators/success");
         $this->service->listCollaborators(1010, 100, ["page" => 1, "per_page" => 4]);
 
-        $this->assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testAddExistingDNSimpleCollaborator()
@@ -50,15 +50,15 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $this->mockResponseWith("addCollaborator/success");
         $collaborator = $this->service->addCollaborator(1010, 1, [ "email" => "existing-user@example.com"])->getData();
 
-        $this->assertEquals(100, $collaborator->id);
-        $this->assertEquals(1, $collaborator->domainId);
-        $this->assertEquals("example.com", $collaborator->domainName);
-        $this->assertEquals(999, $collaborator->userId);
-        $this->assertEquals("existing-user@example.com", $collaborator->userEmail);
-        $this->assertFalse($collaborator->invitation);
-        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->createdAt);
-        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->updatedAt);
-        $this->assertEquals("2016-10-07T08:53:41Z", $collaborator->acceptedAt);
+        self::assertEquals(100, $collaborator->id);
+        self::assertEquals(1, $collaborator->domainId);
+        self::assertEquals("example.com", $collaborator->domainName);
+        self::assertEquals(999, $collaborator->userId);
+        self::assertEquals("existing-user@example.com", $collaborator->userEmail);
+        self::assertFalse($collaborator->invitation);
+        self::assertEquals("2016-10-07T08:53:41Z", $collaborator->createdAt);
+        self::assertEquals("2016-10-07T08:53:41Z", $collaborator->updatedAt);
+        self::assertEquals("2016-10-07T08:53:41Z", $collaborator->acceptedAt);
     }
 
     public function testAddInvitedCollaborator()
@@ -66,7 +66,7 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $this->mockResponseWith("addCollaborator/invite-success");
         $collaborator = $this->service->addCollaborator(1010, "example.com", [ "email" => "invited-user@example.com"])->getData();
 
-        $this->assertTrue($collaborator->invitation);
+        self::assertTrue($collaborator->invitation);
     }
 
     public function testRemoveCollaborator()
@@ -74,7 +74,7 @@ class DomainCollaboratorsTest extends ServiceTestCase
         $this->mockResponseWith("removeCollaborator/success");
         $response = $this->service->removeCollaborator(1010, 1, 12);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(204, $response->getStatusCode());
     }
 }

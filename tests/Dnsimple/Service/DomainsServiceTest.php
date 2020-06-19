@@ -17,15 +17,15 @@ class DomainsServiceTest extends ServiceTestCase
         $this->mockResponseWith("listDomains/success");
 
         $response = $this->service->listDomains(1);
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(200, $response->getStatusCode());
 
         $data = $response->getData();
-        $this->assertCount(2, $data);
+        self::assertCount(2, $data);
 
         $domain = $data[0];
-        $this->assertInstanceOf(Domain::class, $domain);
-        $this->assertEquals(181984, $domain->id);
+        self::assertInstanceOf(Domain::class, $domain);
+        self::assertEquals(181984, $domain->id);
     }
 
     public function testListDomainsSupportsFilters()
@@ -33,7 +33,7 @@ class DomainsServiceTest extends ServiceTestCase
         $this->mockResponseWith("listDomains/success");
         $this->service->listDomains(1, ["name_like"=>"example.com", "registrant_id"=>42]);
 
-        $this->assertEquals("name_like=example.com&registrant_id=42", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("name_like=example.com&registrant_id=42", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testListDomainsSupportsSorting()
@@ -41,7 +41,7 @@ class DomainsServiceTest extends ServiceTestCase
         $this->mockResponseWith("listDomains/success");
         $this->service->listDomains(1, ["sort" => "id:asc,name:desc,expiration:asc"]);
 
-        $this->assertEquals("sort=id%3Aasc%2Cname%3Adesc%2Cexpiration%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("sort=id%3Aasc%2Cname%3Adesc%2Cexpiration%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testListDomainsHasPaginationObject()
@@ -50,18 +50,18 @@ class DomainsServiceTest extends ServiceTestCase
         $response = $this->service->listDomains(1);
         $pagination = $response->getPagination();
 
-        $this->assertEquals(1, $pagination->currentPage);
-        $this->assertEquals(30, $pagination->perPage);
-        $this->assertEquals(2, $pagination->totalEntries);
-        $this->assertEquals(1, $pagination->totalPages);
+        self::assertEquals(1, $pagination->currentPage);
+        self::assertEquals(30, $pagination->perPage);
+        self::assertEquals(2, $pagination->totalEntries);
+        self::assertEquals(1, $pagination->totalPages);
     }
 
     public function testListDomainsSupportsPagination()
     {
         $this->mockResponseWith("listDomains/success");
-        $this->service->listDomains(1, ['page' => 1, 'per_page' => 4]);
+        $this->service->listDomains(1, ["page" => 1, "per_page" => 4]);
 
-        $this->assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
     }
 
     public function testCreateDomain()
@@ -73,14 +73,14 @@ class DomainsServiceTest extends ServiceTestCase
         ];
 
         $response = $this->service->createDomain(1, $attributes);
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(201, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(201, $response->getStatusCode());
 
         $data = $response->getData();
-        $this->assertInstanceOf(Domain::class, $data);
-        $this->assertEquals(181985, $data->id);
-        $this->assertEquals(1385, $data->accountId);
-        $this->assertNull($data->registrantId);
+        self::assertInstanceOf(Domain::class, $data);
+        self::assertEquals(181985, $data->id);
+        self::assertEquals(1385, $data->accountId);
+        self::assertNull($data->registrantId);
     }
 
     public function testGetDomain()
@@ -88,14 +88,14 @@ class DomainsServiceTest extends ServiceTestCase
         $this->mockResponseWith("getDomain/success");
 
         $response = $this->service->getDomain(1, "example.com");
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(200, $response->getStatusCode());
 
         $data = $response->getData();
-        $this->assertInstanceOf(Domain::class, $data);
-        $this->assertEquals(181984, $data->id);
-        $this->assertEquals(1385, $data->accountId);
-        $this->assertEquals(2715, $data->registrantId);
+        self::assertInstanceOf(Domain::class, $data);
+        self::assertEquals(181984, $data->id);
+        self::assertEquals(1385, $data->accountId);
+        self::assertEquals(2715, $data->registrantId);
     }
 
     public function testDeleteDomain()
@@ -103,7 +103,7 @@ class DomainsServiceTest extends ServiceTestCase
         $this->mockResponseWith("deleteDomain/success");
 
         $response = $this->service->deleteDomain(1, "example.com");
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(204, $response->getStatusCode());
     }
 }
