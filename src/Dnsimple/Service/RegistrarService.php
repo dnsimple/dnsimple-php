@@ -192,4 +192,34 @@ class RegistrarService extends ClientService
         $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation/vanity"));
         return new Response($response);
     }
+
+    /**
+     * Enables auto renewal for the domain.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/auto-renewal/#enableDomainAutoRenewal
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response An empty response
+     */
+    public function enableDomainAutoRenewal($accountId, $domain)
+    {
+        $response = $this->client->put(Client::versioned("/{$accountId}/registrar/domains/{$domain}/auto_renewal"));
+        return new Response($response);
+    }
+
+    /**
+     * Disables auto renewal for the domain.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/auto-renewal/#disableDomainAutoRenewal
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response An empty response
+     */
+    public function disableDomainAutoRenewal($accountId, $domain)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/auto_renewal"));
+        return new Response($response);
+    }
 }
