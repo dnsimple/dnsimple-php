@@ -10,6 +10,7 @@ use Dnsimple\Struct\DomainPremiumPrice;
 use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainTransfer;
+use Dnsimple\Struct\WhoisPrivacy;
 
 class RegistrarService extends ClientService
 {
@@ -221,5 +222,73 @@ class RegistrarService extends ClientService
     {
         $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/auto_renewal"));
         return new Response($response);
+    }
+
+    /**
+     * Get the WHOIS privacy details for a domain
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#getWhoisPrivacy
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The whois privacy details
+     */
+    public function getWhoisPrivacy($accountId, $domain)
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy"));
+        return new Response($response, WhoisPrivacy::class);
+    }
+
+    /**
+     * Enable WHOIS privacy
+     *
+     * Note that if the WHOIS privacy is not purchased for the domain, enabling WHOIS privacy will cause the service
+     * to be purchased for a period of 1 year.
+     *
+     * If WHOIS privacy was previously purchased and disabled, then calling this will enable the WHOIS privacy.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#enableWhoisPrivacy
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The whois privacy details
+     */
+    public function enableWhoisPrivacy($accountId, $domain)
+    {
+        $response = $this->client->put(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy"));
+        return new Response($response, WhoisPrivacy::class);
+    }
+    /**
+     * Disable WHOIS privacy
+     *
+     * Note that if the WHOIS privacy is not purchased for the domain, this method will do nothing.
+     *
+     * If WHOIS privacy was previously purchased and enabled, then calling this will disable the WHOIS privacy.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#disableWhoisPrivacy
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The whois privacy details
+     */
+    public function disableWhoisPrivacy($accountId, $domain)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy"));
+        return new Response($response, WhoisPrivacy::class);
+    }
+
+    /**
+     * Renew WHOIS privacy
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#renewWhoisPrivacy
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The whois privacy details
+     */
+    public function renewWhoisPrivacy($accountId, $domain)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy/renewals"));
+        return new Response($response, WhoisPrivacy::class);
     }
 }
