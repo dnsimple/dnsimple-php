@@ -12,7 +12,7 @@ final class ClientTest extends ServiceTestCase
         self::assertInstanceOf(Client::class, $client);
     }
 
-    public function testVersioned_PrependsDefaultVersionToPath()
+    public function testVersionedPrependsDefaultVersionToPath()
     {
         self::assertEquals("/" . Client::API_VERSION . "/test", Client::versioned("/test"));
     }

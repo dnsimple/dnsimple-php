@@ -24,22 +24,7 @@ class DomainsService extends ClientService
      * Lists the domains in the account.
      *
      * @param int $accountId The account ID
-     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
-     *
-     * Possible options:
-     *  - filters:
-     *      - name_like: Only include domains containing given string (i.e. ["name_like" => "example.com"] )
-     *      - registrant_id: Only include domains containing given registrant ID (i.e. ["registrant_id" => 1010] )
-     *  - sorting:
-     *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
-     *    descending).  ["sort" => "sort criteria here"]
-     *    Sort criteria:
-     *      - id: Sort domains by ID (i.e. "id:asc")
-     *      - name: Sort domains by name (alphabetical order) (i.e. "name:desc")
-     *      - expiration: Sort domains by expiration date (i.e. "expiration:asc")
-     *  - pagination:
-     *      - page: The page to return (default: 1)
-     *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
+     * @param array $options key/value options to sort and filter the results
      * @return  Response The list of domains
      * @example listDomains(1010, ["name_like" => "example.com", "sort" => "id:desc,expiration:asc"]
      */
@@ -56,7 +41,7 @@ class DomainsService extends ClientService
      * @see https://developer.dnsimple.com/v2/domains/#create
      *
      * @param int $accountId The account ID
-     * @param array $attributes The domain attributes (currently ["name" => "domain_name.com"])
+     * @param array $attributes The domain attributes. Refer to the documentation for the list of available fields.
      * @return  Response The newly created domain
      */
     public function createDomain($accountId, array $attributes): Response
@@ -110,10 +95,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account ID
      * @param int|string $domainIdentifier The domain name or ID
-     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
-     *  - pagination:
-     *      - page: The page to return (default: 1)
-     *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
+     * @param array $options key/value options to sort and filter the results
      * @return Response The list of collaborators
      */
     public function listCollaborators($accountId, $domainIdentifier, array $options = []): Response
@@ -137,7 +119,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account ID
      * @param int|string $domainIdentifier The domain name or ID
-     * @param array $attributes The collaborator attributes (i.e. ["email" => "user@example.com"])
+     * @param array $attributes The collaborator attributes. Refer to the documentation for the list of available fields.
      * @return Response The collaborator added to the domain in the account
      */
     public function addCollaborator($accountId, $domainIdentifier, array $attributes)
@@ -215,15 +197,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account id
      * @param int|string $domainIdentifier The domain name or id
-     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
-     *
-     * Possible options:
-     *  - sorting:
-     *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
-     *    descending).  ["sort" => "sort criteria here"]
-     *    Sort criteria:
-     *      - id: Sort delegation signer records by ID (i.e. "id:asc")
-     *      - created_at: Sort delegation signer records by creation date (i.e. "created_at:desc")
+     * @param array $options key/value options to sort and filter the results
      * @return Response A list of delegation signer records for the domain in the account
      */
     public function listDomainDelegationSignerRecords($accountId, $domainIdentifier, array $options = [])
@@ -243,12 +217,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account id
      * @param int|string $domainIdentifier The domain name or id
-     * @param array $attributes The delegation signer record attributes to create the delegation signer record
-     *  Required Fields
-     *      - algorithm: DNSSEC algorithms defined in http://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml - pass the Number value as a string (i.e. “8”).
-     *      - digest: The hexidecimal representation of the digest of the corresponding DNSKEY record.
-     *      - digest_type: DNSSEC digest types defined in http://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml - pass the Number value as string (i.e. “2”).
-     *      - keytag: A keytag that references the corresponding DNSKEY record.
+     * @param array $attributes The delegation signer record attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created domain delegation signer record
      */
     public function createDomainDelegationSignerRecord($accountId, $domainIdentifier, $attributes)
@@ -296,19 +265,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account id
      * @param int|string $domainIdentifier The domain name or id
-     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
-     *
-     * Possible options:
-     *  - sorting:
-     *    Comma separated key-value pairs: the name of a field and the order criteria (asc for ascending and desc for
-     *    descending).  ["sort" => "sort criteria here"]
-     *    Sort criteria:
-     *      - id: Sort email forwards by ID (i.e. "id:asc")
-     *      - from: Sort email forwards by sender (i.e. "from:desc")
-     *      - to: Sort email forwards by recipient (i.e. "to:asc")
-     *  - pagination:
-     *      - page: The page to return (default: 1)
-     *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
+     * @param array $options key/value options to sort and filter the results
      * @return Response The list of email forwards for the domain in the account
      */
     public function listEmailForwards($accountId, $domainIdentifier, array $options = [])
@@ -324,10 +281,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account id
      * @param int|string $domainIdentifier The domain name or id
-     * @param array $attributes The email forwards attributes
-     *  Required Fields
-     *      - from: The email address the emails are sent to.
-     *      - to: The email address the email address the emails are forwarded to.
+     * @param array $attributes The email forwards attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created email forward under the domain in the account
      */
     public function createEmailForward($accountId, $domainIdentifier, $attributes)
@@ -375,9 +329,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account id
      * @param int|string $domainIdentifier The domain name or id
-     * @param array $attributes The data to send to initiate the push
-     *  Required field:
-     *      - new_account_email: The email address of the target DNSimple account.
+     * @param array $attributes The initiate push attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created domain push
      */
     public function initiatePush($accountId, $domainIdentifier, array $attributes)
@@ -392,12 +344,7 @@ class DomainsService extends ClientService
      * @see https://developer.dnsimple.com/v2/domains/pushes/#listPushes
      *
      * @param int $accountId The account id
-     * @param array $options Makes it possible to ask only for the exact subset of data that you you’re looking for.
-     *
-     * Possible options:
-     *  - pagination:
-     *      - page: The page to return (default: 1)
-     *      - per_page: The number of entries to return per page (default: 30, maximum: 100)
+     * @param array $options key/value options to sort and filter the results
      * @return Response The list of pushes for the domain
      */
     public function listPushes($accountId, array $options = [])
@@ -413,10 +360,7 @@ class DomainsService extends ClientService
      *
      * @param int $accountId The account id
      * @param int $pushId The push id
-     * @param array $attributes The data to send to accept the push
-     *  Required field:
-     *      - contact_id: A contact that belongs to the target DNSimple account. The contact will be used as new
-     *                    registrant for the domain, if the domain is registered with DNSimple.
+     * @param array $attributes The accept push attributes. Refer to the documentation for the list of available fields.
      * @return Response An empty response
      */
     public function acceptPush($accountId, $pushId, array $attributes)
