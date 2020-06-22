@@ -49,7 +49,10 @@ class Response
         $json = json_decode($this->_httpResponse->getBody())->data;
         if (is_array($json))
         {
-            return array_map(function($args) { return new $this->_data_class($args); }, $json);
+            if ($this->_data_class != null)
+                return array_map(function($args) { return new $this->_data_class($args); }, $json);
+            else
+                return array_map(function($arg) { return $arg;}, $json);
         } else {
             return new $this->_data_class($json);
         }

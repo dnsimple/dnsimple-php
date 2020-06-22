@@ -143,4 +143,53 @@ class RegistrarService extends ClientService
         $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/authorize_transfer_out"));
         return new Response($response);
     }
+
+    /**
+     * List name servers for the domain in the account.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/delegation/#getDomainDelegation
+     *
+     * @param int $accountId The account id
+     * @param string $domain The domain name
+     * @return Response The list of name servers
+     */
+    public function getDomainDelegation($accountId, $domain)
+    {
+        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation"));
+        return new Response($response);
+    }
+
+    /**
+     * Update name servers for the domain in the account
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/delegation/#changeDomainDelegation
+     *
+     * @param int $accountId The account id
+     * @param string $domain The domain name
+     * @param array $attributes List of name servers
+     * @return Response The list of name servers
+     */
+    public function changeDomainDelegation($accountId, $domain, $attributes)
+    {
+        $response = $this->client->put(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation"), $attributes);
+        return new Response($response);
+    }
+
+    /**
+     * Delegate from name servers
+     *
+     * WARNING: This method required the vanity name servers feature, that is only available for certain plans.
+     * If the feature is not enabled, you will receive an HTTP 412 response code.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/delegation/#changeDomainDelegationFromVanity
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @return Response An empty response
+     */
+    public function changeDomainDelegationFromVanity($accountId, $domain)
+    {
+        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation/vanity"));
+        return new Response($response);
+    }
 }

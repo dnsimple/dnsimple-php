@@ -72,7 +72,7 @@ class DomainsServiceTest extends ServiceTestCase
             "name" => "example.com",
         ];
 
-        $response = $this->service->createDomain(1, $attributes);
+        $response = $this->service->createDomain(1385, $attributes);
         self::assertInstanceOf(Response::class, $response);
         self::assertEquals(201, $response->getStatusCode());
 
@@ -87,7 +87,7 @@ class DomainsServiceTest extends ServiceTestCase
     {
         $this->mockResponseWith("getDomain/success");
 
-        $response = $this->service->getDomain(1, "example.com");
+        $response = $this->service->getDomain(1385, "example.com");
         self::assertInstanceOf(Response::class, $response);
         self::assertEquals(200, $response->getStatusCode());
 

@@ -114,6 +114,11 @@ class Client
         return $this->request("PATCH", $path, $options);
     }
 
+    public function put($path, array $options = [])
+    {
+        return $this->request("PUT", $path, $options);
+    }
+
     public function request($method, $path, array $options = [])
     {
         $requestOptions = array_merge_recursive($options, [
