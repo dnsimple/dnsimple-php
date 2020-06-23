@@ -38,7 +38,7 @@ class ServicesTest extends ServiceTestCase
         self::assertEquals("sort=id%3Aasc%2Csid%3Adesc", $this->queryContent());
     }
 
-    public function testListServicesPaginationObject()
+    public function testListServicesHasPaginationObject()
     {
         $this->mockResponseWith("listServices/success");
 

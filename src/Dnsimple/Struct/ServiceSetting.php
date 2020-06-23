@@ -20,7 +20,7 @@ class ServiceSetting
     /**
      * @var string A suffix to be appended to the setting value
      */
-    public string $append;
+    public ?string $append;
     /**
      * @var string The setting description
      */
@@ -28,7 +28,7 @@ class ServiceSetting
     /**
      * @var string An example of the setting value
      */
-    public string $example;
+    public ?string $example;
     /**
      * @var bool Whether the setting requires a password
      */
