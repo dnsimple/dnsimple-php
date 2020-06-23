@@ -18,7 +18,6 @@ class TldsTest extends ServiceTestCase
     public function testListTlds()
     {
         $this->mockResponseWith("listTlds/success");
-        $this->mockResponseWith("listTlds/success");
 
         $response = $this->service->listTlds();
         self::assertInstanceOf(Response::class, $response);
