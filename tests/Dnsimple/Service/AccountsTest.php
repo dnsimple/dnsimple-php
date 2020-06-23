@@ -3,12 +3,12 @@
 namespace Dnsimple\Service;
 
 
-class AccountsServiceTest extends ServiceTestCase
+class AccountsTest extends ServiceTestCase
 {
     function setUp(): void
     {
         parent::setUp();
-        $this->service = new AccountsService($this->client);
+        $this->service = new Accounts($this->client);
     }
 
     function testListAccountsAccount()

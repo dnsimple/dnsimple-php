@@ -5,12 +5,12 @@ namespace Dnsimple\Service;
 use Dnsimple\Response;
 use Dnsimple\Struct\Whoami;
 
-final class IdentityServiceTest extends ServiceTestCase
+final class IdentityTest extends ServiceTestCase
 {
     protected function setUp() : void
     {
         parent::setUp();
-        $this->service = new IdentityService($this->client);
+        $this->service = new Identity($this->client);
     }
 
     public function testWhoami()

@@ -11,7 +11,7 @@ class ZoneRecordsTest extends ServiceTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new ZonesService($this->client);
+        $this->service = new Zones($this->client);
     }
 
     public function testListRecords()

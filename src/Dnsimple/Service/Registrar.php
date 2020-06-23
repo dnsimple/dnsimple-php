@@ -18,7 +18,7 @@ use Dnsimple\Struct\WhoisPrivacy;
  * @see https://developer.dnsimple.com/v2/registrar
  * @package Dnsimple
  */
-class RegistrarService extends ClientService
+class Registrar extends ClientService
 {
     /**
      * Checks whether a domain is available to be registered.

@@ -10,7 +10,7 @@ class OauthTest extends ServiceTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new OauthService($this->client);
+        $this->service = new Oauth($this->client);
     }
 
     public function testExchangeAuthorizationForToken()

@@ -18,7 +18,7 @@ use GuzzleHttp\RequestOptions;
  * @see https://developer.dnsimple.com/v2/domains
  * @package Dnsimple
  */
-class DomainsService extends ClientService
+class Domains extends ClientService
 {
     /**
      * Lists the domains in the account.

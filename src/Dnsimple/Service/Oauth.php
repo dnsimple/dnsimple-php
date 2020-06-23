@@ -14,7 +14,7 @@ use function GuzzleHttp\Psr7\build_query;
  * @see https://developer.dnsimple.com/v2/oauth
  * @package Dnsimple
  */
-class OauthService extends ClientService
+class Oauth extends ClientService
 {
     /**
      * Exchange the short-lived authorization code for an access token you can use to authenticate your API calls.

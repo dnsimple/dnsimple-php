@@ -9,7 +9,7 @@ class DomainsDnssecTest extends ServiceTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new DomainsService($this->client);
+        $this->service = new Domains($this->client);
     }
 
     public function testEnableDnssec()

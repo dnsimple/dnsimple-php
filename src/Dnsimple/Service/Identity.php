@@ -14,7 +14,7 @@ use Dnsimple\Struct\Whoami;
  *
  * @package Dnsimple
  */
-class IdentityService extends ClientService
+class Identity extends ClientService
 {
     /**
      * Retrieves the details about the current authenticated entity used to access the API.

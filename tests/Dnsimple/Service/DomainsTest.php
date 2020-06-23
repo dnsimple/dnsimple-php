@@ -4,12 +4,12 @@ namespace Dnsimple\Service;
 use Dnsimple\Response;
 use Dnsimple\Struct\Domain;
 
-class DomainsServiceTest extends ServiceTestCase
+class DomainsTest extends ServiceTestCase
 {
     protected function setUp() : void
     {
         parent::setUp();
-        $this->service = new DomainsService($this->client);
+        $this->service = new Domains($this->client);
     }
 
     public function testListDomains()

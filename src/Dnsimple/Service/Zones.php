@@ -16,7 +16,7 @@ use Dnsimple\Struct\ZoneRecord;
  * @see https://developer.dnsimple.com/v2/zones
  * @package Dnsimple\Service
  */
-class ZonesService extends ClientService
+class Zones extends ClientService
 {
     /**
      * Lists the zones in the account.

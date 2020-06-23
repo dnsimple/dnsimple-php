@@ -13,7 +13,7 @@ use Dnsimple\Struct\Account;
  * @see http://developer.dnsimple.com/v2/accounts
  * @package Dnsimple
  */
-class AccountsService extends ClientService
+class Accounts extends ClientService
 {
 
     /**

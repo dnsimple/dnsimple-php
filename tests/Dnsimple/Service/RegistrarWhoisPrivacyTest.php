@@ -11,7 +11,7 @@ class RegistrarWhoisPrivacyTest extends ServiceTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new RegistrarService($this->client);
+        $this->service = new Registrar($this->client);
     }
 
     public function testGetWhoisPrivacy()

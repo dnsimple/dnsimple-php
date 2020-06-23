@@ -2,12 +2,12 @@
 
 namespace Dnsimple;
 
-use Dnsimple\Service\AccountsService;
-use Dnsimple\Service\DomainsService;
-use Dnsimple\Service\IdentityService;
-use Dnsimple\Service\OauthService;
-use Dnsimple\Service\RegistrarService;
-use Dnsimple\Service\ZonesService;
+use Dnsimple\Service\Accounts;
+use Dnsimple\Service\Domains;
+use Dnsimple\Service\Identity;
+use Dnsimple\Service\Oauth;
+use Dnsimple\Service\Registrar;
+use Dnsimple\Service\Zones;
 use GuzzleHttp;
 
 /**
@@ -53,29 +53,29 @@ class Client
     private GuzzleHttp\Client $httpClient;
 
     /**
-     * @var IdentityService The service handling the Identity API
+     * @var Identity The service handling the Identity API
      */
-    public IdentityService $Identity;
+    public Identity $Identity;
     /**
-     * @var AccountsService The service handling the Accounts API
+     * @var Accounts The service handling the Accounts API
      */
-    public AccountsService $Accounts;
+    public Accounts $Accounts;
     /**
-     * @var DomainsService The service handling the Domains API
+     * @var Domains The service handling the Domains API
      */
-    public DomainsService $Domains;
+    public Domains $Domains;
     /**
-     * @var RegistrarService The service handling the Registrar API
+     * @var Registrar The service handling the Registrar API
      */
-    private RegistrarService $Registrar;
+    private Registrar $Registrar;
     /**
-     * @var ZonesService The service handling the Zones API
+     * @var Zones The service handling the Zones API
      */
-    private ZonesService $Zones;
+    private Zones $Zones;
     /**
-     * @var OauthService The service handling the Oauth API
+     * @var Oauth The service handling the Oauth API
      */
-    private OauthService $Oauth;
+    private Oauth $Oauth;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -148,11 +148,11 @@ class Client
 
     private function attachServicesToClient()
     {
-        $this->Accounts = new AccountsService($this);
-        $this->Domains = new DomainsService($this);
-        $this->Identity = new IdentityService($this);
-        $this->Oauth = new OauthService($this);
-        $this->Registrar = new RegistrarService($this);
-        $this->Zones = new ZonesService($this);
+        $this->Accounts = new Accounts($this);
+        $this->Domains = new Domains($this);
+        $this->Identity = new Identity($this);
+        $this->Oauth = new Oauth($this);
+        $this->Registrar = new Registrar($this);
+        $this->Zones = new Zones($this);
     }
 }
