@@ -46,13 +46,18 @@ class Response
      */
     public function getData()
     {
-        $json = json_decode($this->_httpResponse->getBody())->data;
-        if (is_array($json))
-        {
-            if ($this->_data_class != null)
-                return array_map(function($args) { return new $this->_data_class($args); }, $json);
-            else
-                return array_map(function($arg) { return $arg;}, $json);
+        $json = json_decode($this->_httpResponse->getBody());
+        if (property_exists($json, "data")) {
+            $data = $json->data;
+            if (is_array($data))
+            {
+                if ($this->_data_class != null)
+                    return array_map(function($args) { return new $this->_data_class($args); }, $data);
+                else
+                    return array_map(function($arg) { return $arg;}, $data);
+            } else {
+                return new $this->_data_class($data);
+            }
         } else {
             return new $this->_data_class($json);
         }

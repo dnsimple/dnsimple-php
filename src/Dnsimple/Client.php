@@ -5,6 +5,7 @@ namespace Dnsimple;
 use Dnsimple\Service\AccountsService;
 use Dnsimple\Service\DomainsService;
 use Dnsimple\Service\IdentityService;
+use Dnsimple\Service\OauthService;
 use Dnsimple\Service\RegistrarService;
 use Dnsimple\Service\ZonesService;
 use GuzzleHttp;
@@ -71,6 +72,10 @@ class Client
      * @var ZonesService The service handling the Zones API
      */
     private ZonesService $Zones;
+    /**
+     * @var OauthService The service handling the Oauth API
+     */
+    private OauthService $Oauth;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -146,6 +151,7 @@ class Client
         $this->Accounts = new AccountsService($this);
         $this->Domains = new DomainsService($this);
         $this->Identity = new IdentityService($this);
+        $this->Oauth = new OauthService($this);
         $this->Registrar = new RegistrarService($this);
         $this->Zones = new ZonesService($this);
     }

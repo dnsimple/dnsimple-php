@@ -12,6 +12,12 @@ use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainTransfer;
 use Dnsimple\Struct\WhoisPrivacy;
 
+/**
+ * The Registrar Service handles the registrar endpoint of the DNSimple API.
+ *
+ * @see https://developer.dnsimple.com/v2/registrar
+ * @package Dnsimple
+ */
 class RegistrarService extends ClientService
 {
     /**
