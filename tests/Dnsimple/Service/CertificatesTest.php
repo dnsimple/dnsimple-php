@@ -39,7 +39,7 @@ class CertificatesTest extends ServiceTestCase
         $this->mockResponseWith("listCertificates/success");
         $this->service->listCertificates(1010, "example.com", ["sort"=>"id:asc,common_name:desc,expiration:asc"]);
 
-        self::assertEquals("sort=id%3Aasc%2Ccommon_name%3Adesc%2Cexpiration%3Aasc", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("sort=id%3Aasc%2Ccommon_name%3Adesc%2Cexpiration%3Aasc", $this->queryContent());
     }
 
 
@@ -60,7 +60,7 @@ class CertificatesTest extends ServiceTestCase
         $this->mockResponseWith("listCertificates/success");
         $this->service->listCertificates(1010, 1, ["page" => 1, "per_page" => 4]);
 
-        self::assertEquals("page=1&per_page=4", $this->mockHandler->getLastRequest()->getUri()->getQuery());
+        self::assertEquals("page=1&per_page=4", $this->queryContent());
     }
 
     public function testGetCertificate()

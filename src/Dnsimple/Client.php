@@ -7,6 +7,7 @@ use Dnsimple\Service\Domains;
 use Dnsimple\Service\Identity;
 use Dnsimple\Service\Oauth;
 use Dnsimple\Service\Registrar;
+use Dnsimple\Service\Tlds;
 use Dnsimple\Service\Zones;
 use GuzzleHttp;
 
@@ -76,6 +77,10 @@ class Client
      * @var Oauth The service handling the Oauth API
      */
     private Oauth $Oauth;
+    /**
+     * @var Tlds The service handling the Tlds API
+     */
+    private Tlds $Tlds;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -153,6 +158,7 @@ class Client
         $this->Identity = new Identity($this);
         $this->Oauth = new Oauth($this);
         $this->Registrar = new Registrar($this);
+        $this->Tlds = new Tlds($this);
         $this->Zones = new Zones($this);
     }
 }
