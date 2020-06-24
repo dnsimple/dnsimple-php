@@ -51,7 +51,7 @@ class Services extends ClientService
      *
      * @param int $accountId The account id
      * @param int|string $domain The domain name or id
-     * @param array $options key/value options to sort and filter the results
+     * @param array $options key/value options to paginate the results
      * @return Response The list of services applied to the domain
      */
     public function appliedServices($accountId, $domain, array $options = [])

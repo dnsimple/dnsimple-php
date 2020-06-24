@@ -67,6 +67,5 @@ class ServicesDomainsTest extends ServiceTestCase
         $response = $this->service->unapplyService(1010, "example.com", 1);
 
         self::assertEquals(204, $response->getStatusCode());
-
     }
 }
