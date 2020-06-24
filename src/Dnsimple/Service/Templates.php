@@ -160,4 +160,20 @@ class Templates extends ClientService
         $response = $this->client->delete(Client::versioned("/{$accountId}/templates/{$template}/records/{$recordId}"));
         return new Response($response);
     }
+
+    /**
+     * Applies a template to the domain
+     *
+     * @see https://developer.dnsimple.com/v2/templates/domains/#applyTemplateToDomain
+     *
+     * @param int $accountId The account id
+     * @param int|string $domain The domain name or id
+     * @param int|string $template The template id or sid
+     * @return Response An empty response
+     */
+    public function applyTemplate($accountId, $domain, $template)
+    {
+        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domain}/templates/{$template}"));
+        return new Response($response);
+    }
 }
