@@ -11,6 +11,7 @@ use Dnsimple\Service\Services;
 use Dnsimple\Service\Templates;
 use Dnsimple\Service\Tlds;
 use Dnsimple\Service\VanityNameServers;
+use Dnsimple\Service\Webhooks;
 use Dnsimple\Service\Zones;
 use GuzzleHttp;
 
@@ -96,6 +97,10 @@ class Client
      * @var VanityNameServers The service handling the Vanity Name Servers API
      */
     public VanityNameServers $VanityNameServers;
+    /**
+     * @var Webhooks The service handling the Webhooks API
+     */
+    public Webhooks $Webhooks;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -177,6 +182,7 @@ class Client
         $this->Templates = new Templates($this);
         $this->Tlds = new Tlds($this);
         $this->VanityNameServers = new VanityNameServers($this);
+        $this->Webhooks = new Webhooks($this);
         $this->Zones = new Zones($this);
     }
 }
