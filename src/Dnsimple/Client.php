@@ -10,6 +10,7 @@ use Dnsimple\Service\Registrar;
 use Dnsimple\Service\Services;
 use Dnsimple\Service\Templates;
 use Dnsimple\Service\Tlds;
+use Dnsimple\Service\VanityNameServers;
 use Dnsimple\Service\Zones;
 use GuzzleHttp;
 
@@ -91,6 +92,10 @@ class Client
      * @var Templates The service handling the Templates API
      */
     public Templates $Templates;
+    /**
+     * @var VanityNameServers The service handling the Vanity Name Servers API
+     */
+    public VanityNameServers $VanityNameServers;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -171,6 +176,7 @@ class Client
         $this->Services = new Services($this);
         $this->Templates = new Templates($this);
         $this->Tlds = new Tlds($this);
+        $this->VanityNameServers = new VanityNameServers($this);
         $this->Zones = new Zones($this);
     }
 }
