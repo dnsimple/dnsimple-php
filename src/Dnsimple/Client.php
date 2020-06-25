@@ -3,6 +3,8 @@
 namespace Dnsimple;
 
 use Dnsimple\Service\Accounts;
+use Dnsimple\Service\Certificates;
+use Dnsimple\Service\Contacts;
 use Dnsimple\Service\Domains;
 use Dnsimple\Service\Identity;
 use Dnsimple\Service\Oauth;
@@ -14,6 +16,7 @@ use Dnsimple\Service\VanityNameServers;
 use Dnsimple\Service\Webhooks;
 use Dnsimple\Service\Zones;
 use GuzzleHttp;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * The version of this Dnsimple client library.
@@ -43,6 +46,7 @@ class Client
      * URL to the production environment
      */
     const BASE_URL = "https://api.dnsimple.com";
+    const DEFAULT_USER_AGENT = "dnsimple-php/" . VERSION;
 
 
     /**
@@ -101,6 +105,15 @@ class Client
      * @var Webhooks The service handling the Webhooks API
      */
     public Webhooks $Webhooks;
+    private string $customUserAgent = "";
+    /**
+     * @var Certificates
+     */
+    public Certificates $Certificates;
+    /**
+     * @var Contacts
+     */
+    public Contacts $Contacts;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -161,19 +174,26 @@ class Client
 
         try {
             return $this->httpClient->request($method, $path, $requestOptions);
-        } catch (GuzzleHttp\Exception\GuzzleException $e) {
+        } catch (GuzzleException $e) {
             throw new DnsimpleException($e);
         }
     }
 
     public function getUserAgent(): string
     {
-        return "dnsimple-php/" . VERSION;
+        return trim($this->customUserAgent . " " . self::DEFAULT_USER_AGENT);
+    }
+
+    public function setUserAgent($customName)
+    {
+        $this->customUserAgent = $customName;
     }
 
     private function attachServicesToClient()
     {
         $this->Accounts = new Accounts($this);
+        $this->Certificates = new Certificates($this);
+        $this->Contacts = new Contacts($this);
         $this->Domains = new Domains($this);
         $this->Identity = new Identity($this);
         $this->Oauth = new Oauth($this);

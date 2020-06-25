@@ -26,4 +26,16 @@ final class ClientTest extends ServiceTestCase
         self::assertEquals(3991, $response->getRateLimitRemaining());
         self::assertEquals(1450451976, $response->getRateLimitReset());
     }
+
+    public function testDefaultUserAgent()
+    {
+        self::assertEquals(Client::DEFAULT_USER_AGENT, $this->client->getUserAgent());
+    }
+
+    public function testSetUserAgent()
+    {
+        $this->client->setUserAgent("my-app");
+
+        self::assertEquals("my-app " . Client::DEFAULT_USER_AGENT, $this->client->getUserAgent());
+    }
 }
