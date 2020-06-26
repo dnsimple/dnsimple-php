@@ -4,7 +4,6 @@
 namespace Dnsimple\Service;
 
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Template;
 use Dnsimple\Struct\TemplateRecord;
@@ -22,13 +21,13 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/#listTemplates
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param array $options key/value options to sort and/or paginate the results
      * @return Response The templates in the account
      */
-    public function listTemplates($accountId, array $options = [])
+    public function listTemplates($account, array $options = [])
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/templates"), $options);
+        $response = $this->get("/{$account}/templates", $options);
         return new Response($response, Template::class);
     }
 
@@ -37,13 +36,13 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/#createTemplate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param array $attributes The template attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created template
      */
-    public function createTemplate($accountId, array $attributes = [])
+    public function createTemplate($account, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/templates"), $attributes);
+        $response = $this->post("/{$account}/templates", $attributes);
         return new Response($response, Template::class);
     }
 
@@ -52,13 +51,13 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/#getTemplate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
      * @return Response The template requested
      */
-    public function getTemplate($accountId, $template)
+    public function getTemplate($account, $template)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/templates/{$template}"));
+        $response = $this->get("/{$account}/templates/{$template}");
         return new Response($response, Template::class);
     }
 
@@ -67,14 +66,14 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/#updateTemplate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
      * @param array $attributes The template attributes. Refer to the documentation for the list of available fields.
      * @return Response The updated template
      */
-    public function updateTemplate($accountId, $template, array $attributes = [])
+    public function updateTemplate($account, $template, array $attributes = [])
     {
-        $response = $this->client->patch(Client::versioned("/{$accountId}/templates/{$template}"), $attributes);
+        $response = $this->patch("/{$account}/templates/{$template}", $attributes);
         return new Response($response, Template::class);
     }
 
@@ -85,13 +84,13 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/#deleteTemplate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
      * @return Response An empty response
      */
-    public function deleteTemplate($accountId, $template)
+    public function deleteTemplate($account, $template)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/templates/{$template}"));
+        $response = $this->delete("/{$account}/templates/{$template}");
         return new Response($response);
     }
 
@@ -100,14 +99,14 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/records/#listTemplateRecords
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
      * @param array $options key/value options to sort and/or paginate the results
      * @return Response The list of template records
      */
-    public function listTemplateRecords($accountId, $template, array $options = [])
+    public function listTemplateRecords($account, $template, array $options = [])
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/templates/{$template}/records"), $options);
+        $response = $this->get("/{$account}/templates/{$template}/records", $options);
         return new Response($response, TemplateRecord::class);
     }
 
@@ -116,14 +115,14 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/records/#createTemplateRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
      * @param array $attributes The template record attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created template record
      */
-    public function createTemplateRecord($accountId, $template, array $attributes = [])
+    public function createTemplateRecord($account, $template, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/templates/{$template}/records"), $attributes);
+        $response = $this->post("/{$account}/templates/{$template}/records", $attributes);
         return new Response($response, TemplateRecord::class);
     }
 
@@ -132,14 +131,14 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/records/#getTemplateRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
-     * @param int $recordId The record id
+     * @param int $record The record id
      * @return Response The template record
      */
-    public function getTemplateRecord($accountId, $template, $recordId)
+    public function getTemplateRecord($account, $template, $record)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/templates/{$template}/records/{$recordId}"));
+        $response = $this->get("/{$account}/templates/{$template}/records/{$record}");
         return new Response($response, TemplateRecord::class);
     }
 
@@ -150,14 +149,14 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/records/#deleteTemplateRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $template The template id or short name
-     * @param int $recordId The record id
+     * @param int $record The record id
      * @return Response An empty response
      */
-    public function deleteTemplateRecord($accountId, $template, $recordId)
+    public function deleteTemplateRecord($account, $template, $record)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/templates/{$template}/records/{$recordId}"));
+        $response = $this->delete("/{$account}/templates/{$template}/records/{$record}");
         return new Response($response);
     }
 
@@ -166,14 +165,14 @@ class Templates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/templates/domains/#applyTemplateToDomain
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @param int|string $template The template id or sid
      * @return Response An empty response
      */
-    public function applyTemplate($accountId, $domain, $template)
+    public function applyTemplate($account, $domain, $template)
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domain}/templates/{$template}"));
+        $response = $this->post("/{$account}/domains/{$domain}/templates/{$template}");
         return new Response($response);
     }
 }

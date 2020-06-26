@@ -4,7 +4,6 @@
 namespace Dnsimple\Service;
 
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Tld;
 use Dnsimple\Struct\TldExtendedAttribute;
@@ -27,7 +26,7 @@ class Tlds extends ClientService
      */
     public function listTlds(array $options = [])
     {
-        $response = $this->client->get(Client::versioned("/tlds"), $options);
+        $response = $this->get("/tlds", $options);
         return new Response($response, Tld::class);
     }
 
@@ -41,7 +40,7 @@ class Tlds extends ClientService
      */
     public function getTld($tld)
     {
-        $response = $this->client->get(Client::versioned("/tlds/{$tld}"));
+        $response = $this->get("/tlds/{$tld}");
         return new Response($response, Tld::class);
     }
 
@@ -55,7 +54,7 @@ class Tlds extends ClientService
      */
     public function getTldExtendedAttributes($tld)
     {
-        $response = $this->client->get(Client::versioned("/tlds/{$tld}/extended_attributes"));
+        $response = $this->get("/tlds/{$tld}/extended_attributes");
         return new Response($response, TldExtendedAttribute::class);
     }
 }

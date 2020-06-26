@@ -3,7 +3,6 @@
 namespace Dnsimple\Service;
 
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Zone;
 use Dnsimple\Struct\ZoneDistribution;
@@ -23,13 +22,13 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/#listZones
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of zones requested
      */
-    public function listZones($accountId, array $options = [])
+    public function listZones($account, array $options = [])
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones"), $options);
+        $response = $this->get("/{$account}/zones", $options);
         return new Response($response, Zone::class);
     }
 
@@ -38,13 +37,13 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/#getZone
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
      * @return Response The zone requested
      */
-    public function getZone($accountId, $zone)
+    public function getZone($account, $zone)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones/{$zone}"));
+        $response = $this->get("/{$account}/zones/{$zone}");
         return new Response($response, Zone::class);
     }
 
@@ -53,13 +52,13 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/#getZoneFile
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
      * @return Response The zone file requested
      */
-    public function getZoneFile($accountId, $zone)
+    public function getZoneFile($account, $zone)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones/{$zone}/file"));
+        $response = $this->get("/{$account}/zones/{$zone}/file");
         return new Response($response, ZoneFile::class);
     }
 
@@ -70,13 +69,13 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/#checkZoneDistribution
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
      * @return Response The zone distribution
      */
-    public function checkZoneDistribution($accountId, $zone)
+    public function checkZoneDistribution($account, $zone)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones/{$zone}/distribution"));
+        $response = $this->get("/{$account}/zones/{$zone}/distribution");
         return new Response($response, ZoneDistribution::class);
     }
 
@@ -85,14 +84,14 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/records/#listZoneRecords
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of zone records in the account
      */
-    public function listRecords($accountId, $zone, array $options = [])
+    public function listRecords($account, $zone, array $options = [])
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones/{$zone}/records"), $options);
+        $response = $this->get("/{$account}/zones/{$zone}/records", $options);
         return new Response($response, ZoneRecord::class);
     }
 
@@ -101,14 +100,14 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/records/#createZoneRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
      * @param array $attributes The zone record attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created zone record
      */
-    public function createRecord($accountId, $zone, array $attributes = [])
+    public function createRecord($account, $zone, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/zones/{$zone}/records"), $attributes);
+        $response = $this->post("/{$account}/zones/{$zone}/records", $attributes);
         return new Response($response, ZoneRecord::class);
     }
 
@@ -117,14 +116,14 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/records/#getZoneRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
-     * @param int $recordId The record id
+     * @param int $record The record id
      * @return Response The zone record requested
      */
-    public function getRecord($accountId, $zone, $recordId)
+    public function getRecord($account, $zone, $record)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones/{$zone}/records/{$recordId}"));
+        $response = $this->get("/{$account}/zones/{$zone}/records/{$record}");
         return new Response($response, ZoneRecord::class);
     }
 
@@ -133,15 +132,15 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/records/#updateZoneRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
-     * @param int $recordId The record id
+     * @param int $record The record id
      * @param array $attributes The zone record attributes. Refer to the documentation for the list of available fields.
      * @return Response The updated zone record
      */
-    public function updateRecord($accountId, $zone, $recordId, $attributes)
+    public function updateRecord($account, $zone, $record, array $attributes = [])
     {
-        $response = $this->client->patch(Client::versioned("/{$accountId}/zones/{$zone}/records/{$recordId}"), $attributes);
+        $response = $this->patch("/{$account}/zones/{$zone}/records/{$record}", $attributes);
         return new Response($response, ZoneRecord::class);
     }
 
@@ -152,14 +151,14 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/records/#deleteZoneRecord
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
-     * @param int $recordId The record id
+     * @param int $record The record id
      * @return Response An empty response
      */
-    public function deleteRecord($accountId, $zone, $recordId)
+    public function deleteRecord($account, $zone, $record)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/zones/{$zone}/records/{$recordId}"));
+        $response = $this->delete("/{$account}/zones/{$zone}/records/{$record}");
         return new Response($response);
     }
 
@@ -170,13 +169,13 @@ class Zones extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/zones/records/#checkZoneRecordDistribution
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $zone The zone name
-     * @param int $recordId The record id
+     * @param int $record The record id
      * @return Response The zone record distribution
      */
-    public function checkZoneRecordDistribution($accountId, $zone, $recordId) {
-        $response = $this->client->get(Client::versioned("/{$accountId}/zones/{$zone}/records/{$recordId}/distribution"));
+    public function checkZoneRecordDistribution($account, $zone, $record) {
+        $response = $this->get("/{$account}/zones/{$zone}/records/{$record}/distribution");
         return new Response($response, ZoneDistribution::class);
     }
 }

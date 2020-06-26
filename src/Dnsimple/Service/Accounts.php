@@ -1,9 +1,7 @@
 <?php
 
-
 namespace Dnsimple\Service;
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Account;
 
@@ -23,7 +21,7 @@ class Accounts extends ClientService
      */
     function listAccounts(): Response
     {
-        $response = $this->client->get(Client::versioned("/accounts"));
+        $response = $this->get("/accounts");
         return new Response($response, Account::class);
     }
 }

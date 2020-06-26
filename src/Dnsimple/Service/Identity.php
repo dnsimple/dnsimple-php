@@ -3,7 +3,6 @@
 namespace Dnsimple\Service;
 
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Whoami;
 
@@ -23,7 +22,7 @@ class Identity extends ClientService
      */
     public function whoami(): Response
     {
-        $response = $this->client->get(Client::versioned("/whoami"));
+        $response = $this->get("/whoami");
 
         return new Response($response, Whoami::class);
     }

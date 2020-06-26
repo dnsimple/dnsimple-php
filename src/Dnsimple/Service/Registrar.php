@@ -3,13 +3,13 @@
 namespace Dnsimple\Service;
 
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\DomainCheck;
 use Dnsimple\Struct\DomainPremiumPrice;
 use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainTransfer;
+use Dnsimple\Struct\VanityNameServer;
 use Dnsimple\Struct\WhoisPrivacy;
 
 /**
@@ -25,13 +25,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#checkDomain
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @return Response The domain check result
      */
-    public function checkDomain($accountId, $domain)
+    public function checkDomain($account, $domain)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/check"));
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/check");
         return new Response($response, DomainCheck::class);
     }
 
@@ -40,15 +40,15 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#getDomainPremiumPrice
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param string $action Optional action between "registration", "renewal", and "transfer". If omitted, it defaults to "registration".
      * @return Response The domain premium price
      */
-    public function getDomainPremiumPrice($accountId, $domain, $action = "registration")
+    public function getDomainPremiumPrice($account, $domain, $action = "registration")
     {
         $options = ["action" => $action];
-        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/premium_price"), $options);
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/premium_price", $options);
         return new Response($response, DomainPremiumPrice::class);
     }
 
@@ -57,14 +57,14 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#registerDomain
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param array $attributes The domain registration attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly registered domain
      */
-    public function registerDomain($accountId, $domain, array $attributes = [])
+    public function registerDomain($account, $domain, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/registrations"), $attributes);
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/registrations", $attributes);
         return new Response($response, DomainRegistration::class);
     }
 
@@ -73,14 +73,14 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#transferDomain
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param array $attributes The domain transfer attributes. Refer to the documentation for the list of available fields.
      * @return Response The domain transfer
      */
-    public function transferDomain($accountId, $domain, array $attributes = [])
+    public function transferDomain($account, $domain, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/transfers"), $attributes);
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/transfers", $attributes);
         return new Response($response, DomainTransfer::class);
     }
 
@@ -89,14 +89,14 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#getDomainTransfer
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param int $domainTransfer The domain transfer id
      * @return Response The details of an existing domain transfer
      */
-    public function getDomainTransfer($accountId, $domain, $domainTransfer)
+    public function getDomainTransfer($account, $domain, $domainTransfer)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/transfers/{$domainTransfer}"));
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/transfers/{$domainTransfer}");
         return new Response($response, DomainTransfer::class);
     }
 
@@ -105,14 +105,14 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#cancelDomainTransfer
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param int $domainTransfer The domain transfer id
      * @return Response The details of the domain transfer
      */
-    public function cancelDomainTransfer($accountId, $domain, $domainTransfer)
+    public function cancelDomainTransfer($account, $domain, $domainTransfer)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/transfers/{$domainTransfer}"));
+        $response = $this->delete("/{$account}/registrar/domains/{$domain}/transfers/{$domainTransfer}");
         return new Response($response, DomainTransfer::class);
     }
 
@@ -124,14 +124,14 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#renewDomain
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param array $attributes The domain renewal attributes. Refer to the documentation for the list of available fields.
      * @return Response The domain renewal
      */
-    public function renewDomain($accountId, $domain, array $attributes = [])
+    public function renewDomain($account, $domain, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/renewals"), $attributes);
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/renewals", $attributes);
         return new Response($response, DomainRenewal::class);
     }
 
@@ -141,13 +141,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/#authorizeDomainTransferOut
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @return Response An empty response
      */
-    public function transferDomainOut($accountId, $domain)
+    public function transferDomainOut($account, $domain)
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/authorize_transfer_out"));
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/authorize_transfer_out");
         return new Response($response);
     }
 
@@ -156,13 +156,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/delegation/#getDomainDelegation
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @return Response The list of name servers
      */
-    public function getDomainDelegation($accountId, $domain)
+    public function getDomainDelegation($account, $domain)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation"));
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/delegation");
         return new Response($response);
     }
 
@@ -171,15 +171,31 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/delegation/#changeDomainDelegation
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param string $domain The domain name
      * @param array $attributes List of name servers
      * @return Response The list of name servers
      */
-    public function changeDomainDelegation($accountId, $domain, $attributes)
+    public function changeDomainDelegation($account, $domain, array $attributes = [])
     {
-        $response = $this->client->put(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation"), $attributes);
+        $response = $this->put("/{$account}/registrar/domains/{$domain}/delegation", $attributes);
         return new Response($response);
+    }
+
+    /**
+     * Delegate to vanity name servers
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/delegation/#changeDomainDelegationToVanity
+     *
+     * @param int $account The account id
+     * @param int|string $domain The domain name or id
+     * @param array $attributes List of name servers
+     * @return Response The list of vanity name servers
+     */
+    public function changeDomainDelegationToVanity($account, $domain, array $attributes =[])
+    {
+        $response = $this->put("/{$account}/registrar/domains/{$domain}/delegation/vanity", $attributes);
+        return new Response($response, VanityNameServer::class);
     }
 
     /**
@@ -190,13 +206,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/delegation/#changeDomainDelegationFromVanity
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
      */
-    public function changeDomainDelegationFromVanity($accountId, $domain)
+    public function changeDomainDelegationFromVanity($account, $domain)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/delegation/vanity"));
+        $response = $this->delete("/{$account}/registrar/domains/{$domain}/delegation/vanity");
         return new Response($response);
     }
 
@@ -205,13 +221,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/auto-renewal/#enableDomainAutoRenewal
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
      */
-    public function enableDomainAutoRenewal($accountId, $domain)
+    public function enableDomainAutoRenewal($account, $domain)
     {
-        $response = $this->client->put(Client::versioned("/{$accountId}/registrar/domains/{$domain}/auto_renewal"));
+        $response = $this->put("/{$account}/registrar/domains/{$domain}/auto_renewal");
         return new Response($response);
     }
 
@@ -220,13 +236,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/auto-renewal/#disableDomainAutoRenewal
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
      */
-    public function disableDomainAutoRenewal($accountId, $domain)
+    public function disableDomainAutoRenewal($account, $domain)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/auto_renewal"));
+        $response = $this->delete("/{$account}/registrar/domains/{$domain}/auto_renewal");
         return new Response($response);
     }
 
@@ -235,13 +251,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#getWhoisPrivacy
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
      */
-    public function getWhoisPrivacy($accountId, $domain)
+    public function getWhoisPrivacy($account, $domain)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy"));
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/whois_privacy");
         return new Response($response, WhoisPrivacy::class);
     }
 
@@ -255,13 +271,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#enableWhoisPrivacy
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
      */
-    public function enableWhoisPrivacy($accountId, $domain)
+    public function enableWhoisPrivacy($account, $domain)
     {
-        $response = $this->client->put(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy"));
+        $response = $this->put("/{$account}/registrar/domains/{$domain}/whois_privacy");
         return new Response($response, WhoisPrivacy::class);
     }
     /**
@@ -273,13 +289,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#disableWhoisPrivacy
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
      */
-    public function disableWhoisPrivacy($accountId, $domain)
+    public function disableWhoisPrivacy($account, $domain)
     {
-        $response = $this->client->delete(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy"));
+        $response = $this->delete("/{$account}/registrar/domains/{$domain}/whois_privacy");
         return new Response($response, WhoisPrivacy::class);
     }
 
@@ -288,13 +304,13 @@ class Registrar extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#renewWhoisPrivacy
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
      */
-    public function renewWhoisPrivacy($accountId, $domain)
+    public function renewWhoisPrivacy($account, $domain)
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/registrar/domains/{$domain}/whois_privacy/renewals"));
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/whois_privacy/renewals");
         return new Response($response, WhoisPrivacy::class);
     }
 }

@@ -4,7 +4,6 @@
 namespace Dnsimple\Service;
 
 
-use Dnsimple\Client;
 use Dnsimple\Response;
 use Dnsimple\Struct\Certificate;
 use Dnsimple\Struct\CertificateDownload;
@@ -24,14 +23,15 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#listCertificates
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of certificates for the domain
      */
-    public function listCertificates($accountId, $domain, array $options = [])
+    public function listCertificates($account, $domain, array $options = [])
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domain}/certificates"), $options);
+        $response = $this->get("/{$account}/domains/{$domain}/certificates", $options);
+
         return new Response($response, Certificate::class);
     }
 
@@ -40,14 +40,14 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#getCertificate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param int $certificateId The certificate id
+     * @param int $certificate The certificate id
      * @return Response The certificate Requested
      */
-    public function getCertificate($accountId, $domain, $certificateId)
+    public function getCertificate($account, $domain, $certificate)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domain}/certificates/{$certificateId}"));
+        $response = $this->get("/{$account}/domains/{$domain}/certificates/{$certificate}");
         return new Response($response, Certificate::class);
     }
 
@@ -56,14 +56,14 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#downloadCertificate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param int $certificateId The certificate id
+     * @param int $certificate The certificate id
      * @return Response The certificate in the domain
      */
-    public function downloadCertificate($accountId, $domain, $certificateId)
+    public function downloadCertificate($account, $domain, $certificate)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domain}/certificates/{$certificateId}/download"));
+        $response = $this->get("/{$account}/domains/{$domain}/certificates/{$certificate}/download");
         return new Response($response, CertificateDownload::class);
     }
 
@@ -72,14 +72,14 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#getCertificatePrivateKey
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param int $certificateId The certificate id
+     * @param int $certificate The certificate id
      * @return Response The PEM-encoded certificate private key
      */
-    public function getCertificatePrivateKey($accountId, $domain, $certificateId)
+    public function getCertificatePrivateKey($account, $domain, $certificate)
     {
-        $response = $this->client->get(Client::versioned("/{$accountId}/domains/{$domain}/certificates/{$certificateId}/private_key"));
+        $response = $this->get("/{$account}/domains/{$domain}/certificates/{$certificate}/private_key");
         return new Response($response, CertificatePrivateKey::class);
     }
 
@@ -91,14 +91,14 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#purchaseLetsencryptCertificate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @param array $attributes The certificate purchase attributes. Refer to the documentation for the list of available fields.
      * @return Response The certificate purchase
      */
-    public function purchaseLetsEncryptCertificate($accountId, $domain, array $attributes = [])
+    public function purchaseLetsEncryptCertificate($account, $domain, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domain}/certificates/letsencrypt"), $attributes);
+        $response = $this->post("/{$account}/domains/{$domain}/certificates/letsencrypt", $attributes);
         return new Response($response, CertificatePurchase::class);
     }
 
@@ -110,14 +110,14 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#issueLetsencryptCertificate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param int $certificateId The certificate id
+     * @param int $certificate The certificate id
      * @return Response The certificate issued
      */
-    public function issueLetsencryptCertificate($accountId, $domain, $certificateId)
+    public function issueLetsencryptCertificate($account, $domain, $certificate)
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domain}/certificates/letsencrypt/{$certificateId}/issue"));
+        $response = $this->post("/{$account}/domains/{$domain}/certificates/letsencrypt/{$certificate}/issue");
         return new Response($response, Certificate::class);
     }
 
@@ -126,15 +126,15 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#purchaseRenewalLetsencryptCertificate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param int $certificateId The certificate id
+     * @param int $certificate The certificate id
      * @param array $attributes The renewal attributes. Refer to the documentation for the list of available fields.
      * @return Response
      */
-    public function purchaseLetsencryptCertificateRenewal($accountId, $domain, $certificateId, array $attributes = [])
+    public function purchaseLetsencryptCertificateRenewal($account, $domain, $certificate, array $attributes = [])
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domain}/certificates/letsencrypt/{$certificateId}/renewals"), $attributes);
+        $response = $this->post("/{$account}/domains/{$domain}/certificates/letsencrypt/{$certificate}/renewals", $attributes);
         return new Response($response, CertificateRenewal::class);
     }
 
@@ -146,15 +146,15 @@ class Certificates extends ClientService
      *
      * @see https://developer.dnsimple.com/v2/certificates/#issueRenewalLetsencryptCertificate
      *
-     * @param int $accountId The account id
+     * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param int $certificateId The certificate id
-     * @param int $renewalId The certificate renewal id
+     * @param int $certificate The certificate id
+     * @param int $certificateRenewal The certificate renewal id
      * @return Response
      */
-    public function issueLetsencryptCertificateRenewal($accountId, $domain, $certificateId, $renewalId)
+    public function issueLetsencryptCertificateRenewal($account, $domain, $certificate, $certificateRenewal)
     {
-        $response = $this->client->post(Client::versioned("/{$accountId}/domains/{$domain}/certificates/letsencrypt/{$certificateId}/renewals/{$renewalId}/issue"));
+        $response = $this->post("/{$account}/domains/{$domain}/certificates/letsencrypt/{$certificate}/renewals/{$certificateRenewal}/issue");
         return new Response($response, Certificate::class);
     }
 }
