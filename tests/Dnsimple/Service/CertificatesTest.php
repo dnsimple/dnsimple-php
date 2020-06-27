@@ -107,7 +107,7 @@ class CertificatesTest extends ServiceTestCase
 
     public function testPurchaseLetsEncryptCertificate()
     {
-        $this->mockResponseWith("purchaseLetsEncryptCertificate/success");
+        $this->mockResponseWith("purchaseLetsencryptCertificate/success");
 
         $attributes = [
             "contact_id" => 42
