@@ -20,7 +20,7 @@ class Contact
     /**
      * @var string The label to represent the contact
      */
-    public string $label;
+    public ?string $label;
     /**
      * @var string The contact first name
      */
@@ -32,11 +32,11 @@ class Contact
     /**
      * @var string The contact's job title
      */
-    public string $jobTitle;
+    public ?string $jobTitle;
     /**
      * @var string The name of the organization in which the contact works
      */
-    public string $organizationName;
+    public ?string $organizationName;
     /**
      * @var string The contact email address
      */
@@ -48,7 +48,7 @@ class Contact
     /**
      * @var string The contact fax number (may be omitted)
      */
-    public string $fax;
+    public ?string $fax;
     /**
      * @var string The contact street address
      */
@@ -56,7 +56,7 @@ class Contact
     /**
      * @var string Apartment or suite number
      */
-    public string $address2;
+    public ?string $address2;
     /**
      * @var string The city name
      */
