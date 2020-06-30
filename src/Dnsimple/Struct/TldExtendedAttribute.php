@@ -16,7 +16,7 @@ class TldExtendedAttribute
     /**
      * @var string A description of the extended attribute
      */
-    public string $description;
+    public ?string $description;
     /**
      * @var bool True if the extended attribute is required
      */
