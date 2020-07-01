@@ -29,8 +29,8 @@
         "classmap": [
             "src/"
         ],
-        "psr-0": {
-            "Dnsimple": "src/"
+        "psr-4": {
+            "Dnsimple\\": "src/"
         }
     }
 }
