@@ -17,6 +17,8 @@ class Accounts extends ClientService
     /**
      * Lists the accounts the current authenticated entity has access to.
      *
+     * @see https://developer.dnsimple.com/v2/accounts/#listAccounts
+     *
      * @return Response The response containing the list of accounts
      */
     function listAccounts(): Response
