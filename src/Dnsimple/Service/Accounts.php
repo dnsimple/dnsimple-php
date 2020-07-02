@@ -2,6 +2,7 @@
 
 namespace Dnsimple\Service;
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Account;
 
@@ -20,6 +21,7 @@ class Accounts extends ClientService
      * @see https://developer.dnsimple.com/v2/accounts/#listAccounts
      *
      * @return Response The response containing the list of accounts
+     * @throws DnsimpleException When something goes wrong
      */
     function listAccounts(): Response
     {

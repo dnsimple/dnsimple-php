@@ -4,6 +4,7 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\Client;
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\AccessToken;
 use function GuzzleHttp\Psr7\build_query;
@@ -23,8 +24,9 @@ class Oauth extends ClientService
      *
      * @param array $attributes key/value options.
      * @return Response The access token
+     * @throws DnsimpleException When something goes wrong
      */
-    public function exchangeAuthorizationForToken(array $attributes=[])
+    public function exchangeAuthorizationForToken(array $attributes=[]): Response
     {
         $attributes["grant_type"] = "authorization_code";
         $response = $this->client->post("/oauth/access_token", $attributes);
@@ -40,7 +42,7 @@ class Oauth extends ClientService
      * @param array $attributes key/value options to help build the url
      * @return string The URL to redirect the user to authorize
      */
-    public function authorizeUrl($clientId, array $attributes = [])
+    public function authorizeUrl($clientId, array $attributes = []): string
     {
         return rtrim(Client::BASE_URL . "/oauth/authorize?client_id={$clientId}&response_type=code&" . build_query($attributes), "&");
     }

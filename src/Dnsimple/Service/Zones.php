@@ -3,6 +3,7 @@
 namespace Dnsimple\Service;
 
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Zone;
 use Dnsimple\Struct\ZoneDistribution;
@@ -25,8 +26,9 @@ class Zones extends ClientService
      * @param int $account The account id
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of zones requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listZones($account, array $options = [])
+    public function listZones($account, array $options = []): Response
     {
         $response = $this->get("/{$account}/zones", $options);
         return new Response($response, Zone::class);
@@ -40,8 +42,9 @@ class Zones extends ClientService
      * @param int $account The account id
      * @param string $zone The zone name
      * @return Response The zone requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getZone($account, $zone)
+    public function getZone($account, $zone): Response
     {
         $response = $this->get("/{$account}/zones/{$zone}");
         return new Response($response, Zone::class);
@@ -55,8 +58,9 @@ class Zones extends ClientService
      * @param int $account The account id
      * @param string $zone The zone name
      * @return Response The zone file requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getZoneFile($account, $zone)
+    public function getZoneFile($account, $zone): Response
     {
         $response = $this->get("/{$account}/zones/{$zone}/file");
         return new Response($response, ZoneFile::class);
@@ -72,8 +76,9 @@ class Zones extends ClientService
      * @param int $account The account id
      * @param string $zone The zone name
      * @return Response The zone distribution
+     * @throws DnsimpleException When something goes wrong
      */
-    public function checkZoneDistribution($account, $zone)
+    public function checkZoneDistribution($account, $zone): Response
     {
         $response = $this->get("/{$account}/zones/{$zone}/distribution");
         return new Response($response, ZoneDistribution::class);
@@ -88,8 +93,9 @@ class Zones extends ClientService
      * @param string $zone The zone name
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of zone records in the account
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listRecords($account, $zone, array $options = [])
+    public function listRecords($account, $zone, array $options = []): Response
     {
         $response = $this->get("/{$account}/zones/{$zone}/records", $options);
         return new Response($response, ZoneRecord::class);
@@ -104,8 +110,9 @@ class Zones extends ClientService
      * @param string $zone The zone name
      * @param array $attributes The zone record attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created zone record
+     * @throws DnsimpleException When something goes wrong
      */
-    public function createRecord($account, $zone, array $attributes = [])
+    public function createRecord($account, $zone, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/zones/{$zone}/records", $attributes);
         return new Response($response, ZoneRecord::class);
@@ -120,8 +127,9 @@ class Zones extends ClientService
      * @param string $zone The zone name
      * @param int $record The record id
      * @return Response The zone record requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getRecord($account, $zone, $record)
+    public function getRecord($account, $zone, $record): Response
     {
         $response = $this->get("/{$account}/zones/{$zone}/records/{$record}");
         return new Response($response, ZoneRecord::class);
@@ -137,8 +145,9 @@ class Zones extends ClientService
      * @param int $record The record id
      * @param array $attributes The zone record attributes. Refer to the documentation for the list of available fields.
      * @return Response The updated zone record
+     * @throws DnsimpleException When something goes wrong
      */
-    public function updateRecord($account, $zone, $record, array $attributes = [])
+    public function updateRecord($account, $zone, $record, array $attributes = []): Response
     {
         $response = $this->patch("/{$account}/zones/{$zone}/records/{$record}", $attributes);
         return new Response($response, ZoneRecord::class);
@@ -155,8 +164,9 @@ class Zones extends ClientService
      * @param string $zone The zone name
      * @param int $record The record id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function deleteRecord($account, $zone, $record)
+    public function deleteRecord($account, $zone, $record): Response
     {
         $response = $this->delete("/{$account}/zones/{$zone}/records/{$record}");
         return new Response($response);
@@ -173,8 +183,10 @@ class Zones extends ClientService
      * @param string $zone The zone name
      * @param int $record The record id
      * @return Response The zone record distribution
+     * @throws DnsimpleException When something goes wrong
      */
-    public function checkZoneRecordDistribution($account, $zone, $record) {
+    public function checkZoneRecordDistribution($account, $zone, $record): Response
+    {
         $response = $this->get("/{$account}/zones/{$zone}/records/{$record}/distribution");
         return new Response($response, ZoneDistribution::class);
     }

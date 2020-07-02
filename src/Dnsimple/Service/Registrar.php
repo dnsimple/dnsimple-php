@@ -3,6 +3,7 @@
 namespace Dnsimple\Service;
 
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\DomainCheck;
 use Dnsimple\Struct\DomainPremiumPrice;
@@ -28,8 +29,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param string $domain The domain name
      * @return Response The domain check result
+     * @throws DnsimpleException When something goes wrong
      */
-    public function checkDomain($account, $domain)
+    public function checkDomain($account, $domain): Response
     {
         $response = $this->get("/{$account}/registrar/domains/{$domain}/check");
         return new Response($response, DomainCheck::class);
@@ -44,8 +46,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param string $action Optional action between "registration", "renewal", and "transfer". If omitted, it defaults to "registration".
      * @return Response The domain premium price
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getDomainPremiumPrice($account, $domain, $action = "registration")
+    public function getDomainPremiumPrice($account, $domain, $action = "registration"): Response
     {
         $options = ["action" => $action];
         $response = $this->get("/{$account}/registrar/domains/{$domain}/premium_price", $options);
@@ -61,8 +64,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param array $attributes The domain registration attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly registered domain
+     * @throws DnsimpleException When something goes wrong
      */
-    public function registerDomain($account, $domain, array $attributes = [])
+    public function registerDomain($account, $domain, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/registrar/domains/{$domain}/registrations", $attributes);
         return new Response($response, DomainRegistration::class);
@@ -77,8 +81,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param array $attributes The domain transfer attributes. Refer to the documentation for the list of available fields.
      * @return Response The domain transfer
+     * @throws DnsimpleException When something goes wrong
      */
-    public function transferDomain($account, $domain, array $attributes = [])
+    public function transferDomain($account, $domain, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/registrar/domains/{$domain}/transfers", $attributes);
         return new Response($response, DomainTransfer::class);
@@ -93,8 +98,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param int $domainTransfer The domain transfer id
      * @return Response The details of an existing domain transfer
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getDomainTransfer($account, $domain, $domainTransfer)
+    public function getDomainTransfer($account, $domain, $domainTransfer): Response
     {
         $response = $this->get("/{$account}/registrar/domains/{$domain}/transfers/{$domainTransfer}");
         return new Response($response, DomainTransfer::class);
@@ -109,8 +115,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param int $domainTransfer The domain transfer id
      * @return Response The details of the domain transfer
+     * @throws DnsimpleException When something goes wrong
      */
-    public function cancelDomainTransfer($account, $domain, $domainTransfer)
+    public function cancelDomainTransfer($account, $domain, $domainTransfer): Response
     {
         $response = $this->delete("/{$account}/registrar/domains/{$domain}/transfers/{$domainTransfer}");
         return new Response($response, DomainTransfer::class);
@@ -128,8 +135,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param array $attributes The domain renewal attributes. Refer to the documentation for the list of available fields.
      * @return Response The domain renewal
+     * @throws DnsimpleException When something goes wrong
      */
-    public function renewDomain($account, $domain, array $attributes = [])
+    public function renewDomain($account, $domain, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/registrar/domains/{$domain}/renewals", $attributes);
         return new Response($response, DomainRenewal::class);
@@ -144,8 +152,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param string $domain The domain name
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function transferDomainOut($account, $domain)
+    public function transferDomainOut($account, $domain): Response
     {
         $response = $this->post("/{$account}/registrar/domains/{$domain}/authorize_transfer_out");
         return new Response($response);
@@ -159,8 +168,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param string $domain The domain name
      * @return Response The list of name servers
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getDomainDelegation($account, $domain)
+    public function getDomainDelegation($account, $domain): Response
     {
         $response = $this->get("/{$account}/registrar/domains/{$domain}/delegation");
         return new Response($response);
@@ -175,8 +185,9 @@ class Registrar extends ClientService
      * @param string $domain The domain name
      * @param array $attributes List of name servers
      * @return Response The list of name servers
+     * @throws DnsimpleException When something goes wrong
      */
-    public function changeDomainDelegation($account, $domain, array $attributes = [])
+    public function changeDomainDelegation($account, $domain, array $attributes = []): Response
     {
         $response = $this->put("/{$account}/registrar/domains/{$domain}/delegation", $attributes);
         return new Response($response);
@@ -191,8 +202,9 @@ class Registrar extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $attributes List of name servers
      * @return Response The list of vanity name servers
+     * @throws DnsimpleException When something goes wrong
      */
-    public function changeDomainDelegationToVanity($account, $domain, array $attributes =[])
+    public function changeDomainDelegationToVanity($account, $domain, array $attributes =[]): Response
     {
         $response = $this->put("/{$account}/registrar/domains/{$domain}/delegation/vanity", $attributes);
         return new Response($response, VanityNameServer::class);
@@ -209,8 +221,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function changeDomainDelegationFromVanity($account, $domain)
+    public function changeDomainDelegationFromVanity($account, $domain): Response
     {
         $response = $this->delete("/{$account}/registrar/domains/{$domain}/delegation/vanity");
         return new Response($response);
@@ -224,8 +237,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function enableDomainAutoRenewal($account, $domain)
+    public function enableDomainAutoRenewal($account, $domain): Response
     {
         $response = $this->put("/{$account}/registrar/domains/{$domain}/auto_renewal");
         return new Response($response);
@@ -239,8 +253,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function disableDomainAutoRenewal($account, $domain)
+    public function disableDomainAutoRenewal($account, $domain): Response
     {
         $response = $this->delete("/{$account}/registrar/domains/{$domain}/auto_renewal");
         return new Response($response);
@@ -254,8 +269,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getWhoisPrivacy($account, $domain)
+    public function getWhoisPrivacy($account, $domain): Response
     {
         $response = $this->get("/{$account}/registrar/domains/{$domain}/whois_privacy");
         return new Response($response, WhoisPrivacy::class);
@@ -274,8 +290,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
+     * @throws DnsimpleException When something goes wrong
      */
-    public function enableWhoisPrivacy($account, $domain)
+    public function enableWhoisPrivacy($account, $domain): Response
     {
         $response = $this->put("/{$account}/registrar/domains/{$domain}/whois_privacy");
         return new Response($response, WhoisPrivacy::class);
@@ -292,8 +309,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
+     * @throws DnsimpleException When something goes wrong
      */
-    public function disableWhoisPrivacy($account, $domain)
+    public function disableWhoisPrivacy($account, $domain): Response
     {
         $response = $this->delete("/{$account}/registrar/domains/{$domain}/whois_privacy");
         return new Response($response, WhoisPrivacy::class);
@@ -307,8 +325,9 @@ class Registrar extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The whois privacy details
+     * @throws DnsimpleException When something goes wrong
      */
-    public function renewWhoisPrivacy($account, $domain)
+    public function renewWhoisPrivacy($account, $domain): Response
     {
         $response = $this->post("/{$account}/registrar/domains/{$domain}/whois_privacy/renewals");
         return new Response($response, WhoisPrivacy::class);

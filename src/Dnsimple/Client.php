@@ -17,6 +17,7 @@ use Dnsimple\Service\Webhooks;
 use Dnsimple\Service\Zones;
 use GuzzleHttp;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * The version of this Dnsimple client library.
@@ -38,7 +39,7 @@ const VERSION = "0.1.0-dev";
 class Client
 {
     /**
-     * The current API version.
+     * The current API version
      */
     const API_VERSION = "v2";
 
@@ -46,6 +47,9 @@ class Client
      * URL to the production environment
      */
     const BASE_URL = "https://api.dnsimple.com";
+    /**
+     * The default user agent
+     */
     const DEFAULT_USER_AGENT = "dnsimple-php/" . VERSION;
 
 
@@ -119,6 +123,11 @@ class Client
      */
     public $contacts;
 
+    /**
+     * Client constructor.
+     * @param string $accessToken The OAuth access token
+     * @param array $config Configuration options passed to the client (such as the base_uri, etc)
+     */
     public function __construct($accessToken, array $config = array())
     {
         $this->accessToken = $accessToken;
@@ -134,39 +143,88 @@ class Client
      * @param  string $path
      * @return string the versioned path
      */
-    public static function versioned($path)
+    public static function versioned($path): string
     {
         return "/" . self::API_VERSION . $path;
     }
 
-    public function get($path, array $options = [])
+    /**
+     * Sends a GET request to the DNSimple API
+     *
+     * @param string $path The path to the service
+     * @param array $options Any extra options passed with the request
+     * @return ResponseInterface The raw response from the server
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function get($path, array $options = []): ResponseInterface
     {
         $query = ["query" => $options];
 
         return $this->request("GET", $path, $query);
     }
 
-    public function post($path, array $options = [])
+    /**
+     * Sends a POST request to the DNSimple API
+     *
+     * @param string $path The path to the service
+     * @param array $options Any extra options passed with the request
+     * @return ResponseInterface The raw response from the server
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function post($path, array $options = []): ResponseInterface
     {
         return $this->request("POST", $path, $options);
     }
 
-    public function delete($path, array $options = [])
+    /**
+     * Sends a DELETE request to the DNSimple API
+     *
+     * @param string $path The path to the service
+     * @param array $options Any extra options passed with the request
+     * @return ResponseInterface The raw response from the server
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function delete($path, array $options = []): ResponseInterface
     {
         return $this->request("DELETE", $path, $options);
     }
 
-    public function patch($path, array $options = [])
+    /**
+     * Sends a PATCH request to the DNSimple API
+     *
+     * @param string $path The path to the service
+     * @param array $options Any extra options passed with the request
+     * @return ResponseInterface The raw response from the server
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function patch($path, array $options = []): ResponseInterface
     {
         return $this->request("PATCH", $path, $options);
     }
 
-    public function put($path, array $options = [])
+    /**
+     * Sends a PUT request to the DNSimple API
+     *
+     * @param string $path The path to the service
+     * @param array $options Any extra options passed with the request
+     * @return ResponseInterface The raw response from the server
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function put($path, array $options = []): ResponseInterface
     {
         return $this->request("PUT", $path, $options);
     }
 
-    public function request($method, $path, array $options = [])
+    /**
+     * Sends a request to the DNSimple API
+     *
+     * @param string $method The HTTP method (GET, POST, PUT, PATCH, DELETE)
+     * @param string $path The path to the service
+     * @param array $options Any extra options passed with the request
+     * @return ResponseInterface
+     * @throws DnsimpleException
+     */
+    public function request($method, $path, array $options = []): ResponseInterface
     {
         $requestOptions = array_merge_recursive($options, [
             "headers" => [
@@ -183,17 +241,28 @@ class Client
         }
     }
 
+    /**
+     * Returns the user agent
+     *
+     * @return string The user Agent
+     */
     public function getUserAgent(): string
     {
         return trim($this->customUserAgent . " " . self::DEFAULT_USER_AGENT);
     }
 
-    public function setUserAgent($customName)
+    /**
+     * Adds a custom name to the user agent sent to the DNSimple API
+     *
+     * @example setUserAgent("My Super App") would result in the user agent "My Super app dnsimple-php/CURRENT_VERSION
+     * @param string $customName The custom name you want to use
+     */
+    public function setUserAgent($customName): void
     {
         $this->customUserAgent = $customName;
     }
 
-    private function attachServicesToClient()
+    private function attachServicesToClient(): void
     {
         $this->accounts = new Accounts($this);
         $this->certificates = new Certificates($this);

@@ -4,6 +4,7 @@
 namespace Dnsimple\Service;
 
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Template;
 use Dnsimple\Struct\TemplateRecord;
@@ -24,8 +25,9 @@ class Templates extends ClientService
      * @param int $account The account id
      * @param array $options key/value options to sort and/or paginate the results
      * @return Response The templates in the account
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listTemplates($account, array $options = [])
+    public function listTemplates($account, array $options = []): Response
     {
         $response = $this->get("/{$account}/templates", $options);
         return new Response($response, Template::class);
@@ -39,8 +41,9 @@ class Templates extends ClientService
      * @param int $account The account id
      * @param array $attributes The template attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created template
+     * @throws DnsimpleException When something goes wrong
      */
-    public function createTemplate($account, array $attributes = [])
+    public function createTemplate($account, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/templates", $attributes);
         return new Response($response, Template::class);
@@ -54,8 +57,9 @@ class Templates extends ClientService
      * @param int $account The account id
      * @param int|string $template The template id or short name
      * @return Response The template requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getTemplate($account, $template)
+    public function getTemplate($account, $template): Response
     {
         $response = $this->get("/{$account}/templates/{$template}");
         return new Response($response, Template::class);
@@ -70,8 +74,9 @@ class Templates extends ClientService
      * @param int|string $template The template id or short name
      * @param array $attributes The template attributes. Refer to the documentation for the list of available fields.
      * @return Response The updated template
+     * @throws DnsimpleException When something goes wrong
      */
-    public function updateTemplate($account, $template, array $attributes = [])
+    public function updateTemplate($account, $template, array $attributes = []): Response
     {
         $response = $this->patch("/{$account}/templates/{$template}", $attributes);
         return new Response($response, Template::class);
@@ -87,8 +92,9 @@ class Templates extends ClientService
      * @param int $account The account id
      * @param int|string $template The template id or short name
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function deleteTemplate($account, $template)
+    public function deleteTemplate($account, $template): Response
     {
         $response = $this->delete("/{$account}/templates/{$template}");
         return new Response($response);
@@ -103,8 +109,9 @@ class Templates extends ClientService
      * @param int|string $template The template id or short name
      * @param array $options key/value options to sort and/or paginate the results
      * @return Response The list of template records
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listTemplateRecords($account, $template, array $options = [])
+    public function listTemplateRecords($account, $template, array $options = []): Response
     {
         $response = $this->get("/{$account}/templates/{$template}/records", $options);
         return new Response($response, TemplateRecord::class);
@@ -119,8 +126,9 @@ class Templates extends ClientService
      * @param int|string $template The template id or short name
      * @param array $attributes The template record attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created template record
+     * @throws DnsimpleException When something goes wrong
      */
-    public function createTemplateRecord($account, $template, array $attributes = [])
+    public function createTemplateRecord($account, $template, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/templates/{$template}/records", $attributes);
         return new Response($response, TemplateRecord::class);
@@ -135,8 +143,9 @@ class Templates extends ClientService
      * @param int|string $template The template id or short name
      * @param int $record The record id
      * @return Response The template record
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getTemplateRecord($account, $template, $record)
+    public function getTemplateRecord($account, $template, $record): Response
     {
         $response = $this->get("/{$account}/templates/{$template}/records/{$record}");
         return new Response($response, TemplateRecord::class);
@@ -153,8 +162,9 @@ class Templates extends ClientService
      * @param int|string $template The template id or short name
      * @param int $record The record id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function deleteTemplateRecord($account, $template, $record)
+    public function deleteTemplateRecord($account, $template, $record): Response
     {
         $response = $this->delete("/{$account}/templates/{$template}/records/{$record}");
         return new Response($response);
@@ -169,8 +179,9 @@ class Templates extends ClientService
      * @param int|string $domain The domain name or id
      * @param int|string $template The template id or sid
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function applyTemplate($account, $domain, $template)
+    public function applyTemplate($account, $domain, $template): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/templates/{$template}");
         return new Response($response);

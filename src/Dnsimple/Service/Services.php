@@ -4,6 +4,7 @@
 namespace Dnsimple\Service;
 
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Service;
 
@@ -22,8 +23,9 @@ class Services extends ClientService
      *
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of services in DNSimple
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listServices(array $options = [])
+    public function listServices(array $options = []): Response
     {
         $response = $this->get("/services", $options);
         return new Response($response, Service::class);
@@ -36,8 +38,9 @@ class Services extends ClientService
      *
      * @param int|string $service The service name or id
      * @return Response The service requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getService($service)
+    public function getService($service): Response
     {
         $response = $this->get("/services/{$service}");
         return new Response($response, Service::class);
@@ -52,8 +55,9 @@ class Services extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $options key/value options to paginate the results
      * @return Response The list of services applied to the domain
+     * @throws DnsimpleException When something goes wrong
      */
-    public function appliedServices($account, $domain, array $options = [])
+    public function appliedServices($account, $domain, array $options = []): Response
     {
         $response = $this->get("/{$account}/domains/{$domain}/services", $options);
         return new Response($response, Service::class);
@@ -69,8 +73,9 @@ class Services extends ClientService
      * @param int|string $service The service name or id
      * @param array $settings
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function applyService($account, $domain, $service, array $settings = [])
+    public function applyService($account, $domain, $service, array $settings = []): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/services/{$service}", $settings);
         return new Response($response);
@@ -85,8 +90,9 @@ class Services extends ClientService
      * @param int|string $domain The domain name or id
      * @param int|string $service The service name or id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function unapplyService($account, $domain, $service)
+    public function unapplyService($account, $domain, $service): Response
     {
         $response = $this->delete("/{$account}/domains/{$domain}/services/{$service}");
         return new Response($response);

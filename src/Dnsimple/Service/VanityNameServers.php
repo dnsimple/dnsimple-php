@@ -3,6 +3,7 @@
 
 namespace Dnsimple\Service;
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\VanityNameServer;
 
@@ -21,8 +22,9 @@ class VanityNameServers extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The vanity name server list
+     * @throws DnsimpleException When something goes wrong
      */
-    public function enableVanityNameServers($account, $domain)
+    public function enableVanityNameServers($account, $domain): Response
     {
         $response = $this->put("/{$account}/vanity/{$domain}");
         return new Response($response, VanityNameServer::class);
@@ -36,8 +38,9 @@ class VanityNameServers extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function disableVanityNameServers($account, $domain)
+    public function disableVanityNameServers($account, $domain): Response
     {
         $response = $this->delete("/{$account}/vanity/{$domain}");
         return new Response($response);

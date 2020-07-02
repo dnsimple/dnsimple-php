@@ -34,6 +34,11 @@ class Response
         $this->_data_class = $data_class;
     }
 
+    /**
+     * Returns the HTTP status code in the response
+     *
+     * @return int The HTTP status code
+     */
     public function getStatusCode(): int
     {
         return $this->_httpResponse->getStatusCode();

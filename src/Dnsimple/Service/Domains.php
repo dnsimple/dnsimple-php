@@ -2,6 +2,7 @@
 
 namespace Dnsimple\Service;
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Collaborator;
 use Dnsimple\Struct\DelegationSignerRecord;
@@ -25,6 +26,7 @@ class Domains extends ClientService
      * @param array $options key/value options to sort and filter the results
      * @return  Response The list of domains
      * @example listDomains(1010, ["name_like" => "example.com", "sort" => "id:desc,expiration:asc"]
+     * @throws DnsimpleException When something goes wrong
      */
     public function listDomains($account, $options = []): Response
     {
@@ -41,6 +43,7 @@ class Domains extends ClientService
      * @param int $account The account ID
      * @param array $attributes The domain attributes. Refer to the documentation for the list of available fields.
      * @return  Response The newly created domain
+     * @throws DnsimpleException When something goes wrong
      */
     public function createDomain($account, array $attributes): Response
     {
@@ -57,6 +60,7 @@ class Domains extends ClientService
      * @param int $account The account ID
      * @param int|string $domain The domain name or ID
      * @return  Response The domain requested
+     * @throws DnsimpleException When something goes wrong
      */
     public function getDomain($account, $domain): Response
     {
@@ -76,6 +80,7 @@ class Domains extends ClientService
      * @param int $account The account ID
      * @param int|string $domain The domain name or ID
      * @return  Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
     public function deleteDomain($account, $domain): Response
     {
@@ -93,6 +98,7 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or ID
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of collaborators
+     * @throws DnsimpleException When something goes wrong
      */
     public function listCollaborators($account, $domain, array $options = []): Response
     {
@@ -117,8 +123,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or ID
      * @param array $attributes The collaborator attributes. Refer to the documentation for the list of available fields.
      * @return Response The collaborator added to the domain in the account
+     * @throws DnsimpleException When something goes wrong
      */
-    public function addCollaborator($account, $domain, array $attributes)
+    public function addCollaborator($account, $domain, array $attributes): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/collaborators", $attributes);
         return new Response($response, Collaborator::class);
@@ -133,8 +140,9 @@ class Domains extends ClientService
      * @param string $domain The domain name or id
      * @param int $collaborator The collaborator id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function removeCollaborator($account, $domain, $collaborator)
+    public function removeCollaborator($account, $domain, $collaborator): Response
     {
         $response = $this->delete("/{$account}/domains/{$domain}/collaborators/{$collaborator}");
         return new Response($response);
@@ -149,8 +157,9 @@ class Domains extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The DNSSEC status
+     * @throws DnsimpleException When something goes wrong
      */
-    public function enableDnssec($account, $domain)
+    public function enableDnssec($account, $domain): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/dnssec");
         return new Response($response, Dnssec::class);
@@ -164,8 +173,9 @@ class Domains extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function disableDnssec($account, $domain)
+    public function disableDnssec($account, $domain): Response
     {
         $response = $this->delete("/{$account}/domains/{$domain}/dnssec");
         return new Response($response);
@@ -179,8 +189,9 @@ class Domains extends ClientService
      * @param int $account The account id
      * @param int|string $domain The domain name or id
      * @return Response The DNSSEC status requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getDnssec($account, $domain)
+    public function getDnssec($account, $domain): Response
     {
         $response = $this->get("/{$account}/domains/{$domain}/dnssec");
         return new Response($response, Dnssec::class);
@@ -195,8 +206,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $options key/value options to sort and filter the results
      * @return Response A list of delegation signer records for the domain in the account
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listDomainDelegationSignerRecords($account, $domain, array $options = [])
+    public function listDomainDelegationSignerRecords($account, $domain, array $options = []): Response
     {
         $response = $this->get("/{$account}/domains/{$domain}/ds_records", $options);
         return new Response($response, DelegationSignerRecord::class);
@@ -215,8 +227,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $attributes The delegation signer record attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created domain delegation signer record
+     * @throws DnsimpleException When something goes wrong
      */
-    public function createDomainDelegationSignerRecord($account, $domain, array $attributes = [])
+    public function createDomainDelegationSignerRecord($account, $domain, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/ds_records", $attributes);
         return new Response($response, DelegationSignerRecord::class);
@@ -231,8 +244,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param int $dsRecordId The delegation signer record id
      * @return Response The domain delegation signer record requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getDomainDelegationSignerRecord($account, $domain, $dsRecordId)
+    public function getDomainDelegationSignerRecord($account, $domain, $dsRecordId): Response
     {
         $response = $this->get("/{$account}/domains/{$domain}/ds_records/{$dsRecordId}");
         return new Response($response, DelegationSignerRecord::class);
@@ -247,8 +261,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param int $dsRecordId The delegation signer record id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function deleteDomainDelegationSignerRecord($account, $domain, $dsRecordId)
+    public function deleteDomainDelegationSignerRecord($account, $domain, $dsRecordId): Response
     {
         $response = $this->delete("/{$account}/domains/{$domain}/ds_records/{$dsRecordId}");
         return new Response($response);
@@ -263,8 +278,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of email forwards for the domain in the account
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listEmailForwards($account, $domain, array $options = [])
+    public function listEmailForwards($account, $domain, array $options = []): Response
     {
         $response = $this->get("/{$account}/domains/{$domain}/email_forwards", $options);
         return new Response($response, EmailForward::class);
@@ -279,8 +295,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $attributes The email forwards attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created email forward under the domain in the account
+     * @throws DnsimpleException When something goes wrong
      */
-    public function createEmailForward($account, $domain, array $attributes = [])
+    public function createEmailForward($account, $domain, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/email_forwards", $attributes);
         return new Response($response, EmailForward::class);
@@ -295,8 +312,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param int $emailForward The email forward id
      * @return Response The email forward requested
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getEmailForward($account, $domain, $emailForward)
+    public function getEmailForward($account, $domain, $emailForward): Response
     {
         $response = $this->get("/{$account}/domains/{$domain}/email_forwards/{$emailForward}");
         return new Response($response, EmailForward::class);
@@ -311,8 +329,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param int $emailForward The email forward id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function deleteEmailForward($account, $domain, $emailForward)
+    public function deleteEmailForward($account, $domain, $emailForward): Response
     {
         $response = $this->delete("/{$account}/domains/{$domain}/email_forwards/{$emailForward}");
         return new Response($response);
@@ -327,8 +346,9 @@ class Domains extends ClientService
      * @param int|string $domain The domain name or id
      * @param array $attributes The initiate push attributes. Refer to the documentation for the list of available fields.
      * @return Response The newly created domain push
+     * @throws DnsimpleException When something goes wrong
      */
-    public function initiatePush($account, $domain, array $attributes = [])
+    public function initiatePush($account, $domain, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/domains/{$domain}/pushes", $attributes);
         return new Response($response, DomainPush::class);
@@ -342,8 +362,9 @@ class Domains extends ClientService
      * @param int $account The account id
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of pushes for the domain
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listPushes($account, array $options = [])
+    public function listPushes($account, array $options = []): Response
     {
         $response = $this->get("/{$account}/pushes", $options);
         return new Response($response, DomainPush::class);
@@ -358,8 +379,9 @@ class Domains extends ClientService
      * @param int $push The push id
      * @param array $attributes The accept push attributes. Refer to the documentation for the list of available fields.
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function acceptPush($account, $push, array $attributes = [])
+    public function acceptPush($account, $push, array $attributes = []): Response
     {
         $response = $this->post("/{$account}/pushes/{$push}", $attributes);
         return new Response($response);
@@ -373,8 +395,9 @@ class Domains extends ClientService
      * @param int $account The account id
      * @param int $push The push id
      * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
      */
-    public function rejectPush($account, $push)
+    public function rejectPush($account, $push): Response
     {
         $response = $this->delete("/{$account}/pushes/{$push}");
         return new Response($response);

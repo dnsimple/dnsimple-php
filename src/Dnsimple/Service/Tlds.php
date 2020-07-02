@@ -4,6 +4,7 @@
 namespace Dnsimple\Service;
 
 
+use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Tld;
 use Dnsimple\Struct\TldExtendedAttribute;
@@ -23,8 +24,9 @@ class Tlds extends ClientService
      *
      * @param array $options key/value options to sort and filter the results
      * @return Response The tld list
+     * @throws DnsimpleException When something goes wrong
      */
-    public function listTlds(array $options = [])
+    public function listTlds(array $options = []): Response
     {
         $response = $this->get("/tlds", $options);
         return new Response($response, Tld::class);
@@ -37,8 +39,9 @@ class Tlds extends ClientService
      *
      * @param string $tld The TLD name
      * @return Response The TLD details
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getTld($tld)
+    public function getTld($tld): Response
     {
         $response = $this->get("/tlds/{$tld}");
         return new Response($response, Tld::class);
@@ -51,8 +54,9 @@ class Tlds extends ClientService
      *
      * @param string $tld The TLD name
      * @return Response The TLDs extended attributes
+     * @throws DnsimpleException When something goes wrong
      */
-    public function getTldExtendedAttributes($tld)
+    public function getTldExtendedAttributes($tld): Response
     {
         $response = $this->get("/tlds/{$tld}/extended_attributes");
         return new Response($response, TldExtendedAttribute::class);
