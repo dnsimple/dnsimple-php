@@ -30,7 +30,7 @@
             "src/"
         ],
         "psr-4": {
-            "\\Dnsimple": "src/"
+            "Dnsimple\\": "src/"
         }
     }
 }
