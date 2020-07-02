@@ -20,7 +20,7 @@ final class ClientTest extends ServiceTestCase
     public function testRateLimits() {
 
         $this->mockResponseWith("whoami/success");
-        $response = $this->client->Identity->whoami();
+        $response = $this->client->identity->whoami();
 
         self::assertEquals(4000, $response->getRateLimit());
         self::assertEquals(3991, $response->getRateLimitRemaining());

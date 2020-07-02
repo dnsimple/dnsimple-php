@@ -69,55 +69,55 @@ class Client
     /**
      * @var Identity The service handling the Identity API
      */
-    public $Identity;
+    public $identity;
     /**
      * @var Accounts The service handling the Accounts API
      */
-    public $Accounts;
+    public $accounts;
     /**
      * @var Domains The service handling the Domains API
      */
-    public $Domains;
+    public $domains;
     /**
      * @var Registrar The service handling the Registrar API
      */
-    public $Registrar;
+    public $registrar;
     /**
      * @var Zones The service handling the Zones API
      */
-    public $Zones;
+    public $zones;
     /**
      * @var Oauth The service handling the Oauth API
      */
-    public $Oauth;
+    public $oauth;
     /**
      * @var Tlds The service handling the Tlds API
      */
-    public $Tlds;
+    public $tlds;
     /**
      * @var Services The service handling the Services API
      */
-    public $Services;
+    public $services;
     /**
      * @var Templates The service handling the Templates API
      */
-    public $Templates;
+    public $templates;
     /**
      * @var VanityNameServers The service handling the Vanity Name Servers API
      */
-    public $VanityNameServers;
+    public $vanityNameServers;
     /**
      * @var Webhooks The service handling the Webhooks API
      */
-    public $Webhooks;
+    public $webhooks;
     /**
      * @var Certificates The service handling the Certificates API
      */
-    public $Certificates;
+    public $certificates;
     /**
      * @var Contacts The service handling the Contacts API
      */
-    public $Contacts;
+    public $contacts;
 
     public function __construct($accessToken, array $config = array())
     {
@@ -195,18 +195,18 @@ class Client
 
     private function attachServicesToClient()
     {
-        $this->Accounts = new Accounts($this);
-        $this->Certificates = new Certificates($this);
-        $this->Contacts = new Contacts($this);
-        $this->Domains = new Domains($this);
-        $this->Identity = new Identity($this);
-        $this->Oauth = new Oauth($this);
-        $this->Registrar = new Registrar($this);
-        $this->Services = new Services($this);
-        $this->Templates = new Templates($this);
-        $this->Tlds = new Tlds($this);
-        $this->VanityNameServers = new VanityNameServers($this);
-        $this->Webhooks = new Webhooks($this);
-        $this->Zones = new Zones($this);
+        $this->accounts = new Accounts($this);
+        $this->certificates = new Certificates($this);
+        $this->contacts = new Contacts($this);
+        $this->domains = new Domains($this);
+        $this->identity = new Identity($this);
+        $this->oauth = new Oauth($this);
+        $this->registrar = new Registrar($this);
+        $this->services = new Services($this);
+        $this->templates = new Templates($this);
+        $this->tlds = new Tlds($this);
+        $this->vanityNameServers = new VanityNameServers($this);
+        $this->webhooks = new Webhooks($this);
+        $this->zones = new Zones($this);
     }
 }

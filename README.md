@@ -21,11 +21,11 @@ use Dnsimple\Client;
 
 $client = new Client("API_TOKEN");
 
-$response = $client->Identity->whoami();
+$response = $client->identity->whoami();
 $whoami = $response->getData();
 $account_id = $whoami->account->id;
 
-$response = $client->Domains->listDomains($account_id);
+$response = $client->domains->listDomains($account_id);
 $domains = $response->getData();
 ```
 
