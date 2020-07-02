@@ -12,19 +12,19 @@ class TldExtendedAttribute
     /**
      * @var string The extended attribute name
      */
-    public string $name;
+    public $name;
     /**
      * @var string A description of the extended attribute
      */
-    public ?string $description;
+    public $description;
     /**
      * @var bool True if the extended attribute is required
      */
-    public bool $required;
+    public $required;
     /**
      * @var array|TldExtendedAttributeOption[] The list of options with possible values for the extended attribute
      */
-    public array $options;
+    public $options;
 
     public function __construct($data)
     {

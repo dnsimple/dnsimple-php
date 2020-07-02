@@ -12,43 +12,43 @@ class Service
     /**
      * @var int The service ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var string The service name
      */
-    public string $name;
+    public $name;
     /**
      * @var string A string ID for the service
      */
-    public string $sid;
+    public $sid;
     /**
      * @var string The service description
      */
-    public string $description;
+    public $description;
     /**
      * @var string|null The service setup description
      */
-    public ?string $setupDescription;
+    public $setupDescription;
     /**
      * @var bool Whether the service requires extra setup
      */
-    public bool $requiresSetup;
+    public $requiresSetup;
     /**
      * @var string|null The default subdomain where the service will be applied
      */
-    public ?string $defaultSubdomain;
+    public $defaultSubdomain;
     /**
      * @var string When the service was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the service was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
     /**
      * @var array|ServiceSetting[] The array of settings to setup this service, if setup is required.
      */
-    public array $settings;
+    public $settings;
 
     public function __construct($data)
     {

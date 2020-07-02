@@ -12,15 +12,15 @@ class CertificateDownload
     /**
      * @var string The server certificate
      */
-    public string $server;
+    public $server;
     /**
      * @var string|null The root certificate
      */
-    public ?string $root;
+    public $root;
     /**
      * @var array The intermediate certificates
      */
-    public array $chain;
+    public $chain;
 
     public function __construct($data)
     {

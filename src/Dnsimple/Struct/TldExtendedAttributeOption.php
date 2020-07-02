@@ -12,15 +12,15 @@ class TldExtendedAttributeOption
     /**
      * @var string The option name
      */
-    public string $title;
+    public $title;
     /**
      * @var string The option value
      */
-    public string $value;
+    public $value;
     /**
      * @var string A long description of the option
      */
-    public string $description;
+    public $description;
 
     /**
      * TldExtendedAttributeOption constructor.

@@ -12,27 +12,27 @@ class DomainRenewal
     /**
      * @var int The domain registration ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var int The number of years the domain was registered for
      */
-    public int $period;
+    public $period;
     /**
      * @var string The state of the renewal
      */
-    public string $state;
+    public $state;
     /**
      * @var string When the domain renewal was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the domain renewal was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

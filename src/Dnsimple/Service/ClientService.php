@@ -8,7 +8,7 @@ use GuzzleHttp\RequestOptions;
 
 class ClientService
 {
-    protected Client $client;
+    protected $client;
 
     public function __construct(Client $client)
     {

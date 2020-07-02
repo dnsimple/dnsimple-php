@@ -14,11 +14,11 @@ class Whoami
     /**
      * @var Account The account, if present
      */
-    public Account $account;
+    public $account;
     /**
      * @var User The user, if present
      */
-    public User $user;
+    public $user;
 
     public function __construct($data)
     {

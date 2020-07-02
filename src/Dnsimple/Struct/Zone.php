@@ -14,27 +14,27 @@ class Zone
     /**
      * @var int The zone ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated account ID in DNSimple
      */
-    public int $accountId;
+    public $accountId;
     /**
      * @var string The zone name
      */
-    public string $name;
+    public $name;
     /**
      * @var bool True if the zone is a reverse zone
      */
-    public bool $reverse;
+    public $reverse;
     /**
      * @var string When the zone was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the zone was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

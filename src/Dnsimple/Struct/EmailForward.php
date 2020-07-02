@@ -12,27 +12,27 @@ class EmailForward
     /**
      * @var int The email forward ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var string The "local part" of the originating email address. Anything to the left of the @ symbol
      */
-    public string $from;
+    public $from;
     /**
      * @var string The full email address to forward to
      */
-    public string $to;
+    public $to;
     /**
      * @var string When the email forward was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the email forward was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

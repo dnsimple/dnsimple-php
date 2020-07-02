@@ -12,27 +12,27 @@ class ServiceSetting
     /**
      * @var string The setting name
      */
-    public string $name;
+    public $name;
     /**
      * @var string The setting label
      */
-    public string $label;
+    public $label;
     /**
      * @var string A suffix to be appended to the setting value
      */
-    public ?string $append;
+    public $append;
     /**
      * @var string The setting description
      */
-    public string $description;
+    public $description;
     /**
      * @var string An example of the setting value
      */
-    public ?string $example;
+    public $example;
     /**
      * @var bool Whether the setting requires a password
      */
-    public bool $password;
+    public $password;
 
     public function __construct($data)
     {

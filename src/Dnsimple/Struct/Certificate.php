@@ -12,59 +12,59 @@ class Certificate
     /**
      * @var int The certificate ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var int The associated contact ID
      */
-    public int $contactId;
+    public $contactId;
     /**
      * @var string The certificate name
      */
-    public string $name;
+    public $name;
     /**
      * @var string The certificate common name
      */
-    public string $commonName;
+    public $commonName;
     /**
      * @var int The years the certificate will last
      */
-    public int $years;
+    public $years;
     /**
      * @var string The certificate CSR
      */
-    public ?string $csr;
+    public $csr;
     /**
      * @var string The certificate state
      */
-    public string $state;
+    public $state;
     /**
      * @var bool True if the certificate is set to auto-renew on expiration
      */
-    public bool $autoRenew;
+    public $autoRenew;
     /**
      * @var array The certificate alternate names
      */
-    public array $alternateNames;
+    public $alternateNames;
     /**
      * @var string The Certificate Authority (CA) that issued the certificate
      */
-    public string $authorityIdentifier;
+    public $authorityIdentifier;
     /**
      * @var string When the certificate was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the certificate was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
     /**
      * @var string When the certificate will expire
      */
-    public ?string $expiresAt;
+    public $expiresAt;
 
     public function __construct($data)
     {

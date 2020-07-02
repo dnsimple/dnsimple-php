@@ -12,7 +12,7 @@ class ZoneFile
     /**
      * @var string The zone file content
      */
-    public string $zone;
+    public $zone;
 
     public function __construct($data)
     {

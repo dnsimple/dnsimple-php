@@ -12,11 +12,11 @@ class DomainPremiumPrice
     /**
      * @var string The domain premium price
      */
-    public string $premiumPrice;
+    public $premiumPrice;
     /**
      * @var string The action (either registration, transfer or renewal)
      */
-    public string $action;
+    public $action;
 
     public function __construct($data)
     {

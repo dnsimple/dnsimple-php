@@ -12,37 +12,37 @@ class DomainTransfer
     /**
      * @var int The domain transfer ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var int The associated registrant (contact) ID
      */
-    public int $registrantId;
+    public $registrantId;
     /**
      * @var string The state of the renewal
      */
-    public string $state;
+    public $state;
     /**
      * @var bool True if the domain auto-renew was requested
      */
-    public bool $autoRenew;
+    public $autoRenew;
     /**
      * @var bool True if the domain WHOIS privacy was requested
      */
-    public bool $whoisPrivacy;
+    public $whoisPrivacy;
 
-    public ?string $statusDescription;
+    public $statusDescription;
     /**
      * @var string When the domain transfer was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the domain renewal was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

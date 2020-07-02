@@ -20,19 +20,19 @@ class Pagination
     /**
      * @var int The page currently returned (default: 1)
      */
-    public int $currentPage;
+    public $currentPage;
     /**
      * @var int The number of entries returned per page (default: 30)
      */
-    public int $perPage;
+    public $perPage;
     /**
      * @var int The total number of entries available in the entire collection
      */
-    public int $totalEntries;
+    public $totalEntries;
     /**
      * @var int The total number of pages available given the current per_page value
      */
-    public int $totalPages;
+    public $totalPages;
 
     public function __construct($data)
     {

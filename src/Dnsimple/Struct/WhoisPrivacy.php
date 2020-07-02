@@ -12,27 +12,27 @@ class WhoisPrivacy
     /**
      * @var int The whois privacy ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var string The date the whois privacy will expire on
      */
-    public ?string $expiresOn;
+    public $expiresOn;
     /**
      * @var bool Whether the whois privacy is enabled for the domain
      */
-    public ?bool $enabled;
+    public $enabled;
     /**
      * @var string When the whois privacy was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the whois privacy was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

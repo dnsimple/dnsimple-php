@@ -12,75 +12,75 @@ class Contact
     /**
      * @var int The contact ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated account ID
      */
-    public int $accountId;
+    public $accountId;
     /**
      * @var string The label to represent the contact
      */
-    public ?string $label;
+    public $label;
     /**
      * @var string The contact first name
      */
-    public string $firstName;
+    public $firstName;
     /**
      * @var string The contact last name
      */
-    public string $lastName;
+    public $lastName;
     /**
      * @var string The contact's job title
      */
-    public ?string $jobTitle;
+    public $jobTitle;
     /**
      * @var string The name of the organization in which the contact works
      */
-    public ?string $organizationName;
+    public $organizationName;
     /**
      * @var string The contact email address
      */
-    public string $email;
+    public $email;
     /**
      * @var string The contact phone number
      */
-    public string $phone;
+    public $phone;
     /**
      * @var string The contact fax number (may be omitted)
      */
-    public ?string $fax;
+    public $fax;
     /**
      * @var string The contact street address
      */
-    public string $address1;
+    public $address1;
     /**
      * @var string Apartment or suite number
      */
-    public ?string $address2;
+    public $address2;
     /**
      * @var string The city name
      */
-    public string $city;
+    public $city;
     /**
      * @var string The state or province name
      */
-    public string $stateProvince;
+    public $stateProvince;
     /**
      * @var string The contact postal code
      */
-    public string $postalCode;
+    public $postalCode;
     /**
      * @var string The contact country (as a 2-character country code)
      */
-    public string $country;
+    public $country;
     /**
      * @var string When the contact was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the contact was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

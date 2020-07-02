@@ -12,31 +12,31 @@ class CertificateRenewal
     /**
      * @var int The certificate renewal ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The old certificate ID
      */
-    public int $oldCertificateId;
+    public $oldCertificateId;
     /**
      * @var int The new certificate ID
      */
-    public int $newCertificateId;
+    public $newCertificateId;
     /**
      * @var string The certificate renewal state
      */
-    public string $state;
+    public $state;
     /**
      * @var bool True if the certificate is requested to auto-renew
      */
-    public bool $autoRenew;
+    public $autoRenew;
     /**
      * @var string When the certificate renewal was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the certificate renewal was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

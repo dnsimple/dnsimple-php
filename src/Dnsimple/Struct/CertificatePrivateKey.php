@@ -12,7 +12,7 @@ class CertificatePrivateKey
     /**
      * @var string The certificate private key
      */
-    public string $privateKey;
+    public $privateKey;
 
     public function __construct($data)
     {

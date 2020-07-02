@@ -6,9 +6,9 @@ namespace Dnsimple\Struct;
 
 class Dnssec
 {
-    public bool $enabled;
-    public string $createdAt;
-    public string $updatedAt;
+    public $enabled;
+    public $createdAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

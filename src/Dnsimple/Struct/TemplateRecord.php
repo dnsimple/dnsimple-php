@@ -12,39 +12,39 @@ class TemplateRecord
     /**
      * @var int The template record ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The template ID in DNSimple
      */
-    public int $templateId;
+    public $templateId;
     /**
      * @var string The template record name (without the domain name)
      */
-    public string $name;
+    public $name;
     /**
      * @var string The plain-text template record content
      */
-    public string $content;
+    public $content;
     /**
      * @var int The template record TTL value
      */
-    public int $ttl;
+    public $ttl;
     /**
      * @var int|null The priority value, if the type of template record accepts a priority
      */
-    public ?int $priority;
+    public $priority;
     /**
      * @var string The type of template record, in uppercase
      */
-    public string $type;
+    public $type;
     /**
      * @var string When the template record was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the template record was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

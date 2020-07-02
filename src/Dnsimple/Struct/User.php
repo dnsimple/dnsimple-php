@@ -14,19 +14,19 @@ class User
     /**
      * @var int The ID of the user in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var string The users email
      */
-    public string $email;
+    public $email;
     /**
      * @var string When the user was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the user was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

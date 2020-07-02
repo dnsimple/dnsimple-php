@@ -12,15 +12,15 @@ class DomainCheck
     /**
      * @var string The domain name
      */
-    public string $domain;
+    public $domain;
     /**
      * @var bool True if the domain is available
      */
-    public bool $available;
+    public $available;
     /**
      * @var bool True if the domain is a premium domain
      */
-    public bool $premium;
+    public $premium;
 
     public function __construct($data)
     {

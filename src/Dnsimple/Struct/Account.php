@@ -14,23 +14,23 @@ class Account
     /**
      * @var int The account ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var string The account email
      */
-    public string $email;
+    public $email;
     /**
      * @var string The identifier of the plan the account is subscribed to
      */
-    public string $planIdentifier;
+    public $planIdentifier;
     /**
      * @var string When the account was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the account was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

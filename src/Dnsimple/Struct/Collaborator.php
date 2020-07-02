@@ -14,39 +14,39 @@ class Collaborator
     /**
      * @var int The collaborator ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var string The associated domain name
      */
-    public string $domainName;
+    public $domainName;
     /**
      * @var int|null The user ID (if the collaborator accepted the invitation).
      */
-    public ?int $userId;
+    public $userId;
     /**
      * @var string The user email
      */
-    public string $userEmail;
+    public $userEmail;
     /**
      * @var bool Invitation
      */
-    public bool $invitation;
+    public $invitation;
     /**
      * @var string When the collaborator was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the collaborator was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
     /**
      * @var string|null When the collaborator accepted the invitation
      */
-    public ?string $acceptedAt;
+    public $acceptedAt;
 
     public function __construct($data)
     {

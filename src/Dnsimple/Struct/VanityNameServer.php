@@ -12,27 +12,27 @@ class VanityNameServer
     /**
      * @var int The vanity name server ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var string The vanity name server name
      */
-    public string $name;
+    public $name;
     /**
      * @var string he vanity name server IPv4
      */
-    public string $ipv4;
+    public $ipv4;
     /**
      * @var string The vanity name server IPv6
      */
-    public string $ipv6;
+    public $ipv6;
     /**
      * @var string When the vanity name server was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the vanity name server was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

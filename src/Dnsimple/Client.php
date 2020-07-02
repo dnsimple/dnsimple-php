@@ -52,68 +52,72 @@ class Client
     /**
      * @var string $accessToken the bearer authentication token
      */
-    private string $accessToken;
+    private $accessToken;
+
+    /**
+     * @var string $customUserAgent a custom user agent name
+     */
+    private $customUserAgent = "";
 
     /**
      * The http client we are using to send requests to the DNSimple API.
      *
      * @var GuzzleHttp\Client $httpClient the HTTP client
      */
-    private GuzzleHttp\Client $httpClient;
+    private $httpClient;
 
     /**
      * @var Identity The service handling the Identity API
      */
-    public Identity $Identity;
+    public $Identity;
     /**
      * @var Accounts The service handling the Accounts API
      */
-    public Accounts $Accounts;
+    public $Accounts;
     /**
      * @var Domains The service handling the Domains API
      */
-    public Domains $Domains;
+    public $Domains;
     /**
      * @var Registrar The service handling the Registrar API
      */
-    public Registrar $Registrar;
+    public $Registrar;
     /**
      * @var Zones The service handling the Zones API
      */
-    public Zones $Zones;
+    public $Zones;
     /**
      * @var Oauth The service handling the Oauth API
      */
-    public Oauth $Oauth;
+    public $Oauth;
     /**
      * @var Tlds The service handling the Tlds API
      */
-    public Tlds $Tlds;
+    public $Tlds;
     /**
      * @var Services The service handling the Services API
      */
-    public Services $Services;
+    public $Services;
     /**
      * @var Templates The service handling the Templates API
      */
-    public Templates $Templates;
+    public $Templates;
     /**
      * @var VanityNameServers The service handling the Vanity Name Servers API
      */
-    public VanityNameServers $VanityNameServers;
+    public $VanityNameServers;
     /**
      * @var Webhooks The service handling the Webhooks API
      */
-    public Webhooks $Webhooks;
-    private string $customUserAgent = "";
+    public $Webhooks;
     /**
-     * @var Certificates
+     * @var Certificates The service handling the Certificates API
      */
-    public Certificates $Certificates;
+    public $Certificates;
     /**
-     * @var Contacts
+     * @var Contacts The service handling the Contacts API
      */
-    public Contacts $Contacts;
+    public $Contacts;
 
     public function __construct($accessToken, array $config = array())
     {

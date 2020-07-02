@@ -18,19 +18,19 @@
         }
     ],
     "require": {
-        "php": "7.4.7",
+        "php": ">=7.2",
         "guzzlehttp/guzzle": "^6.5",
         "ext-json": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.2"
+        "phpunit/phpunit": "^8.5.8"
     },
     "autoload": {
         "classmap": [
             "src/"
         ],
         "psr-4": {
-            "Dnsimple\\": "src/"
+            "\\Dnsimple": "src/"
         }
     }
 }

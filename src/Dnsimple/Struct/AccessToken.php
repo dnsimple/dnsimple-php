@@ -14,19 +14,19 @@ class AccessToken
     /**
      * @var int The account ID in DNSimple this token belongs to
      */
-    public int $accountId;
+    public $accountId;
     /**
      * @var string The token type
      */
-    public string $tokenType;
+    public $tokenType;
     /**
      * @var string The token you can use to authenticate
      */
-    public string $accessToken;
+    public $accessToken;
     /**
      * @var string|null The token scope (not used for now)
      */
-    public ?string $scope;
+    public $scope;
 
     public function __construct($data)
     {

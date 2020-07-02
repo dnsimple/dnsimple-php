@@ -12,51 +12,51 @@ class ZoneRecord
     /**
      * @var int The record ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var string The associated zone ID in DNSimple
      */
-    public string $zoneId;
+    public $zoneId;
     /**
      * @var int|null The ID of the parent record, if this record is dependent on another record.
      */
-    public ?int $parentId;
+    public $parentId;
     /**
      * @var string The record name (without the domain name)
      */
-    public string $name;
+    public $name;
     /**
      * @var string The plain-text record content
      */
-    public string $content;
+    public $content;
     /**
      * @var int The TTL value
      */
-    public int $ttl;
+    public $ttl;
     /**
      * @var int|null The priority value, if the type of record accepts a priority
      */
-    public ?int $priority;
+    public $priority;
     /**
      * @var string The type of record, in uppercase
      */
-    public string $type;
+    public $type;
     /**
      * @var array The regions where the record is propagated. This is optional
      */
-    public array $regions;
+    public $regions;
     /**
      * @var bool True if this is a system record created by DNSimple. System records are read-only.
      */
-    public bool $systemRecord;
+    public $systemRecord;
     /**
      * @var string When the record was created in DNSimple.
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the record was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

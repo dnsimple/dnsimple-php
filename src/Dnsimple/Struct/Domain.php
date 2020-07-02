@@ -14,47 +14,47 @@ class Domain
     /**
      * @var int The domain ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated account ID in DNSimple
      */
-    public int $accountId;
+    public $accountId;
     /**
      * @var int|null The associated registrant (contact) ID in DNSimple
      */
-    public ?int $registrantId;
+    public $registrantId;
     /**
      * @var string The domain name
      */
-    public string $name;
+    public $name;
     /**
      * @var string The domain unicode name
      */
-    public string $unicodeName;
+    public $unicodeName;
     /**
      * @var string The domain state
      */
-    public string $state;
+    public $state;
     /**
      * @var bool True if the domain is set to auto-renew, false otherwise
      */
-    public bool $autoRenew;
+    public $autoRenew;
     /**
      * @var bool True if the domain WHOIS privacy is enabled, false otherwise
      */
-    public bool $privateWhois;
+    public $privateWhois;
     /**
      * @var string|null The date the domain will expire
      */
-    public ?string $expiresOn;
+    public $expiresOn;
     /**
      * @var string When the domain was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the domain was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

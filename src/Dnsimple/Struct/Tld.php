@@ -12,39 +12,39 @@ class Tld
     /**
      * @var string The TLD in DNSimple
      */
-    public string $tld;
+    public $tld;
     /**
      * @var int The TLD type
      */
-    public int $tldType;
+    public $tldType;
     /**
      * @var bool True if Whois Privacy Protection is available
      */
-    public bool $whoisPrivacy;
+    public $whoisPrivacy;
     /**
      * @var bool True if TLD requires use of auto-renewal for renewals
      */
-    public bool $autoRenewOnly;
+    public $autoRenewOnly;
     /**
      * @var bool True if IDN is available
      */
-    public bool $idn;
+    public $idn;
     /**
      * @var int The minimum registration period in years
      */
-    public int $minimumRegistration;
+    public $minimumRegistration;
     /**
      * @var bool True if DNSimple supports registrations for this TLD
      */
-    public bool $registrationEnabled;
+    public $registrationEnabled;
     /**
      * @var bool True if DNSimple supports renewals for this TLD
      */
-    public bool $renewalEnabled;
+    public $renewalEnabled;
     /**
      * @var bool True if DNSimple supports inbound transfers for this TLD
      */
-    public bool $transferEnabled;
+    public $transferEnabled;
 
     public function __construct($data)
     {

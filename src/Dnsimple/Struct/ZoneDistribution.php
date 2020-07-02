@@ -12,7 +12,7 @@ class ZoneDistribution
     /**
      * @var bool True if the zone is properly distributed across all DNSimple name servers.
      */
-    public bool $distributed;
+    public $distributed;
 
     public function __construct($data)
     {

@@ -12,31 +12,31 @@ class Template
     /**
      * @var int The template ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated account ID
      */
-    public int $accountId;
+    public $accountId;
     /**
      * @var string The template name
      */
-    public string $name;
+    public $name;
     /**
      * @var string The string ID for the template
      */
-    public string $sid;
+    public $sid;
     /**
      * @var string The template description
      */
-    public string $description;
+    public $description;
     /**
      * @var string When the template was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the template was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
 
     public function __construct($data)
     {

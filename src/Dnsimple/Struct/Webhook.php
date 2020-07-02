@@ -12,11 +12,11 @@ class Webhook
     /**
      * @var int The webhook ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var string The callback URL
      */
-    public string $url;
+    public $url;
 
     public function __construct($data)
     {

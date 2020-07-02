@@ -12,31 +12,31 @@ class DomainPush
     /**
      * @var int The domain push ID in DNSimple
      */
-    public int $id;
+    public $id;
     /**
      * @var int The associated domain ID
      */
-    public int $domainId;
+    public $domainId;
     /**
      * @var int|null The associated contact ID
      */
-    public ?int $contactId;
+    public $contactId;
     /**
      * @var int The associated account ID
      */
-    public int $accountId;
+    public $accountId;
     /**
      * @var string When the domain push was created in DNSimple
      */
-    public string $createdAt;
+    public $createdAt;
     /**
      * @var string When the domain push was last updated in DNSimple
      */
-    public string $updatedAt;
+    public $updatedAt;
     /**
      * @var string|null When the domain push was accepted in DNSimple
      */
-    public ?string $acceptedAt;
+    public $acceptedAt;
 
     public function __construct($data)
     {
