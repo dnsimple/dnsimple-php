@@ -2,8 +2,6 @@
 coverage:
   precision: 1
   round: down
-
-coverage:
   status:
     patch:
       default: false

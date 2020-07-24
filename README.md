@@ -17,18 +17,19 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 ## Usage
 
 ```php
-$client = new \Dnsimple\Client("API_TOKEN");
+use Dnsimple\Client;
 
-$identity = new \Dnsimple\IdentityService($client);
-$response = $identity->whoami();
-print_r($response->getData());
+$client = new Client("API_TOKEN");
 
-$domains  = new \Dnsimple\DomainsService($client);
-$response = $domains->listDomains();
-print_r($response->getData());
+$response = $client->identity->whoami();
+$whoami = $response->getData();
+$account_id = $whoami->account->id;
+
+$response = $client->domains->listDomains($account_id);
+$domains = $response->getData();
 ```
 
 
 ## License
 
-Copyright (c) 2015-2018 DNSimple Corporation. This is Free Software distributed under the MIT license.
+Copyright (c) 2015-2020 DNSimple Corporation. This is Free Software distributed under the MIT license.
