@@ -5,3 +5,6 @@ coverage:
   status:
     patch:
       default: false
+
+# https://docs.codecov.io/docs/pull-request-comments#section-requiring-changes
+comment: off
