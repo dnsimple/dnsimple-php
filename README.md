@@ -11,7 +11,7 @@ The code is tested with an automated test suite connected to a continuous integr
 
 A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
-[![Build Status](https://travis-ci.org/dnsimple/dnsimple-php.svg)](https://travis-ci.org/dnsimple/dnsimple-php)
+[![Build Status](https://travis-ci.com/dnsimple/dnsimple-php.svg?branch=master)](https://travis-ci.com/dnsimple/dnsimple-php)
 
 
 ## Usage
