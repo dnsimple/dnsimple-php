@@ -7,14 +7,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Simone Carletti",
-            "email": "simone.carletti@dnsimple.com",
+            "name": "DNSimple",
+            "email": "support@dnsimple.com",
             "homepage": "https://developer.dnsimple.com"
-        },
-        {
-            "name": "Enrique Comba Riepenhausen",
-            "email": "enrique@ecomba.pro",
-            "homepage": "http://ecomba.pro"
         }
     ],
     "require": {
