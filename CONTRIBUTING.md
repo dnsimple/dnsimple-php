@@ -38,16 +38,21 @@ The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is
 2. Run the test suite and ensure all tests pass: `./vendor/bin/phpunit`
 3. Finalize the `## master` section in `CHANGELOG.md` assigning the version.
 4. Commit and push the changes
+
     ```shell
     git commit -a -m "Release $VERSION"
     git push origin master
     ```
+
 5. Wait for the CI to complete.
 6. Create a signed tag.
+
     ```shell
     git tag -a v$VERSION -s -m "Release $VERSION"
     git push origin --tags
     ```
+
+7. Wait for Packagist to pull the updates. Verify [dnsimple/dnsimple](https://packagist.org/packages/dnsimple/dnsimple) package is updated with the new release.
 
 ## Testing
 
