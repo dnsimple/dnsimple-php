@@ -1,7 +1,7 @@
 {
     "name": "dnsimple/dnsimple",
     "type": "library",
-    "description": "The DNSimple API client for PHP",
+    "description": "The DNSimple API client for PHP.",
     "keywords": ["dnsimple"],
     "homepage": "https://github.com/dnsimple/dnsimple-php",
     "license": "MIT",
