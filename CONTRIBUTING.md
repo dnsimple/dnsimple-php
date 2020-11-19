@@ -27,7 +27,7 @@ $ php composer.phar install
 To run the test suite:
 
 ```shell
-./vendor/bin/phpunit
+./vendor/bin/phpunit tests
 ```
 
 ## Releasing
