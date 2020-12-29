@@ -37,7 +37,7 @@ The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is
 1. Run the test suite and ensure all the tests pass.
 
     ```shell
-    ./vendor/bin/phpunit
+    ./vendor/bin/phpunit tests
     ```
 
 1. Finalize the `## master` section in `CHANGELOG.md` assigning the version.
