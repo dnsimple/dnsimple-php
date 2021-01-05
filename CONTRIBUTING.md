@@ -32,6 +32,8 @@ To run the test suite:
 
 ## Releasing
 
+:bulb: A new release is not necessary for changes to `composer.lock` because [they do not have an effect on projects that depend on `dnsimple-php`](https://getcomposer.org/doc/02-libraries.md#lock-file).
+
 The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is a `MAJOR.MINOR.BUGFIX` release such as `1.2.0`.
 
 1. Run the test suite and ensure all the tests pass.
