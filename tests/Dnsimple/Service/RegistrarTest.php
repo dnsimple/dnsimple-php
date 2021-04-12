@@ -45,6 +45,27 @@ class RegistrarTest extends ServiceTestCase
         $this->service->getDomainPremiumPrice(1010, "example.com");
     }
 
+    public function testGetDomainPrices()
+    {
+      $this->mockResponseWith("getDomainPrices/success");
+      $prices = $this->service->getDomainPrices(1010, "bingo.pizza")->getData();
+
+      self::assertEquals("bingo.pizza", $prices->domain);
+      self::assertEquals(true, $prices->premium);
+      self::assertEquals(20.0, $prices->registrationPrice);
+      self::assertEquals(20.0, $prices->renewalPrice);
+      self::assertEquals(20.0, $prices->transferPrice);
+    }
+
+    public function testGetDomainPricesFailure()
+    {
+      $this->mockResponseWith("getDomainPrices/failure");
+      $this->expectException(DnsimpleException::class);
+      $this->expectExceptionMessage("TLD .PINEAPPLE is not supported");
+
+      $this->service->getDomainPrices(1010, "bingo.pineapple");
+    }
+
     public function testRegisterDomain()
     {
         $this->mockResponseWith("registerDomain/success");
