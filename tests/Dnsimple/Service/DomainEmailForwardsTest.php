@@ -73,14 +73,14 @@ class DomainEmailForwardsTest extends ServiceTestCase
     public function testGetEmailForward()
     {
         $this->mockResponseWith("getEmailForward/success");
-        $emailForward = $this->service->getEmailForward(1010, 228963, 17706)->getData();
+        $emailForward = $this->service->getEmailForward(1010, 228963, 41872)->getData();
 
-        self::assertEquals(17706, $emailForward->id);
-        self::assertEquals(228963, $emailForward->domainId);
-        self::assertEquals("jim@a-domain.com", $emailForward->from);
-        self::assertEquals("jim@another.com", $emailForward->to);
-        self::assertEquals("2016-02-04T14:26:50Z", $emailForward->createdAt);
-        self::assertEquals("2016-02-04T14:26:50Z", $emailForward->updatedAt);
+        self::assertEquals(41872, $emailForward->id);
+        self::assertEquals(235146, $emailForward->domainId);
+        self::assertEquals("example@dnsimple.xyz", $emailForward->from);
+        self::assertEquals("example@example.com", $emailForward->to);
+        self::assertEquals("2021-01-25T13:54:40Z", $emailForward->createdAt);
+        self::assertEquals("2021-01-25T13:54:40Z", $emailForward->updatedAt);
     }
 
     public function testDeleteEmailForward()
