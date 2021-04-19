@@ -9,6 +9,7 @@ use Dnsimple\Struct\DomainCheck;
 use Dnsimple\Struct\DomainPremiumPrice;
 use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
+use Dnsimple\Struct\DomainPrice;
 use Dnsimple\Struct\DomainTransfer;
 use Dnsimple\Struct\VanityNameServer;
 use Dnsimple\Struct\WhoisPrivacy;
@@ -53,6 +54,22 @@ class Registrar extends ClientService
         $options = ["action" => $action];
         $response = $this->get("/{$account}/registrar/domains/{$domain}/premium_price", $options);
         return new Response($response, DomainPremiumPrice::class);
+    }
+
+    /**
+     * Get prices for a domain.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/#getDomainPrices
+     *
+     * @param int $account The account id
+     * @param string $domain The domain name
+     * @return Response The domain price response
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function getDomainPrices($account, $domain): Response
+    {
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/prices");
+        return new Response($response, DomainPrice::class);
     }
 
     /**
