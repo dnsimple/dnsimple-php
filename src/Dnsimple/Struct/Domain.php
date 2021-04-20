@@ -44,9 +44,9 @@ class Domain
      */
     public $privateWhois;
     /**
-     * @var string|null The date the domain will expire
+     * @var string|null The timestamp when domain will expire
      */
-    public $expiresOn;
+    public $expiresAt;
     /**
      * @var string When the domain was created in DNSimple
      */
@@ -66,7 +66,7 @@ class Domain
         $this->state = $data->state;
         $this->autoRenew = $data->auto_renew;
         $this->privateWhois = $data->private_whois;
-        $this->expiresOn = $data->expires_on;
+        $this->expiresAt = $data->expires_at;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
     }
