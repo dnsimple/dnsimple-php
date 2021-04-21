@@ -42,12 +42,12 @@ The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is
     ./vendor/bin/phpunit tests
     ```
 
-1. Finalize the `## master` section in `CHANGELOG.md` assigning the version.
+1. Finalize the `## main` section in `CHANGELOG.md` assigning the version.
 1. Commit and push the changes
 
     ```shell
     git commit -a -m "Release $VERSION"
-    git push origin master
+    git push origin main
     ```
 
 1. Wait for the CI to complete.
