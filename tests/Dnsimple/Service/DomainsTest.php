@@ -96,6 +96,7 @@ class DomainsTest extends ServiceTestCase
         self::assertEquals(181984, $data->id);
         self::assertEquals(1385, $data->accountId);
         self::assertEquals(2715, $data->registrantId);
+        self::assertEquals("2021-06-05T02:15:00Z", $data->expiresAt);
     }
 
     public function testDeleteDomain()
