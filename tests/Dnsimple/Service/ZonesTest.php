@@ -1,6 +1,6 @@
 <?php
 
-namespace Dnsimple\ Service;
+namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
