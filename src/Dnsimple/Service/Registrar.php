@@ -48,6 +48,7 @@ class Registrar extends ClientService
      * @param string $action Optional action between "registration", "renewal", and "transfer". If omitted, it defaults to "registration".
      * @return Response The domain premium price
      * @throws DnsimpleException When something goes wrong
+     * @deprecated getDomainPremiumPrice has been deprecated, use getDomainPrices instead
      */
     public function getDomainPremiumPrice($account, $domain, $action = "registration"): Response
     {
