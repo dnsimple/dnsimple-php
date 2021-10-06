@@ -35,6 +35,10 @@ class DelegationSignerRecord
      */
     public $keytag;
     /**
+     * @var string The public key that references the corresponding DNSKEY record
+     */
+    public $publicKey;
+    /**
      * @var string When the delegation signing record was created in DNSimple
      */
     public $createdAt;
@@ -51,6 +55,7 @@ class DelegationSignerRecord
         $this->digest = $data->digest;
         $this->digestType = $data->digest_type;
         $this->keytag = $data->keytag;
+        $this->publicKey = $data->public_key;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
     }
