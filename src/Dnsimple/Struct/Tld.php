@@ -45,6 +45,10 @@ class Tld
      * @var bool True if DNSimple supports inbound transfers for this TLD
      */
     public $transferEnabled;
+    /**
+     * @var string Type of data interface required for DNSSEC for this TLD
+     */
+    public $dnssecInterfaceType;
 
     public function __construct($data)
     {
@@ -57,5 +61,6 @@ class Tld
         $this->registrationEnabled = $data->registration_enabled;
         $this->renewalEnabled = $data->renewal_enabled;
         $this->transferEnabled = $data->transfer_enabled;
+        $this->dnssecInterfaceType = $data->dnssec_interface_type;
     }
 }

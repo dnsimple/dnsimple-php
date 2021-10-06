@@ -74,6 +74,7 @@ class TldsTest extends ServiceTestCase
         self::assertTrue($tld->registrationEnabled);
         self::assertTrue($tld->renewalEnabled);
         self::assertTrue($tld->transferEnabled);
+        self::assertEquals("ds", $tld->dnssecInterfaceType);
     }
 
     public function testGetTldExtendedAttributes()

@@ -91,6 +91,7 @@ class DomainDelegationSignerRecordsTest extends ServiceTestCase
         self::assertEquals("C1F6E04A5A61FBF65BF9DC8294C363CF11C89E802D926BDAB79C55D27BEFA94F", $record->digest);
         self::assertEquals(2, $record->digestType);
         self::assertEquals(44620, $record->keytag);
+        self::assertEquals(null, $record->publicKey);
         self::assertEquals("2017-03-03T13:49:58Z", $record->createdAt);
         self::assertEquals("2017-03-03T13:49:58Z", $record->updatedAt);
     }
