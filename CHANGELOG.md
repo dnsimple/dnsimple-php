@@ -3,6 +3,9 @@
 This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
+
+## 0.4.0
+
 - CHANGED: Add support for DNSSEC key-data interface (dnsimple/dnsimple-php#29).
 
 ## 0.3.1
