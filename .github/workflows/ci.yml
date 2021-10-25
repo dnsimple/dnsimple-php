@@ -54,9 +54,9 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
-    - run: vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
   slack-workflow-status:
     if: always()
