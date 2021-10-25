@@ -14,7 +14,6 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
 [![Build Status](https://github.com/dnsimple/dnsimple-php/actions/workflows/ci.yml/badge.svg)](https://github.com/dnsimple/dnsimple-php/actions/workflows/ci.yml)
 
-
 ## Usage
 
 ```php
