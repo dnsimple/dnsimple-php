@@ -6,6 +6,7 @@ use GuzzleHttp;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Message;
 use PHPUnit\Framework\TestCase;
 
 abstract class ServiceTestCase extends TestCase
@@ -24,7 +25,7 @@ abstract class ServiceTestCase extends TestCase
 
     protected function fixture($fixture): Response
     {
-        return GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__ . "/../../fixtures/v2/api/" . $fixture . ".http"));
+        return Message::parseResponse(file_get_contents(__DIR__ . "/../../fixtures/v2/api/" . $fixture . ".http"));
     }
 
     protected function mockResponseWith($fixture) : void

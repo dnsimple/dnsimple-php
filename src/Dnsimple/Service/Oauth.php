@@ -7,7 +7,7 @@ use Dnsimple\Client;
 use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\AccessToken;
-use function GuzzleHttp\Psr7\build_query;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * The Registrar Service handles the oauth endpoint of the DNSimple API.
@@ -44,6 +44,6 @@ class Oauth extends ClientService
      */
     public function authorizeUrl($clientId, array $attributes = []): string
     {
-        return rtrim(Client::BASE_URL . "/oauth/authorize?client_id={$clientId}&response_type=code&" . build_query($attributes), "&");
+        return rtrim(Client::BASE_URL . "/oauth/authorize?client_id={$clientId}&response_type=code&" . Query::build($attributes), "&");
     }
 }
