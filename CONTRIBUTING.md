@@ -38,35 +38,26 @@ To run the test suite:
 The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is a `MAJOR.MINOR.BUGFIX` release such as `1.2.0`.
 
 1. Set the version in `Client.php`:
-
 ```php
 const VERSION = "$VERSION";
 ```
-
 1. Run the test suite and ensure all the tests pass.
-
     ```shell
     ./vendor/bin/phpunit tests
     ```
-
 1. Finalize the `## main` section in `CHANGELOG.md` assigning the version.
- 
 1. Commit and push the changes
-
     ```shell
     git commit -a -m "Release $VERSION"
     git push origin main
     ```
-
 1. Wait for the CI to complete.
-
 1. Create a signed tag.
 
     ```shell
     git tag -a v$VERSION -s -m "Release $VERSION"
     git push origin --tags
     ```
-
 1. Wait for Packagist to pull the updates. Verify [dnsimple/dnsimple](https://packagist.org/packages/dnsimple/dnsimple) package is updated with the new release.
 
 ## Testing
