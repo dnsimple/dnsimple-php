@@ -37,6 +37,12 @@ To run the test suite:
 
 The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is a `MAJOR.MINOR.BUGFIX` release such as `1.2.0`.
 
+1. Set the version in `Client.php`:
+
+```php
+const VERSION = "$VERSION";
+```
+
 1. Run the test suite and ensure all the tests pass.
 
     ```shell
@@ -44,6 +50,7 @@ The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is
     ```
 
 1. Finalize the `## main` section in `CHANGELOG.md` assigning the version.
+ 
 1. Commit and push the changes
 
     ```shell
@@ -52,6 +59,7 @@ The following instructions uses `$VERSION` as a placeholder, where `$VERSION` is
     ```
 
 1. Wait for the CI to complete.
+
 1. Create a signed tag.
 
     ```shell
