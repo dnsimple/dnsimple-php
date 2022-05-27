@@ -19,6 +19,7 @@ class Certificate
     public $domainId;
     /**
      * @var int The associated contact ID
+     * @deprecated
      */
     public $contactId;
     /**
