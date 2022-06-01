@@ -4,6 +4,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+- CHANGED: Deprecate Certificate's `contact_id` (dnsimple/dnsimple-php#46)
 - CHANGED: Add documentation to CONTRIBUTING.md
 - FIXES: Version number of the client
 
