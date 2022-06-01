@@ -37,7 +37,7 @@ class CertificatesTest extends ServiceTestCase
     public function testListCertificatesSupportsSorting()
     {
         $this->mockResponseWith("listCertificates/success");
-        $this->service->listCertificates(1010, "example.com", ["sort"=>"id:asc,common_name:desc,expiration:asc"]);
+        $this->service->listCertificates(1010, "example.com", ["sort" => "id:asc,common_name:desc,expiration:asc"]);
 
         self::assertEquals("sort=id%3Aasc%2Ccommon_name%3Adesc%2Cexpiration%3Aasc", $this->queryContent());
     }
@@ -109,9 +109,7 @@ class CertificatesTest extends ServiceTestCase
     {
         $this->mockResponseWith("purchaseLetsencryptCertificate/success");
 
-        $attributes = [
-            "contact_id" => 42
-        ];
+        $attributes = [];
         $certificatePurchase = $this->service->purchaseLetsEncryptCertificate(1010, "example.com", $attributes)->getData();
 
         self::assertInstanceOf(CertificatePurchase::class, $certificatePurchase);
