@@ -3,6 +3,7 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
+use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Response;
 use Dnsimple\Struct\Contact;
 
@@ -132,7 +133,7 @@ class ContactsTest extends ServiceTestCase
     public function testDeleteContactInUse()
     {
         $this->mockResponseWith("deleteContact/error-contact-in-use");
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("The contact cannot be deleted because it's currently in use");
 
         $this->service->deleteContact(1010, 1);

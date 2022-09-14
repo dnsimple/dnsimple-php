@@ -3,6 +3,8 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
+use Dnsimple\Exceptions\NotFoundException;
+use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Struct\WhoisPrivacy;
 
 class RegistrarWhoisPrivacyTest extends ServiceTestCase
@@ -71,7 +73,7 @@ class RegistrarWhoisPrivacyTest extends ServiceTestCase
     public function testRenewWhoisPrivacyDuplicatedOrder()
     {
         $this->mockResponseWith("renewWhoisPrivacy/whois-privacy-duplicated-order");
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("The whois privacy for example.com has just been renewed, a new renewal cannot be started at this time");
 
         $this->service->renewWhoisPrivacy(1010, "example.com");
@@ -80,7 +82,7 @@ class RegistrarWhoisPrivacyTest extends ServiceTestCase
     public function testRenewWhoisPrivacyNotFound()
     {
         $this->mockResponseWith("renewWhoisPrivacy/whois-privacy-not-found");
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("WHOIS privacy not found for example.com");
 
         $this->service->renewWhoisPrivacy(1010, "example.com");

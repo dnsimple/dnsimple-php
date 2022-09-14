@@ -3,6 +3,7 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
+use Dnsimple\Exceptions\BadRequestException;
 
 class OauthTest extends ServiceTestCase
 {
@@ -37,7 +38,7 @@ class OauthTest extends ServiceTestCase
     {
         $this->mockResponseWith("oauthAccessToken/error-invalid-request");
 
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
 
         $attributes = [ "code" => "the_code", "client_id" => "my-super-service", "client_secret" => "shhhh",
             "state" => "some_state", "redirect_uri" => "the_uri" ];
