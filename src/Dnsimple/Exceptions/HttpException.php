@@ -14,9 +14,10 @@ class HttpException extends DnsimpleException
     /**
      * Construct exception from response object.
      * @param ResponseInterface $response
+     * @param Exception $previous
      * @return HttpException
      */
-    public static function fromResponse(ResponseInterface $response)
+    public static function fromResponse(ResponseInterface $response, \Exception $previous = null)
     {
         $message = $response->getReasonPhrase();
         $code = $response->getStatusCode();
@@ -24,7 +25,7 @@ class HttpException extends DnsimpleException
         if (property_exists($json, "message")) {
             $message = $json->message;
         }
-        $exception = new static($message, $code);
+        $exception = new static($message, $code, $previous);
         $exception->setResponse($response);
         return $exception;
     }
