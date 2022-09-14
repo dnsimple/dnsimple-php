@@ -34,7 +34,7 @@ class HttpException extends DnsimpleException
      * The response to the request.
      * @var ResponseInterface|null
      */
-    protected ?ResponseInterface $response = null;
+    protected $response = null;
 
     /**
      * @var array Errors loaded from the response
