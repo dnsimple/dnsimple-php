@@ -3,7 +3,6 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
-use Dnsimple\Exceptions\NotFoundException;
 use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Struct\WhoisPrivacy;
 
