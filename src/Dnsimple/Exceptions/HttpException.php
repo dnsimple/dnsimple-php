@@ -22,7 +22,7 @@ class HttpException extends DnsimpleException
         $message = $response->getReasonPhrase();
         $code = $response->getStatusCode();
         $json = json_decode($response->getBody());
-        if (property_exists($json, "message")) {
+        if (!empty($json) && property_exists($json, "message")) {
             $message = $json->message;
         }
         $exception = new static($message, $code, $previous);
@@ -37,9 +37,10 @@ class HttpException extends DnsimpleException
     protected $response = null;
 
     /**
-     * @var array Errors loaded from the response
+     * Errors loaded from the response
+     * @var array|null
      */
-    private $errors;
+    private $errors = null;
 
     /**
      * Set the response that caused the exception.
@@ -70,17 +71,16 @@ class HttpException extends DnsimpleException
 
     /**
      * Returns the errors found in the response.
-     *
-     * @return array The errors
+     * @return array|null The errors
      */
-    public function getErrors(): array
+    public function getAttributeErrors()
     {
-      if (empty($this->errors)) {
-          $json = json_decode($this->response->getBody());
-          if (property_exists($json, "errors")) {
-              $this->errors = (array) $json->errors;
-          }
-      }
-      return $this->errors;
+        if (empty($this->errors)) {
+            $json = json_decode($this->response->getBody());
+            if (!empty($json) && property_exists($json, "errors")) {
+                $this->errors = (array) $json->errors;
+            }
+        }
+        return $this->errors;
     }
 }
