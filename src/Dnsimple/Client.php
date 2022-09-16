@@ -2,6 +2,9 @@
 
 namespace Dnsimple;
 
+use Dnsimple\Exceptions\HttpException;
+use Dnsimple\Exceptions\BadRequestException;
+use Dnsimple\Exceptions\NotFoundException;
 use Dnsimple\Service\Accounts;
 use Dnsimple\Service\Certificates;
 use Dnsimple\Service\Contacts;
@@ -236,6 +239,20 @@ class Client
 
         try {
             return $this->httpClient->request($method, $path, $requestOptions);
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+            $exception_map = [
+                400 => BadRequestException::class,
+                404 => NotFoundException::class,
+            ];
+            $response = $e->getResponse();
+
+            if (array_key_exists($response->getStatusCode(), $exception_map)) {
+                $exceptionClass = $exception_map[$response->getStatusCode()];
+            } else {
+                $exceptionClass = HttpException::class;
+            }
+            $exception = $exceptionClass::fromResponse($response);
+            throw $exception;
         } catch (GuzzleException $e) {
             throw new DnsimpleException($e);
         }

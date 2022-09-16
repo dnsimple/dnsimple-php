@@ -3,6 +3,7 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
+use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Struct\DomainCheck;
 use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainTransfer;
@@ -39,7 +40,7 @@ class RegistrarTest extends ServiceTestCase
     public function testGetDomainPremiumPriceFailure()
     {
         $this->mockResponseWith("getDomainPremiumPrice/failure");
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("`example.com` is not a premium domain for registration");
 
         $this->service->getDomainPremiumPrice(1010, "example.com");
@@ -47,23 +48,23 @@ class RegistrarTest extends ServiceTestCase
 
     public function testGetDomainPrices()
     {
-      $this->mockResponseWith("getDomainPrices/success");
-      $prices = $this->service->getDomainPrices(1010, "bingo.pizza")->getData();
+        $this->mockResponseWith("getDomainPrices/success");
+        $prices = $this->service->getDomainPrices(1010, "bingo.pizza")->getData();
 
-      self::assertEquals("bingo.pizza", $prices->domain);
-      self::assertEquals(true, $prices->premium);
-      self::assertEquals(20.0, $prices->registrationPrice);
-      self::assertEquals(20.0, $prices->renewalPrice);
-      self::assertEquals(20.0, $prices->transferPrice);
+        self::assertEquals("bingo.pizza", $prices->domain);
+        self::assertEquals(true, $prices->premium);
+        self::assertEquals(20.0, $prices->registrationPrice);
+        self::assertEquals(20.0, $prices->renewalPrice);
+        self::assertEquals(20.0, $prices->transferPrice);
     }
 
     public function testGetDomainPricesFailure()
     {
-      $this->mockResponseWith("getDomainPrices/failure");
-      $this->expectException(DnsimpleException::class);
-      $this->expectExceptionMessage("TLD .PINEAPPLE is not supported");
+        $this->mockResponseWith("getDomainPrices/failure");
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage("TLD .PINEAPPLE is not supported");
 
-      $this->service->getDomainPrices(1010, "bingo.pineapple");
+        $this->service->getDomainPrices(1010, "bingo.pineapple");
     }
 
     public function testRegisterDomain()
@@ -114,8 +115,8 @@ class RegistrarTest extends ServiceTestCase
         $attributes = [
             "registrant_id" => 2
         ];
-        $this->expectException(DnsimpleException::class);
-        $this->expectExceptionMessage("You must provide an authorization code for the domain");
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage("Validation failed");
 
         $this->service->transferDomain(1010, "example.com", $attributes);
     }
@@ -123,7 +124,7 @@ class RegistrarTest extends ServiceTestCase
     public function testTransferDomainErrorInDnsimple()
     {
         $this->mockResponseWith("transferDomain/error-indnsimple");
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("The domain google.com is already in DNSimple and cannot be added");
 
         $attributes = [
@@ -184,7 +185,7 @@ class RegistrarTest extends ServiceTestCase
     public function testRenewDomainTooEarly()
     {
         $this->mockResponseWith("renewDomain/error-tooearly");
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->expectExceptionMessage("example.com may not be renewed at this time");
 
         $this->service->renewDomain(1010, "example.com", ["period" => 1]);

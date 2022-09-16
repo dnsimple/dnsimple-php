@@ -3,6 +3,7 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
+use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Response;
 use Dnsimple\Struct\DelegationSignerRecord;
 
@@ -76,7 +77,7 @@ class DomainDelegationSignerRecordsTest extends ServiceTestCase
     {
         $this->mockResponseWith("createDelegationSignerRecord/validation-error");
 
-        $this->expectException(DnsimpleException::class);
+        $this->expectException(BadRequestException::class);
         $this->service->createDomainDelegationSignerRecord(1010, 1, []);
     }
 
