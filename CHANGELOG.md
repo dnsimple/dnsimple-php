@@ -4,6 +4,8 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 1.0.0
+
 - BREAKING CHANGES: Wrap `GuzzleHttp\Exception\ClientException` (dnsimple/dnsimple-php#63)
   - **400** http exceptions are wrapped in `BadRequestException`
   - **404** http exceptions are wrapped in `NotFoundException`
