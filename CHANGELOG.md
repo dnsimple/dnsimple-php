@@ -9,6 +9,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
   - **404** http exceptions are wrapped in `NotFoundException`
   - All other **4xx** exceptions are wrapped in `HttpException` which the other classes inherit
   - The new exception classes come with [improved interface](src/Dnsimple/Exceptions/HttpException.php) e.g. `->getAttributeErrors()` to get validation errors.
+- CHANGED: Add support for PHP ^8.0 (dnsimple-php#64)
 - CHANGED: Deprecate Certificate's `contact_id` (dnsimple/dnsimple-php#46)
 - CHANGED: Add documentation to CONTRIBUTING.md
 - FIXES: Version number of the client
