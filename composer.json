@@ -2,7 +2,9 @@
     "name": "dnsimple/dnsimple",
     "type": "library",
     "description": "The DNSimple API client for PHP.",
-    "keywords": ["dnsimple"],
+    "keywords": [
+        "dnsimple"
+    ],
     "homepage": "https://github.com/dnsimple/dnsimple-php",
     "license": "MIT",
     "authors": [
@@ -13,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 || ^8.0",
         "guzzlehttp/guzzle": "^7.0",
         "ext-json": "*"
     },

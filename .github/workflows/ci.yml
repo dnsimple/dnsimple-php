@@ -41,6 +41,8 @@ jobs:
         php-version:
           - '7.3'
           - '7.4'
+          - '8.0'
+          - '8.1'
     steps:
       - name: Set up PHP
         uses: shivammathur/setup-php@e04e1d97f0c0481c6e1ba40f8a538454fe5d7709
