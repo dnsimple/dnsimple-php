@@ -89,6 +89,22 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("2016-12-09T19:35:31Z", $registration->updatedAt);
     }
 
+    public function testGetDomainRegistration()
+    {
+        $this->mockResponseWith("getDomainRegistration/success");
+        $registration = $this->service->getDomainRegistration(1010, "example.com", 361)->getData();
+
+        self::assertIsInt($registration->id);
+        self::assertIsInt($registration->domainId);
+        self::assertIsInt($registration->registrantId);
+        self::assertIsInt($registration->period);
+        self::assertIsString($registration->state);
+        self::assertFalse($registration->autoRenew);
+        self::assertFalse($registration->whoisPrivacy);
+        self::assertIsString($registration->createdAt);
+        self::assertIsString($registration->updatedAt);
+    }
+
     public function testTransferDomain()
     {
         $this->mockResponseWith("transferDomain/success");

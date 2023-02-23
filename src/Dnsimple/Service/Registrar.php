@@ -91,6 +91,23 @@ class Registrar extends ClientService
     }
 
     /**
+     * Retrieves the details of an existing domain registration.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/#getDomainRegistration
+     *
+     * @param int $account The account id
+     * @param string $domain The domain name
+     * @param int $domainRegistration The domain registration id
+     * @return Response The details of an existing domain registration
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function getDomainRegistration($account, $domain, $domainRegistration): Response
+    {
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/registrations/{$domainRegistration}");
+        return new Response($response, DomainRegistration::class);
+    }
+
+    /**
      * Starts the transfer of a domain to DNSimple
      *
      * @see https://developer.dnsimple.com/v2/registrar/#transferDomain
