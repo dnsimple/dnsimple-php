@@ -179,6 +179,23 @@ class Registrar extends ClientService
     }
 
     /**
+     * Retrieves the details of an existing domain renewal.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/#getDomainRenewal
+     *
+     * @param int $account The account id
+     * @param string $domain The domain name
+     * @param int $domainRenewal The domain renewal id
+     * @return Response The details of an existing domain renewal
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function getDomainRenewal($account, $domain, $domainRenewal): Response
+    {
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/renewals/{$domainRenewal}");
+        return new Response($response, DomainRenewal::class);
+    }
+
+    /**
      * Prepare a domain for transferring out. This will unlock a domain and send the authorization code to the domain’s
      * administrative contact.
      *

@@ -207,6 +207,19 @@ class RegistrarTest extends ServiceTestCase
         $this->service->renewDomain(1010, "example.com", ["period" => 1]);
     }
 
+    public function testGetDomainRenewal()
+    {
+        $this->mockResponseWith("getDomainRenewal/success");
+        $renewal = $this->service->getDomainRenewal(1010, "example.com", 361)->getData();
+
+        self::assertIsInt($renewal->id);
+        self::assertIsInt($renewal->domainId);
+        self::assertIsInt($renewal->period);
+        self::assertIsString($renewal->state);
+        self::assertIsString($renewal->createdAt);
+        self::assertIsString($renewal->updatedAt);
+    }
+
     public function testTransferDomainOut()
     {
         $this->mockResponseWith("authorizeDomainTransferOut/success");
