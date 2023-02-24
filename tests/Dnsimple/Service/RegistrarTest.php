@@ -94,15 +94,15 @@ class RegistrarTest extends ServiceTestCase
         $this->mockResponseWith("getDomainRegistration/success");
         $registration = $this->service->getDomainRegistration(1010, "example.com", 361)->getData();
 
-        self::assertIsInt($registration->id);
-        self::assertIsInt($registration->domainId);
-        self::assertIsInt($registration->registrantId);
-        self::assertIsInt($registration->period);
-        self::assertIsString($registration->state);
+        self::assertEquals(361, $registration->id);
+        self::assertEquals(104040, $registration->domainId);
+        self::assertEquals(2715, $registration->registrantId);
+        self::assertEquals(1, $registration->period);
+        self::assertEquals("registering", $registration->state);
         self::assertFalse($registration->autoRenew);
         self::assertFalse($registration->whoisPrivacy);
-        self::assertIsString($registration->createdAt);
-        self::assertIsString($registration->updatedAt);
+        self::assertEquals("2023-01-27T17:44:32Z", $registration->createdAt);
+        self::assertEquals("2023-01-27T17:44:40Z", $registration->updatedAt);
     }
 
     public function testTransferDomain()
@@ -212,12 +212,13 @@ class RegistrarTest extends ServiceTestCase
         $this->mockResponseWith("getDomainRenewal/success");
         $renewal = $this->service->getDomainRenewal(1010, "example.com", 361)->getData();
 
-        self::assertIsInt($renewal->id);
-        self::assertIsInt($renewal->domainId);
-        self::assertIsInt($renewal->period);
-        self::assertIsString($renewal->state);
-        self::assertIsString($renewal->createdAt);
-        self::assertIsString($renewal->updatedAt);
+        self::assertInstanceOf(DomainRenewal::class, $renewal);
+        self::assertEquals(1, $renewal->id);
+        self::assertEquals(999, $renewal->domainId);
+        self::assertEquals(1, $renewal->period);
+        self::assertEquals("renewed", $renewal->state);
+        self::assertEquals("2016-12-09T19:46:45Z", $renewal->createdAt);
+        self::assertEquals("2016-12-12T19:46:45Z", $renewal->updatedAt);
     }
 
     public function testTransferDomainOut()
