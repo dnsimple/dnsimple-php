@@ -23,8 +23,8 @@ final class IdentityTest extends ServiceTestCase
 
         $data = $response->getData();
         self::assertInstanceOf(Whoami::class, $data);
-        self::assertObjectHasAttribute("user", $data);
-        self::assertObjectHasAttribute("account", $data);
+        self::assertTrue(property_exists($data, "user"));
+        self::assertTrue(property_exists($data, "account"));
     }
 
     public function testUser()
