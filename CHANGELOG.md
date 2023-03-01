@@ -4,6 +4,10 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 1.1.0
+
+- NEW: Added getDomainRenewal and getDomainRegistration endpoints (dnsimple/dnsimple-php#72)
+
 ## 1.0.0
 
 - BREAKING CHANGES: Wrap `GuzzleHttp\Exception\ClientException` (dnsimple/dnsimple-php#63)
