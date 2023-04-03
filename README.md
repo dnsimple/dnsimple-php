@@ -16,6 +16,12 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 - PHP ^7.3
 - PHP ^8.0
 
+## Installation
+
+```sh
+composer require dnsimple/dnsimple
+```
+
 ## Usage
 
 This library is a PHP client you can use to interact with the [DNSimple API v2](https://developer.dnsimple.com/v2/). Here are some examples.
