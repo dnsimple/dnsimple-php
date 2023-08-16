@@ -11,6 +11,9 @@ use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainPrice;
 use Dnsimple\Struct\DomainTransfer;
+use Dnsimple\Struct\ExtendedAttribute;
+use Dnsimple\Struct\RegistrantChange;
+use Dnsimple\Struct\RegistrantChangeCheck;
 use Dnsimple\Struct\VanityNameServer;
 use Dnsimple\Struct\WhoisPrivacy;
 
@@ -384,4 +387,59 @@ class Registrar extends ClientService
         $response = $this->post("/{$account}/registrar/domains/{$domain}/whois_privacy/renewals");
         return new Response($response, WhoisPrivacy::class);
     }
+
+    /**
+     * List the registrant changes in the account
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#listRegistrantChanges
+     * 
+     * @param int $account The account id
+     * @param array $options key/value options to sort and filter the results
+     * @return Response The list of registrant changes
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function listRegistrantChanges($account, array $options = [])
+    {
+        $response = $this->get("{$account}/registrar/registrant_changes", $options);
+        return new Response($response, RegistrantChange::class);
+    }
+
+    /**
+     * Create a new registrant change
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#startRegistrantChange
+     * 
+     * @param int $account The account id
+     * @param array $attributes The registrant change attributes
+     * @return Response The newly created registrant change
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function createRegistrantChange($account, array $attributes)
+    {
+        $response = $this->post("{$account}/registrar/registrant_changes", $attributes);
+        return new Response($response, RegistrantChange::class);
+    }
+
+    // Check registrant change requirements
+    public function checkRegistrantChange($account, array $attributes)
+    {
+        $response = $this->post("{$account}/registrar/registrant_changes/check", $attributes);
+        return new Response($response, RegistrantChangeCheck::class);
+    }
+
+    // Retrieve a registrant change
+    public function getRegistrantChange($account, $registrantChange)
+    {
+        $response = $this->get("{$account}/registrar/registrant_changes/{$registrantChange}");
+        return new Response($response, RegistrantChange::class);
+    }
+
+    // Cancel a registrant change
+    public function deleteRegistrantChange($account, $registrantChange)
+    {
+        $response = $this->delete("{$account}/registrar/registrant_changes/{$registrantChange}");
+        return new Response($response);
+    }
+
+
 }
