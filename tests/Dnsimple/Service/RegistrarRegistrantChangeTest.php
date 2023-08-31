@@ -1,0 +1,137 @@
+<?php
+
+namespace Dnsimple\Service;
+use Dnsimple\Response;
+use Dnsimple\Struct\RegistrantChange;
+
+class RegistrarRegistrantChangeTest extends ServiceTestCase
+{
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->service = new Registrar($this->client);
+    }
+
+    public function testListRegistrantChanges()
+    {
+        $this->mockResponseWith("listRegistrantChanges/success");
+
+        $response = $this->service->listRegistrantChanges(1010);
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(200, $response->getStatusCode());
+
+        // TODO: validate response data
+    }
+
+    public function testListRegistrantChangesSupportsFilters()
+    {
+        $this->mockResponseWith("listRegistrantChanges/success");
+        $this->service->listRegistrantChanges(1, ["contact_id"=>101,"domain_id"=>101, "state"=>"new"]);
+
+        self::assertEquals("contact_id=101&domain_id=101&state=new", $this->queryContent());
+    }
+
+    public function testListRegistrantChangesSupportsSorting()
+    {
+        $this->mockResponseWith("listRegistrantChanges/success");
+
+        $this->service->listRegistrantChanges(1010, ["sort" => "id:asc"]);
+
+        self::assertEquals("sort=id%3Aasc", $this->queryContent());
+    }
+
+    public function testListRegistrantChangesHasPaginationObject()
+    {
+        $this->mockResponseWith("listRegistrantChanges/success");
+
+        $response = $this->service->listRegistrantChanges(1010);
+        $pagination = $response->getPagination();
+
+        self::assertEquals(1, $pagination->currentPage);
+        self::assertEquals(30, $pagination->perPage);
+        self::assertEquals(1, $pagination->totalEntries);
+        self::assertEquals(1, $pagination->totalPages);
+    }
+
+    public function testListRegistrantChangesSupportsPagination()
+    {
+        $this->mockResponseWith("listRegistrantChanges/success");
+
+        $this->service->listRegistrantChanges(1010, ["page" => 1, "per_page" => 2]);
+
+        self::assertEquals("page=1&per_page=2", $this->queryContent());
+    }
+
+    public function testCreateRegistrantChange()
+    {
+        $this->mockResponseWith("createRegistrantChange/success");
+
+        $attributes = [
+            "domain_id" => 101,
+            "contact_id" => 102,
+        ];
+        $registrantChange = $this->service->createRegistrantChange(1010, $attributes)->getData();
+
+        self::assertInstanceOf(RegistrantChange::class, $registrantChange);
+    }
+
+    // public function testGetContact()
+    // {
+    //     $this->mockResponseWith("getContact/success");
+
+    //     $contact = $this->service->getContact(1010, 1)->getData();
+
+    //     self::assertEquals(1, $contact->id);
+    //     self::assertEquals(1010, $contact->accountId);
+    //     self::assertEquals("Default", $contact->label);
+    //     self::assertEquals("First", $contact->firstName);
+    //     self::assertEquals("User", $contact->lastName);
+    //     self::assertEquals("CEO", $contact->jobTitle);
+    //     self::assertEquals("Awesome Company", $contact->organizationName);
+    //     self::assertEquals("first@example.com", $contact->email);
+    //     self::assertEquals("+18001234567", $contact->phone);
+    //     self::assertEquals("+18011234567", $contact->fax);
+    //     self::assertEquals("Italian Street, 10", $contact->address1);
+    //     self::assertEmpty($contact->address2);
+    //     self::assertEquals("Roma", $contact->city);
+    //     self::assertEquals("RM", $contact->stateProvince);
+    //     self::assertEquals("IT", $contact->country);
+    //     self::assertEquals("00100", $contact->postalCode);
+    //     self::assertEquals("2016-01-19T20:50:26Z", $contact->createdAt);
+    //     self::assertEquals("2016-01-19T20:50:26Z", $contact->updatedAt);
+    // }
+
+    // public function testUpdateContact()
+    // {
+    //     $this->mockResponseWith("updateContact/success");
+
+    //     $attributes = [
+    //         "first_name" => "First"
+    //     ];
+    //     $response = $this->service->updateContact(1010, 1, $attributes);
+    //     $contact = $response->getData();
+
+    //     self::assertEquals(200, $response->getStatusCode());
+    //     self::assertInstanceOf(Contact::class, $contact);
+    // }
+
+    // public function testDeleteContact()
+    // {
+    //     $this->mockResponseWith("deleteContact/success");
+    //     $response = $this->service->deleteContact(1010, 1);
+
+    //     self::assertEquals(204, $response->getStatusCode());
+    // }
+
+    // public function testDeleteContactInUse()
+    // {
+    //     $this->mockResponseWith("deleteContact/error-contact-in-use");
+    //     $this->expectException(BadRequestException::class);
+    //     $this->expectExceptionMessage("The contact cannot be deleted because it's currently in use");
+
+    //     $this->service->deleteContact(1010, 1);
+    // }
+
+
+}
