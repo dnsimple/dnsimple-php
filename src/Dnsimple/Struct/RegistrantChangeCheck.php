@@ -13,7 +13,7 @@ class RegistrantChangeCheck
      */
     public $domainId;
     /**
-     * @var array The extended attributes
+     * @var array|TldExtendedAttribute The extended attributes
      */
     public $extendedAttributes; // This will be an array of ExtendedAttribute objects
     /**
@@ -23,11 +23,9 @@ class RegistrantChangeCheck
 
     public function __construct($data)
     {
-        $this->contactId = $data["contact_id"];
-        $this->domainId = $data["domain_id"];
-        $this->extendedAttributes = array_map(function ($item) {
-            return new ExtendedAttribute($item);
-        }, $data["extended_attributes"]);
-        $this->registryOwnerChange = $data["registry_owner_change"];
+        $this->contactId = $data->contact_id;
+        $this->domainId = $data->domain_id;
+        $this->registryOwnerChange = $data->registry_owner_change;
+        $this->extendedAttributes = array_map(function($data) { return new TldExtendedAttribute($data); }, $data->extended_attributes);
     }
 }

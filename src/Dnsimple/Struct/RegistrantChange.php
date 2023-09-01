@@ -2,6 +2,10 @@
 
 namespace Dnsimple\Struct;
 
+/**
+ * Represents the result of a registrant change call.
+ * @package Dnsimple\Struct
+ */
 class RegistrantChange
 {
     /**
@@ -28,7 +32,7 @@ class RegistrantChange
     /**
      * @var array The extended attributes
      */
-    public $extendedAttributes; // Assuming TradeExtendedAttributes is an associative array
+    public $extendedAttributes;
     /**
      * @var bool Whether the registrant change is a registry owner change
      */
@@ -48,15 +52,15 @@ class RegistrantChange
 
     public function __construct($data)
     {
-        $this->id = $data["id"];
-        $this->accountId = $data["account_id"];
-        $this->contactId = $data["contact_id"];
-        $this->domainId = $data["domain_id"];
-        $this->state = $data["state"];
-        $this->extendedAttributes = $data["extended_attributes"];
-        $this->registryOwnerChange = $data["registry_owner_change"];
-        $this->irtLockLiftedBy = $data["irt_lock_lifted_by"];
-        $this->createdAt = $data["created_at"];
-        $this->updatedAt = $data["updated_at"];
+        $this->id = $data->id;
+        $this->accountId = $data->account_id;
+        $this->domainId = $data->domain_id;
+        $this->contactId = $data->contact_id;
+        $this->state = $data->state;
+        $this->extendedAttributes = $data->extended_attributes;
+        $this->registryOwnerChange = $data->registry_owner_change;
+        $this->irtLockLiftedBy = $data->irt_lock_lifted_by;
+        $this->createdAt = $data->created_at;
+        $this->updatedAt = $data->updated_at;
     }
 }
