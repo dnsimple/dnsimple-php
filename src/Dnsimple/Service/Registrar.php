@@ -399,7 +399,7 @@ class Registrar extends ClientService
      */
     public function listRegistrantChanges($account, array $options = []): Response
     {
-        $response = $this->get("{$account}/registrar/registrant_changes", $options);
+        $response = $this->get("/{$account}/registrar/registrant_changes", $options);
         return new Response($response, RegistrantChange::class);
     }
 
@@ -413,9 +413,9 @@ class Registrar extends ClientService
      * @return Response The newly created registrant change
      * @throws DnsimpleException When something goes wrong
      */
-    public function createRegistrantChange($account, array $attributes): Response
+    public function createRegistrantChange($account, array $attributes = []): Response
     {
-        $response = $this->post("{$account}/registrar/registrant_changes", $attributes);
+        $response = $this->post("/{$account}/registrar/registrant_changes", $attributes);
         return new Response($response, RegistrantChange::class);
     }
 
@@ -431,7 +431,7 @@ class Registrar extends ClientService
      */
     public function getRegistrantChange($account, $registrantChange): Response
     {
-        $response = $this->get("{$account}/registrar/registrant_changes/{$registrantChange}");
+        $response = $this->get("/{$account}/registrar/registrant_changes/{$registrantChange}");
         return new Response($response, RegistrantChange::class);
     }
 
@@ -447,7 +447,7 @@ class Registrar extends ClientService
      */
     public function deleteRegistrantChange($account, $registrantChange): Response
     {
-        $response = $this->delete("{$account}/registrar/registrant_changes/{$registrantChange}");
+        $response = $this->delete("/{$account}/registrar/registrant_changes/{$registrantChange}");
         return new Response($response);
     }
 
@@ -463,7 +463,7 @@ class Registrar extends ClientService
      */
     public function checkRegistrantChange($account, array $attributes): Response
     {
-        $response = $this->post("{$account}/registrar/registrant_changes/check", $attributes);
+        $response = $this->post("/{$account}/registrar/registrant_changes/check", $attributes);
         return new Response($response, RegistrantChangeCheck::class);
     }
 }
