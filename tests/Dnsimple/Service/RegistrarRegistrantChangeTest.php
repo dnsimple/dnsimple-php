@@ -83,7 +83,7 @@ class RegistrarRegistrantChangeTest extends ServiceTestCase
 
     public function testGetRegistrantChange()
     {
-        $this->mockResponseWith("GetRegistrantChange/success");
+        $this->mockResponseWith("getRegistrantChange/success");
 
         $registrantChange = $this->service->getRegistrantChange(101, 101)->getData();
 
