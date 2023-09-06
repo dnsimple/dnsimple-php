@@ -4,6 +4,10 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 1.2.0
+
+- NEW: Added getDomainTransferLock, enableDomainTransferLock and deleteDomainTransferLock endpoints (dnsimple/dnsimple-php#85)
+
 ## 1.1.0
 
 - NEW: Added getDomainRenewal and getDomainRegistration endpoints (dnsimple/dnsimple-php#72)
