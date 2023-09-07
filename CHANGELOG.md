@@ -6,6 +6,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## 1.2.0
 
+- NEW: Added listRegistrantChanges, createRegistrantChange, getRegistrantChange, deleteRegistrantChange and checkRegistrantChange endpoints (dnsimple/dnsimple-php#83)
 - NEW: Added getDomainTransferLock, enableDomainTransferLock and deleteDomainTransferLock endpoints (dnsimple/dnsimple-php#85)
 
 ## 1.1.0

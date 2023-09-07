@@ -11,6 +11,8 @@ use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainPrice;
 use Dnsimple\Struct\DomainTransfer;
+use Dnsimple\Struct\RegistrantChange;
+use Dnsimple\Struct\RegistrantChangeCheck;
 use Dnsimple\Struct\DomainTransferLock;
 use Dnsimple\Struct\VanityNameServer;
 use Dnsimple\Struct\WhoisPrivacy;
@@ -384,6 +386,86 @@ class Registrar extends ClientService
     {
         $response = $this->post("/{$account}/registrar/domains/{$domain}/whois_privacy/renewals");
         return new Response($response, WhoisPrivacy::class);
+    }
+
+    /**
+     * List the registrant changes in the account
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#listRegistrantChanges
+     * 
+     * @param int $account The account id
+     * @param array $options key/value options to sort and filter the results
+     * @return Response The list of registrant changes
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function listRegistrantChanges($account, array $options = []): Response
+    {
+        $response = $this->get("/{$account}/registrar/registrant_changes", $options);
+        return new Response($response, RegistrantChange::class);
+    }
+
+    /**
+     * Create a new registrant change
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#startRegistrantChange
+     * 
+     * @param int $account The account id
+     * @param array $attributes The registrant change attributes
+     * @return Response The newly created registrant change
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function createRegistrantChange($account, array $attributes = []): Response
+    {
+        $response = $this->post("/{$account}/registrar/registrant_changes", $attributes);
+        return new Response($response, RegistrantChange::class);
+    }
+
+    /**
+     * Retrieve a registrant change
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#getRegistrantChange
+     * 
+     * @param int $account The account id
+     * @param int $registrantChange The registrant change id
+     * @return Response The registrant change
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function getRegistrantChange($account, $registrantChange): Response
+    {
+        $response = $this->get("/{$account}/registrar/registrant_changes/{$registrantChange}");
+        return new Response($response, RegistrantChange::class);
+    }
+
+    /**
+     * Cancel a registrant change
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#deleteRegistrantChange
+     * 
+     * @param int $account The account id
+     * @param int $registrantChange The registrant change id
+     * @return Response An empty response
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function deleteRegistrantChange($account, $registrantChange): Response
+    {
+        $response = $this->delete("/{$account}/registrar/registrant_changes/{$registrantChange}");
+        return new Response($response);
+    }
+
+    /**
+     * Check registrant change requirements
+     * 
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#checkRegistrantChange
+     * 
+     * @param int $account The account id
+     * @param array $attributes The registrant change attributes
+     * @return Response The registrant change check
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function checkRegistrantChange($account, array $attributes): Response
+    {
+        $response = $this->post("/{$account}/registrar/registrant_changes/check", $attributes);
+        return new Response($response, RegistrantChangeCheck::class);
     }
 
     /**
