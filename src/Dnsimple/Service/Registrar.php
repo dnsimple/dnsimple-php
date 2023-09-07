@@ -13,6 +13,7 @@ use Dnsimple\Struct\DomainPrice;
 use Dnsimple\Struct\DomainTransfer;
 use Dnsimple\Struct\RegistrantChange;
 use Dnsimple\Struct\RegistrantChangeCheck;
+use Dnsimple\Struct\DomainTransferLock;
 use Dnsimple\Struct\VanityNameServer;
 use Dnsimple\Struct\WhoisPrivacy;
 
@@ -465,5 +466,53 @@ class Registrar extends ClientService
     {
         $response = $this->post("/{$account}/registrar/registrant_changes/check", $attributes);
         return new Response($response, RegistrantChangeCheck::class);
+    }
+
+    /**
+     * Get the transfer lock details for a domain
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/transfer-lock/#getDomainTransferLock
+     *
+     * @param int $account The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The domain transfer lock state
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function getDomainTransferLock($account, $domain): Response
+    {
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/transfer_lock");
+        return new Response($response, DomainTransferLock::class);
+    }
+
+    /**
+     * Enable domain transfer lock
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/transfer-lock/#enableDomainTransferLock
+     *
+     * @param int $account The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The domain transfer lock state
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function enableDomainTransferLock($account, $domain): Response
+    {
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/transfer_lock");
+        return new Response($response, DomainTransferLock::class);
+    }
+
+    /**
+     * Disable domain transfer lock
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/transfer-lock/#disableDomainTransferLock
+     *
+     * @param int $account The account id
+     * @param int|string $domain The domain name or id
+     * @return Response The domain transfer lock state
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function disableDomainTransferLock($account, $domain): Response
+    {
+        $response = $this->delete("/{$account}/registrar/domains/{$domain}/transfer_lock");
+        return new Response($response, DomainTransferLock::class);
     }
 }
