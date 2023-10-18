@@ -190,4 +190,36 @@ class Zones extends ClientService
         $response = $this->get("/{$account}/zones/{$zone}/records/{$record}/distribution");
         return new Response($response, ZoneDistribution::class);
     }
+
+    /**
+     * Activates DNS services for the zone.
+     *
+     * @see https://developer.dnsimple.com/v2/zones/#activateZoneService
+     *
+     * @param int $account The account id
+     * @param string $zone The zone name
+     * @return Response The zone requested
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function activateZoneService($account, $zone): Response
+    {
+        $response = $this->put("/{$account}/zones/{$zone}/activation");
+        return new Response($response, Zone::class);
+    }
+
+    /**
+     * Deactivates DNS services for the zone.
+     *
+     * @see https://developer.dnsimple.com/v2/zones/#deactivateZoneService
+     *
+     * @param int $account The account id
+     * @param string $zone The zone name
+     * @return Response The zone requested
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function deactivateZoneService($account, $zone): Response
+    {
+        $response = $this->delete("/{$account}/zones/{$zone}/activation");
+        return new Response($response, Zone::class);
+    }
 }
