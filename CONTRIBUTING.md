@@ -15,10 +15,10 @@ cd dnsimple-php
 
 [Install composer locally](https://getcomposer.org/doc/00-intro.md#locally).
 
-Install the dependencies:
+Install the dependencies using composer:
 
 ```shell
-php composer.phar install
+composer install
 ```
 
 ### 3. Testing

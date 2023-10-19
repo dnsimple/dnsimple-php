@@ -111,4 +111,26 @@ class ZonesTest extends ServiceTestCase
 
         $this->service->checkZoneDistribution(1010, "example.com");
     }
+
+    public function testActivateZoneService()
+    {
+        $this->mockResponseWith("activateZoneService/success");
+
+        $zone = $this->service->activateZoneService(1010, "example-alpha.com")->getData();
+
+        self::assertEquals(1, $zone->id);
+        self::assertEquals(1010, $zone->accountId);
+        self::assertEquals("example-alpha.com", $zone->name);
+    }
+
+    public function testDeactivateZoneService()
+    {
+        $this->mockResponseWith("deactivateZoneService/success");
+
+        $zone = $this->service->deactivateZoneService(1010, "example-alpha.com")->getData();
+
+        self::assertEquals(1, $zone->id);
+        self::assertEquals(1010, $zone->accountId);
+        self::assertEquals("example-alpha.com", $zone->name);
+    }
 }
