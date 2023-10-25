@@ -6,6 +6,7 @@ use Dnsimple\Exceptions\HttpException;
 use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Exceptions\NotFoundException;
 use Dnsimple\Service\Accounts;
+use Dnsimple\Service\Billing;
 use Dnsimple\Service\Certificates;
 use Dnsimple\Service\Contacts;
 use Dnsimple\Service\Domains;
@@ -83,6 +84,10 @@ class Client
     public $accounts;
     /**
      * @var Domains The service handling the Domains API
+     */
+    public $billing;
+    /**
+     * @var Billing The service handling the billing API
      */
     public $domains;
     /**
