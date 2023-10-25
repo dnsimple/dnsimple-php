@@ -83,11 +83,11 @@ class Client
      */
     public $accounts;
     /**
-     * @var Billing The service handling the Domains API
+     * @var Billing The service handling the Billing API
      */
     public $billing;
     /**
-     * @var Domains The service handling the billing API
+     * @var Domains The service handling the Domains API
      */
     public $domains;
     /**
