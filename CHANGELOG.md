@@ -4,8 +4,6 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
-## 1.3.0
-
 - NEW: Added listCharges endpoint (dnsimple/dnsimple-php#89)
 
 ## 1.2.0
