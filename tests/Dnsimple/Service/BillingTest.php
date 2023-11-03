@@ -2,6 +2,7 @@
 
 namespace Dnsimple\Service;
 
+use Brick\Math\BigDecimal;
 use Dnsimple\Response;
 use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Exceptions\HttpException;
@@ -30,12 +31,14 @@ class BillingTest extends ServiceTestCase
 
         $charge = $data[0];
         self::assertInstanceOf(Charge::class, $charge);
-        self::assertEqualsWithDelta(14.5, $charge->totalAmount, 0.01);
+        self::assertInstanceOf(BigDecimal::class, $charge->totalAmount);
+        self::assertEquals(BigDecimal::of("14.50"), $charge->totalAmount);
         self::assertEquals("collected", $charge->state);
 
         $item = $charge->items[0];
         self::assertInstanceOf(ChargeItem::class, $item);
-        self::assertEqualsWithDelta(14.5, $item->amount, 0.01);
+        self::assertInstanceOf(BigDecimal::class, $item->amount);
+        self::assertEquals(BigDecimal::of("14.50"), $item->amount);
         self::assertEquals("Register bubble-registered.com", $item->description);
     }
 

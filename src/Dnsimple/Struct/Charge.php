@@ -2,6 +2,8 @@
 
 namespace Dnsimple\Struct;
 
+use Brick\Math\BigDecimal;
+
 /**
  * Represents a Charge.
  *
@@ -16,11 +18,11 @@ class Charge
      */
     public $invoicedAt;
     /**
-     * @var float The aggregate amount of all line items, that need to be paid.
+     * @var object<BigDecimal> The aggregate amount of all line items, that need to be paid.
      */
     public $totalAmount;
     /**
-     * @var float The amount that was paid via wallet.
+     * @var object<BigDecimal> The amount that was paid via wallet.
      */
     public $balanceAmount;
     /**
@@ -41,8 +43,8 @@ class Charge
         $items = [];
 
         $this->invoicedAt = $data->invoiced_at;
-        $this->totalAmount = floatval($data->total_amount);
-        $this->balanceAmount = floatval($data->balance_amount);
+        $this->totalAmount = BigDecimal::of($data->total_amount);
+        $this->balanceAmount = BigDecimal::of($data->balance_amount);
         $this->reference = $data->reference;
         $this->state = $data->state;
         # Convert items to ChargeItem objects

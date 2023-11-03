@@ -2,6 +2,8 @@
 
 namespace Dnsimple\Struct;
 
+use Brick\Math\BigDecimal;
+
 /**
  * Represents a Charge Item.
  *
@@ -16,7 +18,7 @@ class ChargeItem
      */
     public $description;
     /**
-     * @var float The amount of the charge item.
+     * @var object<BigDecimal> The amount of the charge item.
      */
     public $amount;
     /**
@@ -36,7 +38,7 @@ class ChargeItem
     public function __construct($data)
     {
         $this->description = $data->description;
-        $this->amount = floatval($data->amount);
+        $this->amount = BigDecimal::of($data->amount);
         $this->productId = $data->product_id;
         $this->productType = $data->product_type;
         $this->productReference = $data->product_reference;
