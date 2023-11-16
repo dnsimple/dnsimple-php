@@ -287,6 +287,7 @@ class Client
     private function attachServicesToClient(): void
     {
         $this->accounts = new Accounts($this);
+        $this->billing = new Billing($this);
         $this->certificates = new Certificates($this);
         $this->contacts = new Contacts($this);
         $this->domains = new Domains($this);
