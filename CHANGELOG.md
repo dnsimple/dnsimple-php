@@ -4,6 +4,8 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+- NEW: Added listCharges endpoint (dnsimple/dnsimple-php#89)
+
 ## 1.2.0
 
 - NEW: Added listRegistrantChanges, createRegistrantChange, getRegistrantChange, deleteRegistrantChange and checkRegistrantChange endpoints (dnsimple/dnsimple-php#83)

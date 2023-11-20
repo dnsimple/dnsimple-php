@@ -6,6 +6,7 @@ use Dnsimple\Exceptions\HttpException;
 use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Exceptions\NotFoundException;
 use Dnsimple\Service\Accounts;
+use Dnsimple\Service\Billing;
 use Dnsimple\Service\Certificates;
 use Dnsimple\Service\Contacts;
 use Dnsimple\Service\Domains;
@@ -125,6 +126,10 @@ class Client
      * @var Contacts The service handling the Contacts API
      */
     public $contacts;
+    /**
+     * @var Billing The service handling the Billing API
+     */
+    public $billing;
 
     /**
      * Client constructor.
@@ -282,6 +287,7 @@ class Client
     private function attachServicesToClient(): void
     {
         $this->accounts = new Accounts($this);
+        $this->billing = new Billing($this);
         $this->certificates = new Certificates($this);
         $this->contacts = new Contacts($this);
         $this->domains = new Domains($this);
