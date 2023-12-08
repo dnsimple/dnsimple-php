@@ -4,6 +4,10 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+ENHANCEMENTS:
+
+- NEW: Added `Secondary`, `LastTransferredAt`, `Active` to `Zone` (dnsimple/dnsimple-php)
+
 ## 1.3.0
 
 - NEW: Added Billing service listCharges endpoint (dnsimple/dnsimple-php#89)
