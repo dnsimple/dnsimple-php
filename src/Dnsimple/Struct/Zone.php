@@ -28,6 +28,18 @@ class Zone
      */
     public $reverse;
     /**
+     * @var bool True if the zone is a secondary zone
+     */
+    public $secondary;
+    /**
+     * @var string The zone's last transfer date
+     */
+    public $lastTransferredAt;
+    /**
+     * @var bool True if the zone is active
+     */
+    public $active;
+    /**
      * @var string When the zone was created in DNSimple
      */
     public $createdAt;
@@ -42,6 +54,9 @@ class Zone
         $this->accountId = $data->account_id;
         $this->name = $data->name;
         $this->reverse = $data->reverse;
+        $this->secondary = $data->secondary;
+        $this->lastTransferredAt = $data->last_transferred_at;
+        $this->active = $data->active;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
     }
