@@ -74,6 +74,9 @@ class ZonesTest extends ServiceTestCase
         self::assertEquals(1010, $zone->accountId);
         self::assertEquals("example-alpha.com", $zone->name);
         self::assertFalse($zone->reverse);
+        self::assertFalse($zone->secondary);
+        self::assertNull($zone->lastTransferredAt);
+        self::assertTrue($zone->active);
         self::assertEquals("2015-04-23T07:40:03Z", $zone->createdAt);
         self::assertEquals("2015-04-23T07:40:03Z", $zone->updatedAt);
     }
@@ -121,6 +124,7 @@ class ZonesTest extends ServiceTestCase
         self::assertEquals(1, $zone->id);
         self::assertEquals(1010, $zone->accountId);
         self::assertEquals("example-alpha.com", $zone->name);
+        self::assertTrue($zone->active);
     }
 
     public function testDeactivateZoneService()
@@ -132,5 +136,6 @@ class ZonesTest extends ServiceTestCase
         self::assertEquals(1, $zone->id);
         self::assertEquals(1010, $zone->accountId);
         self::assertEquals("example-alpha.com", $zone->name);
+        self::assertFalse($zone->active);
     }
 }
