@@ -4,9 +4,9 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
-ENHANCEMENTS:
+## 1.4.0
 
-- NEW: Added `Secondary`, `LastTransferredAt`, `Active` to `Zone` (dnsimple/dnsimple-php)
+- NEW: Added `secondary`, `lastTransferredAt`, `active` to `Zone` (dnsimple/dnsimple-php#93)
 
 ## 1.3.0
 
