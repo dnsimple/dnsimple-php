@@ -4,6 +4,8 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 2.0.0
+
 - CHANGED: Drop support for PHP < 8.2
 - CHANGED: Add support for PHP 8.3
 

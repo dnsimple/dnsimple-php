@@ -28,7 +28,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @see http://semver.org/ This project uses Semantic Versioning 2.0.0
  */
-const VERSION = "1.4.0";
+const VERSION = "2.0.0";
 
 
 /**
