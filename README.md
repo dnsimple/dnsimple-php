@@ -13,18 +13,13 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
 ## Requirements
 
-- PHP ^7.3
-- PHP ^8.0
+- PHP ^8.2
 
 ## Getting Started
 
 1. **Sign up for DNSimple** – Before you begin, you need to
    sign up for a [DNSimple](https://dnsimple.com) account and retrieve your [DNSimple API token](https://developer.dnsimple.com/v2/#authentication).
-2. **Minimum requirements** – To run the SDK, your system will need to meet the
-   minimum requirements, including having **PHP >= 7.3**.
-   We recommend having it compiled with the cURL extension and cURL
-   7.16.2+ compiled with a TLS backend (e.g., NSS or OpenSSL).
-3. **Install** – Using [Composer] is the recommended way to install.
+2. **Install** – Using [Composer] is the recommended way to install.
    The PHP client is available via [Packagist] under the [`dnsimple/dnsimple`] package. If Composer is installed globally on your system, you can run the following in the base directory of your project to add the package as a dependency:
 
    ```shell
