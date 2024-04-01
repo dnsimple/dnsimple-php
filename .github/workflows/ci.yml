@@ -34,7 +34,7 @@ jobs:
           - '8.3'
     steps:
       - name: Set up PHP
-        uses: shivammathur/setup-php@73963f5001e335723c998e4a0125ce060083985c
+        uses: shivammathur/setup-php@8872c784b04a1420e81191df5d64fbd59d3d3033
         with:
           php-version: ${{ matrix.php-version }}
       - uses: actions/checkout@v4
