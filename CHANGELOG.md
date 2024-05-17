@@ -4,6 +4,9 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+- NEW: Added `aliasEmail` and `destinationEmail` to `EmailForward`
+- CHANGED: Deprecated `from` and `to` fields in `EmailForward`
+
 ## 2.0.0
 
 - CHANGED: Drop support for PHP < 8.2
