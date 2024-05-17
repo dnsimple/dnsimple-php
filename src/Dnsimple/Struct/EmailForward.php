@@ -26,6 +26,14 @@ class EmailForward
      */
     public $to;
     /**
+     * @var string The "local part" of the originating email address. Anything to the left of the @ symbol
+     */
+    public $aliasEmail;
+    /**
+     * @var string The full email address to forward to
+     */
+    public $destinationEmail;
+    /**
      * @var string When the email forward was created in DNSimple
      */
     public $createdAt;
@@ -40,6 +48,8 @@ class EmailForward
         $this->domainId = $data->domain_id;
         $this->from = $data->from;
         $this->to = $data->to;
+        $this->aliasEmail = $data->alias_email;
+        $this->destinationEmail = $data->destination_email;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
     }
