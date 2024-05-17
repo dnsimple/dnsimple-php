@@ -19,10 +19,12 @@ class EmailForward
     public $domainId;
     /**
      * @var string The "local part" of the originating email address. Anything to the left of the @ symbol
+     * @deprecated
      */
     public $from;
     /**
      * @var string The full email address to forward to
+     * @deprecated
      */
     public $to;
     /**
@@ -46,8 +48,8 @@ class EmailForward
     {
         $this->id = $data->id;
         $this->domainId = $data->domain_id;
-        $this->from = $data->from;
-        $this->to = $data->to;
+        $this->from = $data->alias_email;
+        $this->to = $data->destination_email;
         $this->aliasEmail = $data->alias_email;
         $this->destinationEmail = $data->destination_email;
         $this->createdAt = $data->created_at;
