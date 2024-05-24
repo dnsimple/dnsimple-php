@@ -19,7 +19,7 @@ class DomainEmailForwardsTest extends ServiceTestCase
         $response = $this->service->listEmailForwards(1010, 1);
 
         $data = $response->getData();
-        self::assertCount(2, $data);
+        self::assertCount(1, $data);
 
         $record = $data[0];
         self::assertInstanceOf(EmailForward::class, $record);
@@ -41,7 +41,7 @@ class DomainEmailForwardsTest extends ServiceTestCase
 
         self::assertEquals(1, $pagination->currentPage);
         self::assertEquals(30, $pagination->perPage);
-        self::assertEquals(2, $pagination->totalEntries);
+        self::assertEquals(1, $pagination->totalEntries);
         self::assertEquals(1, $pagination->totalPages);
     }
 
