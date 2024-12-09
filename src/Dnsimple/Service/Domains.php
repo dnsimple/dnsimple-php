@@ -99,6 +99,7 @@ class Domains extends ClientService
      * @param array $options key/value options to sort and filter the results
      * @return Response The list of collaborators
      * @throws DnsimpleException When something goes wrong
+     * @deprecated `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
      */
     public function listCollaborators($account, $domain, array $options = []): Response
     {
@@ -124,6 +125,7 @@ class Domains extends ClientService
      * @param array $attributes The collaborator attributes. Refer to the documentation for the list of available fields.
      * @return Response The collaborator added to the domain in the account
      * @throws DnsimpleException When something goes wrong
+     * @deprecated `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
      */
     public function addCollaborator($account, $domain, array $attributes): Response
     {
@@ -141,6 +143,7 @@ class Domains extends ClientService
      * @param int $collaborator The collaborator id
      * @return Response An empty response
      * @throws DnsimpleException When something goes wrong
+     * @deprecated `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
      */
     public function removeCollaborator($account, $domain, $collaborator): Response
     {
