@@ -50,4 +50,4 @@ jobs:
             ${{ runner.os }}-php-
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
-      - run: vendor/bin/phpunit --coverage-clover=coverage.xml
+      - run: vendor/bin/phpunit tests --coverage-clover=coverage.xml
