@@ -4,6 +4,8 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 3.0.0
+
 - NEW: Added `aliasEmail` and `destinationEmail` to `EmailForward`
 - CHANGED: Deprecated `from` and `to` fields in `EmailForward`
 - CHANGED: `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
