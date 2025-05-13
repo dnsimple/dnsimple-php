@@ -13,7 +13,7 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
 ## Requirements
 
-- PHP ^8.2
+- PHP ^8.3
 
 ## Getting Started
 
