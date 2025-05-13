@@ -4,7 +4,6 @@ namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
-use Dnsimple\Struct\Collaborator;
 use Dnsimple\Struct\DelegationSignerRecord;
 use Dnsimple\Struct\Dnssec;
 use Dnsimple\Struct\Domain;
