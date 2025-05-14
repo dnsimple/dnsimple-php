@@ -13,7 +13,7 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
 ## Requirements
 
-- PHP ^8.2
+- PHP ^8.3
 
 ## Getting Started
 
@@ -67,4 +67,4 @@ Contibutions are welcomed. Please open an issue to discuss the changes before op
 
 ## License
 
-Copyright (c) 2015-2024 DNSimple Corporation. This is Free Software distributed under the MIT license.
+Copyright (c) 2015-2025 DNSimple Corporation. This is Free Software distributed under the MIT license.

@@ -4,7 +4,6 @@ namespace Dnsimple\Service;
 
 use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
-use Dnsimple\Struct\Collaborator;
 use Dnsimple\Struct\DelegationSignerRecord;
 use Dnsimple\Struct\Dnssec;
 use Dnsimple\Struct\Domain;
@@ -86,68 +85,6 @@ class Domains extends ClientService
     {
         $response = $this->delete("/{$account}/domains/{$domain}");
 
-        return new Response($response);
-    }
-
-    /**
-     * List collaborators for the domain in the account.
-     *
-     * @see https://developer.dnsimple.com/v2/domains/collaborators/#listDomainCollaborators
-     *
-     * @param int $account The account ID
-     * @param int|string $domain The domain name or ID
-     * @param array $options key/value options to sort and filter the results
-     * @return Response The list of collaborators
-     * @throws DnsimpleException When something goes wrong
-     * @deprecated `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
-     */
-    public function listCollaborators($account, $domain, array $options = []): Response
-    {
-        $response = $this->get("/{$account}/domains/{$domain}/collaborators", $options);
-        return new Response($response, Collaborator::class);
-    }
-
-    /**
-     * Adds a collaborator for the domain in the account
-     *
-     * At the time of the add, a collaborator may or may not have a DNSimple account.
-     *
-     * In case the collaborator doesn"t have a DNSimple account, the system will invite her/him to register to
-     * DNSimple first and then to accept the collaboration invitation.
-     *
-     * In the other case, she/he is automatically added to the domain as collaborator. She/he can decide to reject
-     * the invitation later.
-     *
-     * @see https://developer.dnsimple.com/v2/domains/collaborators/#addDomainCollaborator
-     *
-     * @param int $account The account ID
-     * @param int|string $domain The domain name or ID
-     * @param array $attributes The collaborator attributes. Refer to the documentation for the list of available fields.
-     * @return Response The collaborator added to the domain in the account
-     * @throws DnsimpleException When something goes wrong
-     * @deprecated `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
-     */
-    public function addCollaborator($account, $domain, array $attributes): Response
-    {
-        $response = $this->post("/{$account}/domains/{$domain}/collaborators", $attributes);
-        return new Response($response, Collaborator::class);
-    }
-
-    /**
-     * Remove a collaborator from the domain in the account
-     *
-     * @see https://developer.dnsimple.com/v2/domains/collaborators/#removeDomainCollaborator
-     *
-     * @param int $account The account Id
-     * @param string $domain The domain name or id
-     * @param int $collaborator The collaborator id
-     * @return Response An empty response
-     * @throws DnsimpleException When something goes wrong
-     * @deprecated `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
-     */
-    public function removeCollaborator($account, $domain, $collaborator): Response
-    {
-        $response = $this->delete("/{$account}/domains/{$domain}/collaborators/{$collaborator}");
         return new Response($response);
     }
 
