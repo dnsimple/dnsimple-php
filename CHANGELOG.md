@@ -4,6 +4,8 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 4.0.0
+
 - BREAKING: `DomainCollaborators` have been removed. Please use our Domain Access Control feature.
 - CHANGED: Drop support for PHP < 8.3
 
