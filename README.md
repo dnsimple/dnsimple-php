@@ -61,7 +61,7 @@ $client = new Client("API_TOKEN", ["base_uri" => 'https://api.sandbox.dnsimple.c
 You will need to ensure that you are using an access token created in the sandbox environment.
 Production tokens will *not* work in the sandbox environment.
 
-## Contributing
+## Contributing
 
 Contibutions are welcomed. Please open an issue to discuss the changes before opening a PR. For more details on how to do development please refer to [CONTRIBUTING.md](CONTRIBUTING.md)
 
