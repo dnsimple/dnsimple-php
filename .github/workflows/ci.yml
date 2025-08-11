@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Run markdownlint-cli
         uses: nosborn/github-action-markdown-cli@v3.5.0
         with:
@@ -37,7 +37,7 @@ jobs:
         uses: shivammathur/setup-php@ccf2c627fe61b1b4d924adfcbd19d661a18133a0
         with:
           php-version: ${{ matrix.php-version }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
       - name: Cache Composer packages
