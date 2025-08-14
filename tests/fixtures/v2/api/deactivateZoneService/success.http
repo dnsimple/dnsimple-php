@@ -1,16 +1,16 @@
 HTTP/1.1 200 OK
 Server: nginx
-Date: Fri, 22 Jan 2016 16:54:14 GMT
+Date: Tue, 08 Aug 2023 04:19:52 GMT
 Content-Type: application/json; charset=utf-8
 Connection: keep-alive
-Status: 200 OK
-X-RateLimit-Limit: 4000
-X-RateLimit-Remaining: 3995
-X-RateLimit-Reset: 1453484046
-ETag: W/"2161245abd349a34cba32a970e6424ba"
+X-RateLimit-Limit: 2400
+X-RateLimit-Remaining: 2398
+X-RateLimit-Reset: 1691471962
+X-WORK-WITH-US: Love automation? So do we! https://dnsimple.com/jobs
+ETag: W/"5f30a37d01b99bb9e620ef1bbce9a014"
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 93182033-a215-484e-a107-5235fa48001c
-X-Runtime: 0.177942
-Strict-Transport-Security: max-age=31536000
+X-Request-Id: d2f7bba4-4c81-4818-81d2-c9bbe95f104e
+X-Runtime: 0.133278
+Strict-Transport-Security: max-age=63072000
 
-{"data":{"id":1,"account_id":1010,"name":"example-alpha.com","reverse":false,"secondary":false,"last_transferred_at":null,"active":false,"created_at":"2015-04-23T07:40:03Z","updated_at":"2015-04-23T07:40:03Z"}}
+{"data":{"id":1,"account_id":1010,"name":"example.com","reverse":false,"secondary":false,"last_transferred_at":null,"active":false,"created_at":"2022-09-28T04:45:24Z","updated_at":"2023-08-08T04:19:52Z"}}
