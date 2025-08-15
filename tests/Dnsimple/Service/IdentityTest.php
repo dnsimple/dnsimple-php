@@ -45,7 +45,7 @@ final class IdentityTest extends ServiceTestCase
 
         self::assertEquals(1, $account->id);
         self::assertEquals("example-account@example.com", $account->email);
-        self::assertEquals("dnsimple-professional", $account->planIdentifier);
+        self::assertEquals("teams-v1-monthly", $account->planIdentifier);
         self::assertEquals("2015-09-18T23:04:37Z", $account->createdAt);
         self::assertEquals("2016-06-09T20:03:39Z", $account->updatedAt);
     }
