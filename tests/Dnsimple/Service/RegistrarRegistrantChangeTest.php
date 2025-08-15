@@ -106,7 +106,7 @@ class RegistrarRegistrantChangeTest extends ServiceTestCase
         $this->mockResponseWith("deleteRegistrantChange/success");
         $response = $this->service->deleteRegistrantChange(101, 101);
 
-        self::assertEquals(201, $response->getStatusCode());
+        self::assertEquals(204, $response->getStatusCode());
     }
 
     public function testCheckRegistrantChange()

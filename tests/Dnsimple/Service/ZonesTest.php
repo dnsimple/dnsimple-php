@@ -123,7 +123,7 @@ class ZonesTest extends ServiceTestCase
 
         self::assertEquals(1, $zone->id);
         self::assertEquals(1010, $zone->accountId);
-        self::assertEquals("example-alpha.com", $zone->name);
+        self::assertEquals("example.com", $zone->name);
         self::assertTrue($zone->active);
     }
 
@@ -135,7 +135,7 @@ class ZonesTest extends ServiceTestCase
 
         self::assertEquals(1, $zone->id);
         self::assertEquals(1010, $zone->accountId);
-        self::assertEquals("example-alpha.com", $zone->name);
+        self::assertEquals("example.com", $zone->name);
         self::assertFalse($zone->active);
     }
 }
