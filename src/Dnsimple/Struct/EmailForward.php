@@ -36,6 +36,10 @@ class EmailForward
      */
     public $destinationEmail;
     /**
+     * @var bool Whether the email forward is active
+     */
+    public $active;
+    /**
      * @var string When the email forward was created in DNSimple
      */
     public $createdAt;
@@ -52,6 +56,7 @@ class EmailForward
         $this->to = $data->destination_email;
         $this->aliasEmail = $data->alias_email;
         $this->destinationEmail = $data->destination_email;
+        $this->active = $data->active;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
     }
