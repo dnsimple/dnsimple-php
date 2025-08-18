@@ -23,6 +23,7 @@ class DomainEmailForwardsTest extends ServiceTestCase
 
         $record = $data[0];
         self::assertInstanceOf(EmailForward::class, $record);
+        self::assertEquals(true, $record->active);
     }
 
     public function testListDomainEmailForwardsSupportsSorting()
@@ -68,6 +69,7 @@ class DomainEmailForwardsTest extends ServiceTestCase
 
         $data = $response->getData();
         self::assertInstanceOf(EmailForward::class, $data);
+        self::assertEquals(true, $data->active);
     }
 
     public function testGetEmailForward()
@@ -79,6 +81,7 @@ class DomainEmailForwardsTest extends ServiceTestCase
         self::assertEquals(235146, $emailForward->domainId);
         self::assertEquals("example@dnsimple.xyz", $emailForward->from);
         self::assertEquals("example@example.com", $emailForward->to);
+        self::assertEquals(true, $emailForward->active);
         self::assertEquals("2021-01-25T13:54:40Z", $emailForward->createdAt);
         self::assertEquals("2021-01-25T13:54:40Z", $emailForward->updatedAt);
     }
