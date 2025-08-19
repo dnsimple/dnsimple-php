@@ -19,16 +19,6 @@ class EmailForward
     public $domainId;
     /**
      * @var string The "local part" of the originating email address. Anything to the left of the @ symbol
-     * @deprecated
-     */
-    public $from;
-    /**
-     * @var string The full email address to forward to
-     * @deprecated
-     */
-    public $to;
-    /**
-     * @var string The "local part" of the originating email address. Anything to the left of the @ symbol
      */
     public $aliasEmail;
     /**

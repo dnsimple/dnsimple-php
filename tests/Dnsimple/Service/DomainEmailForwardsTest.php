@@ -58,8 +58,8 @@ class DomainEmailForwardsTest extends ServiceTestCase
     {
         $this->mockResponseWith("createEmailForward/created");
         $attributes = [
-            "from" => "jim@a-domain.com",
-            "to" => "jikm@another.com"
+            "alias_name" => "jim",
+            "destination_email" => "jikm@another.com"
         ];
         $response = $this->service->createEmailForward(1010, 228963, $attributes);
 
@@ -79,8 +79,8 @@ class DomainEmailForwardsTest extends ServiceTestCase
 
         self::assertEquals(41872, $emailForward->id);
         self::assertEquals(235146, $emailForward->domainId);
-        self::assertEquals("example@dnsimple.xyz", $emailForward->from);
-        self::assertEquals("example@example.com", $emailForward->to);
+        self::assertEquals("example@dnsimple.xyz", $emailForward->aliasEmail);
+        self::assertEquals("example@example.com", $emailForward->destinationEmail);
         self::assertEquals(true, $emailForward->active);
         self::assertEquals("2021-01-25T13:54:40Z", $emailForward->createdAt);
         self::assertEquals("2021-01-25T13:54:40Z", $emailForward->updatedAt);
