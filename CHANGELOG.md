@@ -4,6 +4,11 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ## main
 
+## 5.0.0
+
+- BREAKING: Removed `from` and `to` fields in `EmailForward`. Please use `aliasEmail` and `destinationEmail` instead.
+- NEW: Added `active` to `EmailForward`
+
 ## 4.0.0
 
 - BREAKING: `DomainCollaborators` have been removed. Please use our Domain Access Control feature.
