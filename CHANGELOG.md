@@ -2,70 +2,112 @@
 
 This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
-## 5.0.0
+## [5.0.0] - 2026-01-12
 
-- BREAKING: Removed `from` and `to` fields in `EmailForward`. Please use `aliasEmail` and `destinationEmail` instead.
-- NEW: Added `active` to `EmailForward`
+### Removed
 
-## 4.0.0 - 2025-08-20
+- **BREAKING**: Removed `from` and `to` fields in `EmailForward`. Please use `aliasEmail` and `destinationEmail` instead.
 
-- BREAKING: `DomainCollaborators` have been removed. Please use our Domain Access Control feature.
-- CHANGED: Drop support for PHP < 8.3
+### Added
 
-## 3.0.0 - 2025-05-09
+- Added `active` to `EmailForward`
 
-- NEW: Added `aliasEmail` and `destinationEmail` to `EmailForward`
-- CHANGED: Deprecated `from` and `to` fields in `EmailForward`
-- CHANGED: `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
-- CHANGED: Add support for PHP 8.4
+## [4.0.0] - 2025-08-20
 
-## 2.0.0 - 2024-12-12
+### Removed
 
-- CHANGED: Drop support for PHP < 8.2
-- CHANGED: Add support for PHP 8.3
+- **BREAKING**: `DomainCollaborators` have been removed. Please use our Domain Access Control feature.
 
-## 1.4.0 - 2024-01-16
+### Changed
 
-- NEW: Added `secondary`, `lastTransferredAt`, `active` to `Zone` (dnsimple/dnsimple-php#93)
+- Drop support for PHP < 8.3
 
-## 1.3.0 - 2023-12-12
+## [3.0.0] - 2025-05-09
 
-- NEW: Added Billing service listCharges endpoint (dnsimple/dnsimple-php#89)
+### Added
 
-## 1.2.0 - 2023-12-06
+- Added `aliasEmail` and `destinationEmail` to `EmailForward`
 
-- NEW: Added listRegistrantChanges, createRegistrantChange, getRegistrantChange, deleteRegistrantChange and checkRegistrantChange endpoints (dnsimple/dnsimple-php#83)
-- NEW: Added getDomainTransferLock, enableDomainTransferLock and deleteDomainTransferLock endpoints (dnsimple/dnsimple-php#85)
-- NEW: Added activateZoneService and deactivateZoneService endpoints (dnsimple/dnsimple-php#87)
+### Deprecated
 
-## 1.1.0 - 2023-03-03
+- Deprecated `from` and `to` fields in `EmailForward`
+- `DomainCollaborators` have been deprecated and will be removed in the next major version. Please use our Domain Access Control feature.
 
-- NEW: Added getDomainRenewal and getDomainRegistration endpoints (dnsimple/dnsimple-php#72)
+### Changed
 
-## 1.0.0 - 2022-09-20
+- Add support for PHP 8.4
 
-- BREAKING CHANGES: Wrap `GuzzleHttp\Exception\ClientException` (dnsimple/dnsimple-php#63)
+## [2.0.0] - 2024-12-12
+
+### Changed
+
+- Drop support for PHP < 8.2
+- Add support for PHP 8.3
+
+## [1.4.0] - 2024-01-16
+
+### Added
+
+- Added `secondary`, `lastTransferredAt`, `active` to `Zone` (dnsimple/dnsimple-php#93)
+
+## [1.3.0] - 2023-12-12
+
+### Added
+
+- Added Billing service listCharges endpoint (dnsimple/dnsimple-php#89)
+
+## [1.2.0] - 2023-12-06
+
+### Added
+
+- Added listRegistrantChanges, createRegistrantChange, getRegistrantChange, deleteRegistrantChange and checkRegistrantChange endpoints (dnsimple/dnsimple-php#83)
+- Added getDomainTransferLock, enableDomainTransferLock and deleteDomainTransferLock endpoints (dnsimple/dnsimple-php#85)
+- Added activateZoneService and deactivateZoneService endpoints (dnsimple/dnsimple-php#87)
+
+## [1.1.0] - 2023-03-03
+
+### Added
+
+- Added getDomainRenewal and getDomainRegistration endpoints (dnsimple/dnsimple-php#72)
+
+## [1.0.0] - 2022-09-20
+
+### Changed
+
+- **BREAKING**: Wrap `GuzzleHttp\Exception\ClientException` (dnsimple/dnsimple-php#63)
   - **400** http exceptions are wrapped in `BadRequestException`
   - **404** http exceptions are wrapped in `NotFoundException`
   - All other **4xx** exceptions are wrapped in `HttpException` which the other classes inherit
   - The new exception classes come with [improved interface](src/Dnsimple/Exceptions/HttpException.php) e.g. `->getAttributeErrors()` to get validation errors.
-- CHANGED: Add support for PHP ^8.0 (dnsimple-php#64)
-- CHANGED: Deprecate Certificate's `contact_id` (dnsimple/dnsimple-php#46)
-- CHANGED: Add documentation to CONTRIBUTING.md
-- FIXES: Version number of the client
+- Add support for PHP ^8.0 (dnsimple-php#64)
+- Add documentation to CONTRIBUTING.md
 
-## 0.4.0 - 2021-10-25
+### Deprecated
 
-- CHANGED: Add support for DNSSEC key-data interface (dnsimple/dnsimple-php#29).
+- Deprecate Certificate's `contact_id` (dnsimple/dnsimple-php#46)
 
-## 0.3.1 - 2021-06-07
+### Fixed
 
-- CHANGED: Deprecates `service.getDomainPremiumPrice`
+- Version number of the client
 
-## 0.3.0 - 2021-04-21
+## [0.4.0] - 2021-10-25
 
-- NEW: Added `service.getDomainPrices` to retrieve whether a domain is premium, and the prices to register, transfer, and renew. (dnsimple/dnsimple-php#18)
+### Changed
 
-## 0.1.0 - 2020-09-14
+- Add support for DNSSEC key-data interface (dnsimple/dnsimple-php#29).
+
+## [0.3.1] - 2021-06-07
+
+### Deprecated
+
+- Deprecates `service.getDomainPremiumPrice`
+
+## [0.3.0] - 2021-04-21
+
+### Added
+
+- Added `service.getDomainPrices` to retrieve whether a domain is premium, and the prices to register, transfer, and renew. (dnsimple/dnsimple-php#18)
+
+## [0.1.0] - 2020-09-14
 
 Initial public release.
