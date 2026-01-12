@@ -4,27 +4,19 @@ A PHP client for the [DNSimple API v2](https://developer.dnsimple.com/v2/).
 
 [![Build Status](https://github.com/dnsimple/dnsimple-php/actions/workflows/ci.yml/badge.svg)](https://github.com/dnsimple/dnsimple-php/actions/workflows/ci.yml)
 
-## Documentation
-
-- [dnsimple-php Packagist](https://packagist.org/packages/dnsimple/dnsimple)
-- [DNSimple API documentation](https://developer.dnsimple.com/)
-- [DNSimple API examples repository](https://github.com/dnsimple/dnsimple-api-examples)
-- [DNSimple support documentation](https://support.dnsimple.com/)
-
 ## Requirements
 
 - PHP ^8.3
+- An activated DNSimple account
 
-## Getting Started
+## Installation
 
-1. **Sign up for DNSimple** – Before you begin, you need to
-   sign up for a [DNSimple](https://dnsimple.com) account and retrieve your [DNSimple API token](https://developer.dnsimple.com/v2/#authentication).
-2. **Install** – Using [Composer] is the recommended way to install.
-   The PHP client is available via [Packagist] under the [`dnsimple/dnsimple`] package. If Composer is installed globally on your system, you can run the following in the base directory of your project to add the package as a dependency:
+Using [Composer](https://getcomposer.org/) is the recommended way to install.
+The PHP client is available via [Packagist](https://packagist.org/) under the [`dnsimple/dnsimple`](https://packagist.org/packages/dnsimple/dnsimple) package. If Composer is installed globally on your system, you can run the following in the base directory of your project to add the package as a dependency:
 
-   ```shell
-   composer require dnsimple/dnsimple
-   ```
+```shell
+composer require dnsimple/dnsimple
+```
 
 ## Usage
 
@@ -43,6 +35,8 @@ $response = $client->domains->listDomains($account_id);
 $domains = $response->getData();
 ```
 
+## Configuration
+
 ### Sandbox Environment
 
 We highly recommend testing against our [sandbox environment](https://developer.dnsimple.com/sandbox/) before using our
@@ -60,6 +54,25 @@ $client = new Client("API_TOKEN", ["base_uri" => 'https://api.sandbox.dnsimple.c
 
 You will need to ensure that you are using an access token created in the sandbox environment.
 Production tokens will *not* work in the sandbox environment.
+
+### Setting a custom `User-Agent` header
+
+You can customize the `User-Agent` header for the calls made to the DNSimple API:
+
+```php
+use Dnsimple\Client;
+
+$client = new Client("API_TOKEN", ["user_agent" => "my-app/1.0"]);
+```
+
+The value you provide will be appended to the default `User-Agent` the client uses. For example, if you use `my-app/1.0`, the final header value will be `dnsimple-php/x.x.x my-app/1.0` (note that it will vary depending on the client version).
+
+## Documentation
+
+- [dnsimple-php Packagist](https://packagist.org/packages/dnsimple/dnsimple)
+- [DNSimple API documentation](https://developer.dnsimple.com/)
+- [DNSimple API examples repository](https://github.com/dnsimple/dnsimple-api-examples)
+- [DNSimple support documentation](https://support.dnsimple.com/)
 
 ## Contributing
 
