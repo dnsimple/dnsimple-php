@@ -2,6 +2,12 @@
 
 This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
+## main
+
+### Removed
+
+- Removed deprecated `getDomainPremiumPrice`. Use `getDomainPrices` instead.
+
 ## [5.0.0] - 2026-01-12
 
 ### Removed

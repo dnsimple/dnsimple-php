@@ -6,7 +6,6 @@ namespace Dnsimple\Service;
 use Dnsimple\DnsimpleException;
 use Dnsimple\Response;
 use Dnsimple\Struct\DomainCheck;
-use Dnsimple\Struct\DomainPremiumPrice;
 use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
 use Dnsimple\Struct\DomainPrice;
@@ -39,25 +38,6 @@ class Registrar extends ClientService
     {
         $response = $this->get("/{$account}/registrar/domains/{$domain}/check");
         return new Response($response, DomainCheck::class);
-    }
-
-    /**
-     * Get the premium price for a domain.
-     *
-     * @see https://developer.dnsimple.com/v2/registrar/#getDomainPremiumPrice
-     *
-     * @param int $account The account id
-     * @param string $domain The domain name
-     * @param string $action Optional action between "registration", "renewal", and "transfer". If omitted, it defaults to "registration".
-     * @return Response The domain premium price
-     * @throws DnsimpleException When something goes wrong
-     * @deprecated getDomainPremiumPrice has been deprecated, use getDomainPrices instead
-     */
-    public function getDomainPremiumPrice($account, $domain, $action = "registration"): Response
-    {
-        $options = ["action" => $action];
-        $response = $this->get("/{$account}/registrar/domains/{$domain}/premium_price", $options);
-        return new Response($response, DomainPremiumPrice::class);
     }
 
     /**

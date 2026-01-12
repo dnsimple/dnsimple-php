@@ -27,25 +27,6 @@ class RegistrarTest extends ServiceTestCase
         self::assertTrue($check->premium);
     }
 
-    public function testGetDomainPremiumPrice()
-    {
-        $this->mockResponseWith("getDomainPremiumPrice/success");
-        $premiumPrice = $this->service->getDomainPremiumPrice(1010, "ruby.codes", "registration")->getData();
-
-        self::assertEquals("109.00", $premiumPrice->premiumPrice);
-        self::assertEquals("registration", $premiumPrice->action);
-    }
-
-
-    public function testGetDomainPremiumPriceFailure()
-    {
-        $this->mockResponseWith("getDomainPremiumPrice/failure");
-        $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessage("`example.com` is not a premium domain for registration");
-
-        $this->service->getDomainPremiumPrice(1010, "example.com");
-    }
-
     public function testGetDomainPrices()
     {
         $this->mockResponseWith("getDomainPrices/success");
