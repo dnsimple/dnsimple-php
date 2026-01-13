@@ -317,22 +317,6 @@ class Registrar extends ClientService
     }
 
     /**
-     * Get the WHOIS privacy details for a domain
-     *
-     * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#getWhoisPrivacy
-     *
-     * @param int $account The account id
-     * @param int|string $domain The domain name or id
-     * @return Response The whois privacy details
-     * @throws DnsimpleException When something goes wrong
-     */
-    public function getWhoisPrivacy($account, $domain): Response
-    {
-        $response = $this->get("/{$account}/registrar/domains/{$domain}/whois_privacy");
-        return new Response($response, WhoisPrivacy::class);
-    }
-
-    /**
      * Enable WHOIS privacy
      *
      * Note that if the WHOIS privacy is not purchased for the domain, enabling WHOIS privacy will cause the service
@@ -369,22 +353,6 @@ class Registrar extends ClientService
     public function disableWhoisPrivacy($account, $domain): Response
     {
         $response = $this->delete("/{$account}/registrar/domains/{$domain}/whois_privacy");
-        return new Response($response, WhoisPrivacy::class);
-    }
-
-    /**
-     * Renew WHOIS privacy
-     *
-     * @see https://developer.dnsimple.com/v2/registrar/whois-privacy/#renewWhoisPrivacy
-     *
-     * @param int $account The account id
-     * @param int|string $domain The domain name or id
-     * @return Response The whois privacy details
-     * @throws DnsimpleException When something goes wrong
-     */
-    public function renewWhoisPrivacy($account, $domain): Response
-    {
-        $response = $this->post("/{$account}/registrar/domains/{$domain}/whois_privacy/renewals");
         return new Response($response, WhoisPrivacy::class);
     }
 
