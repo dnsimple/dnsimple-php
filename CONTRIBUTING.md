@@ -28,7 +28,7 @@ composer install
 To run the test suite:
 
 ```shell
-./vendor/bin/phpunit tests
+composer test
 ```
 
 ## Changelog
