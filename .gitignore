@@ -1,5 +1,8 @@
-composer.phar
+# Local files
 vendor/
 .phpunit.result.cache
+composer.phar
 composer.lock
+
+# Local configs
 .tool-versions
