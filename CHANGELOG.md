@@ -6,6 +6,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/).
 
 ### Removed
 
+- Removed deprecated `getDomainPremiumPrice`. Use `getDomainPrices` instead. (dnsimple/dnsimple-developer#916)
 - Removed deprecated `getWhoisPrivacy` (dnsimple/dnsimple-developer#919)
 - Removed deprecated `renewWhoisPrivacy` (dnsimple/dnsimple-developer#919)
 
