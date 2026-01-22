@@ -13,8 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  markdownlint-cli:
-    name: Lint markdown
+  markdown-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -26,9 +25,10 @@ jobs:
           config_file: ".markdownlint.yaml"
 
   test:
-    needs: [markdownlint-cli]
-    runs-on: ubuntu-latest
     name: PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    needs:
+      - markdown-lint
     strategy:
       matrix:
         php-version:
