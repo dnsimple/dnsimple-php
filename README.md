@@ -35,6 +35,25 @@ $response = $client->domains->listDomains($account_id);
 $domains = $response->getData();
 ```
 
+### Research a domain
+
+> **Note:** This endpoint is part of a Private Beta. During the beta period, changes to the endpoint may occur at any time. If interested in using this endpoint, reach out to [DNSimple support](support@dnsimple.com).
+
+Research a domain name for availability and registration status information:
+
+```php
+use Dnsimple\Client;
+
+$client = new Client("API_TOKEN");
+
+$response = $client->domains->domainResearchStatus($account_id, "example.com");
+$research = $response->getData();
+echo $research->domain;          // "example.com"
+echo $research->availability;    // "unavailable"
+echo $research->request_id;      // "f453dabc-a27e-4bf1-a93e-f263577ffaae"
+print_r($research->errors);      // []
+```
+
 ## Configuration
 
 ### Sandbox Environment
