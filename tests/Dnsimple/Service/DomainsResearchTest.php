@@ -14,20 +14,20 @@ class DomainsResearchTest extends ServiceTestCase
 
     public function testDomainResearchStatus()
     {
-        $this->mockResponseWith("domainResearchStatus/success");
+        $this->mockResponseWith("getDomainsResearchStatus/success-unavailable.http");
 
-        $response = $this->service->domainResearchStatus(1010, "example.com");
+        $response = $this->service->domainResearchStatus(1010, "taken.com");
         self::assertInstanceOf(Response::class, $response);
         self::assertEquals(200, $response->getStatusCode());
 
         $data = $response->getData();
         self::assertInstanceOf(DomainResearchStatus::class, $data);
-        self::assertEquals("f453dabc-a27e-4bf1-a93e-f263577ffaae", $data->request_id);
-        self::assertEquals("example.com", $data->domain);
+        self::assertEquals("25dd77cb-2f71-48b9-b6be-1dacd2881418", $data->request_id);
+        self::assertEquals("taken.com", $data->domain);
         self::assertEquals("unavailable", $data->availability);
         self::assertEquals([], $data->errors);
 
         $request = $this->mockHandler->getLastRequest();
-        self::assertEquals("domain=example.com", $request->getUri()->getQuery());
+        self::assertEquals("domain=taken.com", $request->getUri()->getQuery());
     }
 }
