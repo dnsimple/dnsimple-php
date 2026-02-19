@@ -14,7 +14,7 @@ class DomainsResearchTest extends ServiceTestCase
 
     public function testDomainResearchStatus()
     {
-        $this->mockResponseWith("getDomainsResearchStatus/success-unavailable.http");
+        $this->mockResponseWith("getDomainsResearchStatus/success-unavailable");
 
         $response = $this->service->domainResearchStatus(1010, "taken.com");
         self::assertInstanceOf(Response::class, $response);
