@@ -18,6 +18,7 @@ use Dnsimple\Struct\EmailForward;
  */
 class Domains extends ClientService
 {
+    use DomainsResearch;
     /**
      * Lists the domains in the account.
      *
