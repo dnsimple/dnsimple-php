@@ -68,6 +68,8 @@ class TldsTest extends ServiceTestCase
         self::assertEquals("com", $tld->tld);
         self::assertEquals(1, $tld->tldType);
         self::assertTrue($tld->whoisPrivacy);
+        self::assertFalse($tld->trusteeServiceEnabled);
+        self::assertFalse($tld->trusteeServiceRequired);
         self::assertFalse($tld->autoRenewOnly);
         self::assertTrue($tld->idn);
         self::assertEquals(1, $tld->minimumRegistration);
