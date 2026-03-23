@@ -22,6 +22,14 @@ class Tld
      */
     public $whoisPrivacy;
     /**
+     * @var bool True if Trustee service is enabled for this TLD
+     */
+    public $trusteeServiceEnabled;
+    /**
+     * @var bool True if Trustee service is required for this TLD
+     */
+    public $trusteeServiceRequired;
+    /**
      * @var bool True if TLD requires use of auto-renewal for renewals
      */
     public $autoRenewOnly;
@@ -55,6 +63,8 @@ class Tld
         $this->tld = $data->tld;
         $this->tldType = $data->tld_type;
         $this->whoisPrivacy = $data->whois_privacy;
+        $this->trusteeServiceEnabled = $data->trustee_service_enabled;
+        $this->trusteeServiceRequired = $data->trustee_service_required;
         $this->autoRenewOnly = $data->auto_renew_only;
         $this->idn = $data->idn;
         $this->minimumRegistration = $data->minimum_registration;

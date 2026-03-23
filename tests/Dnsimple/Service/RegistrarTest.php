@@ -37,6 +37,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals(20.0, $prices->registrationPrice);
         self::assertEquals(20.0, $prices->renewalPrice);
         self::assertEquals(20.0, $prices->transferPrice);
+        self::assertEquals(20.0, $prices->trusteeServicePrice);
     }
 
     public function testGetDomainPricesFailure()
@@ -66,6 +67,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("new", $registration->state);
         self::assertFalse($registration->autoRenew);
         self::assertFalse($registration->whoisPrivacy);
+        self::assertFalse($registration->trusteeService);
         self::assertEquals("2016-12-09T19:35:31Z", $registration->createdAt);
         self::assertEquals("2016-12-09T19:35:31Z", $registration->updatedAt);
     }
@@ -82,6 +84,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("registering", $registration->state);
         self::assertFalse($registration->autoRenew);
         self::assertFalse($registration->whoisPrivacy);
+        self::assertFalse($registration->trusteeService);
         self::assertEquals("2023-01-27T17:44:32Z", $registration->createdAt);
         self::assertEquals("2023-01-27T17:44:40Z", $registration->updatedAt);
     }
