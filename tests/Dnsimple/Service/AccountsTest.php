@@ -18,6 +18,7 @@ class AccountsTest extends ServiceTestCase
 
         self::assertCount(1, $accounts);
         self::assertEquals("john@example.com", $accounts[0]->email);
+        self::assertEquals("John", $accounts[0]->name);
     }
 
     function testListAccountsUser()
