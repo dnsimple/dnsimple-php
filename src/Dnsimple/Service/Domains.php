@@ -285,7 +285,7 @@ class Domains extends ClientService
      *
      * @param int $account The account id
      * @param int|string $domain The domain name or id
-     * @param array $attributes The initiate push attributes. Supports 'new_domain_push_identifier' (preferred)
+     * @param array $attributes The initiate push attributes. Supports 'new_account_identifier' (preferred)
      *                          or 'new_account_email' (deprecated).
      * @return Response The newly created domain push
      * @throws DnsimpleException When something goes wrong
