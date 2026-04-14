@@ -30,6 +30,18 @@ class DomainPushesTest extends ServiceTestCase
         self::assertNull($push->acceptedAt);
     }
 
+    public function testInitiatePushWithAccountIdentifier()
+    {
+        $this->mockResponseWith("initiatePush/success");
+        $attributes = [
+            "new_account_identifier" => "abc123"
+        ];
+        $push = $this->service->initiatePush(2020, 100, $attributes)->getData();
+
+        self::assertEquals(1, $push->id);
+        self::assertEquals(2020, $push->accountId);
+    }
+
     public function testListPushes()
     {
         $this->mockResponseWith("listPushes/success");

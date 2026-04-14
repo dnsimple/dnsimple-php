@@ -20,6 +20,10 @@ class Account
      */
     public $email;
     /**
+     * @var string The account name
+     */
+    public $name;
+    /**
      * @var string The identifier of the plan the account is subscribed to
      */
     public $planIdentifier;
@@ -36,6 +40,7 @@ class Account
     {
         $this->id = $data->id;
         $this->email = $data->email;
+        $this->name = $data->name ?? null;
         $this->planIdentifier = $data->plan_identifier;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
