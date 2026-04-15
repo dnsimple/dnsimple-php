@@ -33,6 +33,10 @@ class DomainTransfer
      * @var bool True if the domain WHOIS privacy was requested
      */
     public $whoisPrivacy;
+    /**
+     * @var bool True if the domain Trustee service was requested
+     */
+    public $trusteeService;
 
     public $statusDescription;
     /**
@@ -52,6 +56,7 @@ class DomainTransfer
         $this->state = $data->state;
         $this->autoRenew = $data->auto_renew;
         $this->whoisPrivacy = $data->whois_privacy;
+        $this->trusteeService = $data->trustee_service;
         if (property_exists($data, 'status_description'))
             $this->statusDescription = $data->status_description;
         $this->createdAt = $data->created_at;
