@@ -18,11 +18,6 @@ class Certificate
      */
     public $domainId;
     /**
-     * @var int The associated contact ID
-     * @deprecated
-     */
-    public $contactId;
-    /**
      * @var string The certificate name
      */
     public $name;
@@ -71,7 +66,6 @@ class Certificate
     {
         $this->id = $data->id;
         $this->domainId = $data->domain_id;
-        $this->contactId = $data->contact_id;
         $this->name = $data->name;
         $this->commonName = $data->common_name;
         $this->years = $data->years;
