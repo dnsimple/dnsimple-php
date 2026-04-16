@@ -42,8 +42,6 @@ class EmailForward
     {
         $this->id = $data->id;
         $this->domainId = $data->domain_id;
-        $this->from = $data->alias_email;
-        $this->to = $data->destination_email;
         $this->aliasEmail = $data->alias_email;
         $this->destinationEmail = $data->destination_email;
         $this->active = $data->active;
