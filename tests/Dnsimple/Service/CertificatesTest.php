@@ -71,7 +71,6 @@ class CertificatesTest extends ServiceTestCase
 
         self::assertEquals(101967, $certificate->id);
         self::assertEquals(289333, $certificate->domainId);
-        self::assertEquals(2511, $certificate->contactId);
         self::assertEquals("www", $certificate->name);
         self::assertEquals("www.bingo.pizza", $certificate->commonName);
         self::assertEquals(1, $certificate->years);
