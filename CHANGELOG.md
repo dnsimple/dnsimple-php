@@ -7,6 +7,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/), the format is
 ### Removed
 
 - **BREAKING**: Removed the deprecated `contactId` field from the `Certificate` struct. The field was deprecated on 2022-05-17 and is no longer required for certificate operations.
+- **BREAKING**: Removed the deprecated `from` and `to` fields from the `EmailForward` struct. Use `aliasEmail` and `destinationEmail` instead.
 
 ## 6.3.0 - 2026-04-15
 
