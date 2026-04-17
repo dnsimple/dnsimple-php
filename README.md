@@ -84,7 +84,7 @@ use Dnsimple\Client;
 $client = new Client("API_TOKEN", ["user_agent" => "my-app/1.0"]);
 ```
 
-The value you provide will be appended to the default `User-Agent` the client uses. For example, if you use `my-app/1.0`, the final header value will be `dnsimple-php/x.x.x my-app/1.0` (note that it will vary depending on the client version).
+The value you provide will be prepended to the default `User-Agent` the client uses. For example, if you use `my-app/1.0`, the final header value will be `my-app/1.0 dnsimple-php/x.x.x` (note that it will vary depending on the client version).
 
 ## Documentation
 
