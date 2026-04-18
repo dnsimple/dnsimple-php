@@ -27,7 +27,7 @@ class BillingTest extends ServiceTestCase
         self::assertEquals(200, $response->getStatusCode());
 
         $data = $response->getData();
-        self::assertCount(3, $data);
+        self::assertCount(4, $data);
 
         $charge = $data[0];
         self::assertInstanceOf(Charge::class, $charge);
@@ -40,6 +40,11 @@ class BillingTest extends ServiceTestCase
         self::assertInstanceOf(BigDecimal::class, $item->amount);
         self::assertEquals(BigDecimal::of("14.50"), $item->amount);
         self::assertEquals("Register bubble-registered.com", $item->description);
+
+        $certCharge = $data[3];
+        self::assertEquals("5-2", $certCharge->reference);
+        self::assertEquals("certificate-purchase", $certCharge->items[0]->productType);
+        self::assertSame("42", $certCharge->items[0]->productReference);
     }
 
     public function testListChargesSupportsFilters()
@@ -67,7 +72,7 @@ class BillingTest extends ServiceTestCase
 
         self::assertEquals(1, $pagination->currentPage);
         self::assertEquals(30, $pagination->perPage);
-        self::assertEquals(3, $pagination->totalEntries);
+        self::assertEquals(4, $pagination->totalEntries);
         self::assertEquals(1, $pagination->totalPages);
     }
 
