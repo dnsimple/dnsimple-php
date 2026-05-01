@@ -30,9 +30,9 @@ class DomainPrice
      */
     public $transferPrice;
     /**
-     * @var float The trustee service price
+     * @var float The trustee price
      */
-    public $trusteeServicePrice;
+    public $trusteePrice;
 
     public function __construct($data)
     {
@@ -41,6 +41,6 @@ class DomainPrice
         $this->registrationPrice = $data->registration_price;
         $this->renewalPrice = $data->renewal_price;
         $this->transferPrice = $data->transfer_price;
-        $this->trusteeServicePrice = $data->trustee_service_price;
+        $this->trusteePrice = $data->trustee_price;
     }
 }
