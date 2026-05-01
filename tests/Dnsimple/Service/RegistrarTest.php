@@ -37,7 +37,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals(20.0, $prices->registrationPrice);
         self::assertEquals(20.0, $prices->renewalPrice);
         self::assertEquals(20.0, $prices->transferPrice);
-        self::assertEquals(20.0, $prices->trusteeServicePrice);
+        self::assertEquals(20.0, $prices->trusteePrice);
     }
 
     public function testGetDomainPricesFailure()
@@ -67,7 +67,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("new", $registration->state);
         self::assertFalse($registration->autoRenew);
         self::assertFalse($registration->whoisPrivacy);
-        self::assertFalse($registration->trusteeService);
+        self::assertFalse($registration->trustee);
         self::assertEquals("2016-12-09T19:35:31Z", $registration->createdAt);
         self::assertEquals("2016-12-09T19:35:31Z", $registration->updatedAt);
     }
@@ -84,7 +84,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("registering", $registration->state);
         self::assertFalse($registration->autoRenew);
         self::assertFalse($registration->whoisPrivacy);
-        self::assertFalse($registration->trusteeService);
+        self::assertFalse($registration->trustee);
         self::assertEquals("2023-01-27T17:44:32Z", $registration->createdAt);
         self::assertEquals("2023-01-27T17:44:40Z", $registration->updatedAt);
     }
@@ -105,7 +105,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("transferring", $domainTransfer->state);
         self::assertFalse($domainTransfer->autoRenew);
         self::assertFalse($domainTransfer->whoisPrivacy);
-        self::assertFalse($domainTransfer->trusteeService);
+        self::assertFalse($domainTransfer->trustee);
         self::assertEquals("2016-12-09T19:43:41Z", $domainTransfer->createdAt);
         self::assertEquals("2016-12-09T19:43:43Z", $domainTransfer->updatedAt);
     }
@@ -147,7 +147,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("cancelled", $transfer->state);
         self::assertFalse($transfer->autoRenew);
         self::assertFalse($transfer->whoisPrivacy);
-        self::assertFalse($transfer->trusteeService);
+        self::assertFalse($transfer->trustee);
         self::assertEquals("Canceled by customer", $transfer->statusDescription);
         self::assertEquals( "2020-06-05T18:08:00Z", $transfer->createdAt);
         self::assertEquals("2020-06-05T18:10:01Z", $transfer->updatedAt);
@@ -164,7 +164,7 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals(202, $response->getStatusCode());
         self::assertInstanceOf(DomainTransfer::class, $cancellation);
         self::assertEquals("transferring", $cancellation->state);
-        self::assertFalse($cancellation->trusteeService);
+        self::assertFalse($cancellation->trustee);
     }
 
     public function testRenewDomain()

@@ -44,9 +44,9 @@ class Domain
      */
     public $privateWhois;
     /**
-     * @var bool True if the domain Trustee service is enabled, false otherwise
+     * @var bool True if the domain trustee is enabled, false otherwise
      */
-    public $trusteeService;
+    public $trustee;
     /**
      * @var string|null The timestamp when domain will expire
      */
@@ -70,7 +70,7 @@ class Domain
         $this->state = $data->state;
         $this->autoRenew = $data->auto_renew;
         $this->privateWhois = $data->private_whois;
-        $this->trusteeService = $data->trustee_service;
+        $this->trustee = $data->trustee;
         $this->expiresAt = $data->expires_at;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
