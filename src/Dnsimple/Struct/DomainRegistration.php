@@ -38,9 +38,9 @@ class DomainRegistration
      */
     public $whoisPrivacy;
     /**
-     * @var bool True if the domain Trustee service was requested
+     * @var bool True if trustee was requested
      */
-    public $trusteeService;
+    public $trustee;
     /**
      * @var string When the domain renewal was created in DNSimple
      */
@@ -59,7 +59,7 @@ class DomainRegistration
         $this->state = $data->state;
         $this->autoRenew = $data->auto_renew;
         $this->whoisPrivacy = $data->whois_privacy;
-        $this->trusteeService = $data->trustee_service;
+        $this->trustee = $data->trustee;
         $this->createdAt = $data->created_at;
         $this->updatedAt = $data->updated_at;
     }
