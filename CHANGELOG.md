@@ -2,16 +2,18 @@
 
 This project uses [Semantic Versioning 2.0.0](http://semver.org/), the format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## main
+## 7.0.0 - 2026-05-05
 
 ### Changed
 
+- **BREAKING**: Renamed `trusteeService` to `trustee` in `Domain`, `DomainRegistration`, and `DomainTransfer`. (#168)
+- **BREAKING**: Renamed `trusteeServicePrice` to `trusteePrice` in `DomainPrice`. (#168)
 - Updated the `listCharges` test fixture to include a certificate purchase entry demonstrating that `productReference` is a string even when it represents a numeric ID. (#166)
 
 ### Removed
 
-- **BREAKING**: Removed the deprecated `contactId` field from the `Certificate` struct. The field was deprecated on 2022-05-17 and is no longer required for certificate operations.
-- **BREAKING**: Removed the deprecated `from` and `to` fields from the `EmailForward` struct. Use `aliasEmail` and `destinationEmail` instead.
+- **BREAKING**: Removed the deprecated `contactId` field from the `Certificate` struct. The field was deprecated on 2022-05-17 and is no longer required for certificate operations. (#164)
+- **BREAKING**: Removed the deprecated `from` and `to` fields from the `EmailForward` struct. Use `aliasEmail` and `destinationEmail` instead. (#165)
 
 ## 6.3.0 - 2026-04-15
 
