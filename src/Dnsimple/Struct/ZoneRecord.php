@@ -19,6 +19,7 @@ class ZoneRecord
     public $zoneId;
     /**
      * @var int|null The ID of the parent record, if this record is dependent on another record.
+     * @deprecated the value is always null, and the property will be removed in the next major version
      */
     public $parentId;
     /**
