@@ -8,6 +8,7 @@ use Dnsimple\Response;
 use Dnsimple\Struct\DomainCheck;
 use Dnsimple\Struct\DomainRegistration;
 use Dnsimple\Struct\DomainRenewal;
+use Dnsimple\Struct\DomainRestore;
 use Dnsimple\Struct\DomainPrice;
 use Dnsimple\Struct\DomainTransfer;
 use Dnsimple\Struct\RegistrantChange;
@@ -176,6 +177,42 @@ class Registrar extends ClientService
     {
         $response = $this->get("/{$account}/registrar/domains/{$domain}/renewals/{$domainRenewal}");
         return new Response($response, DomainRenewal::class);
+    }
+
+    /**
+     * Restores a domain that can no longer be renewed.
+     *
+     * You are charged the restore fee when the restore completes.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/#restoreDomain
+     *
+     * @param int $account The account id
+     * @param string $domain The domain name
+     * @param array $attributes The domain restore attributes. Refer to the documentation for the list of available fields.
+     * @return Response The domain restore
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function restoreDomain($account, $domain, array $attributes = []): Response
+    {
+        $response = $this->post("/{$account}/registrar/domains/{$domain}/restores", $attributes);
+        return new Response($response, DomainRestore::class);
+    }
+
+    /**
+     * Retrieves the details of an existing domain restore.
+     *
+     * @see https://developer.dnsimple.com/v2/registrar/#getDomainRestore
+     *
+     * @param int $account The account id
+     * @param string $domain The domain name
+     * @param int $domainRestore The domain restore id
+     * @return Response The details of an existing domain restore
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function getDomainRestore($account, $domain, $domainRestore): Response
+    {
+        $response = $this->get("/{$account}/registrar/domains/{$domain}/restores/{$domainRestore}");
+        return new Response($response, DomainRestore::class);
     }
 
     /**

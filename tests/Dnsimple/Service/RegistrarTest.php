@@ -6,6 +6,7 @@ use Dnsimple\DnsimpleException;
 use Dnsimple\Exceptions\BadRequestException;
 use Dnsimple\Struct\DomainCheck;
 use Dnsimple\Struct\DomainRenewal;
+use Dnsimple\Struct\DomainRestore;
 use Dnsimple\Struct\DomainTransfer;
 
 class RegistrarTest extends ServiceTestCase
@@ -206,6 +207,45 @@ class RegistrarTest extends ServiceTestCase
         self::assertEquals("renewed", $renewal->state);
         self::assertEquals("2016-12-09T19:46:45Z", $renewal->createdAt);
         self::assertEquals("2016-12-12T19:46:45Z", $renewal->updatedAt);
+    }
+
+    public function testRestoreDomain()
+    {
+        $this->mockResponseWith("restoreDomain/success");
+
+        $attributes = [
+            "premium_price" => "100.0"
+        ];
+        $restore = $this->service->restoreDomain(1010, "example.com", $attributes)->getData();
+
+        $request = $this->mockHandler->getLastRequest();
+        self::assertEquals("POST", $request->getMethod());
+        self::assertEquals("/v2/1010/registrar/domains/example.com/restores", $request->getUri()->getPath());
+        self::assertEquals($attributes, json_decode((string) $request->getBody(), true));
+
+        self::assertInstanceOf(DomainRestore::class, $restore);
+        self::assertEquals(43, $restore->id);
+        self::assertEquals(214, $restore->domainId);
+        self::assertEquals("new", $restore->state);
+        self::assertEquals("2024-02-14T14:40:42Z", $restore->createdAt);
+        self::assertEquals("2024-02-14T14:40:42Z", $restore->updatedAt);
+    }
+
+    public function testGetDomainRestore()
+    {
+        $this->mockResponseWith("getDomainRestore/success");
+        $restore = $this->service->getDomainRestore(1010, "bingo.pizza", 1)->getData();
+
+        $request = $this->mockHandler->getLastRequest();
+        self::assertEquals("GET", $request->getMethod());
+        self::assertEquals("/v2/1010/registrar/domains/bingo.pizza/restores/1", $request->getUri()->getPath());
+
+        self::assertInstanceOf(DomainRestore::class, $restore);
+        self::assertEquals(43, $restore->id);
+        self::assertEquals(214, $restore->domainId);
+        self::assertEquals("new", $restore->state);
+        self::assertEquals("2024-02-14T14:40:42Z", $restore->createdAt);
+        self::assertEquals("2024-02-14T14:40:42Z", $restore->updatedAt);
     }
 
     public function testTransferDomainOut()
