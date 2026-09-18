@@ -51,7 +51,7 @@ class Response
      */
     public function getData()
     {
-        $json = json_decode($this->_httpResponse->getBody());
+        $json = $this->getJson();
         if (property_exists($json, "data")) {
             $data = $json->data;
             if (is_array($data))
@@ -74,7 +74,17 @@ class Response
      * @return Pagination The pagination object.
      */
     public function getPagination() {
-        return new Pagination(json_decode($this->_httpResponse->getBody())->pagination);
+        return new Pagination($this->getJson()->pagination);
+    }
+
+    /**
+     * Returns the decoded JSON body of the response.
+     *
+     * @return mixed The decoded body
+     */
+    protected function getJson()
+    {
+        return json_decode($this->_httpResponse->getBody());
     }
 
     /**

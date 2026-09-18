@@ -8,6 +8,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/), the format is
 
 - Added `restoreDomain` and `getDomainRestore` to restore a domain and retrieve a domain restore. (#182)
 - Added `batchChangeZoneRecords` to create, update, and delete zone records in one atomic request. (#185)
+- Added `dnsAnalytics->query` to query DNS Analytics data. The API is in Public Beta. (#186)
 
 ## 7.1.0 - 2026-09-17
 
