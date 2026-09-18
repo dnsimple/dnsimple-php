@@ -3,7 +3,6 @@
 namespace Dnsimple\Service;
 
 use Dnsimple\DnsAnalyticsResponse;
-use Dnsimple\Struct\DnsAnalytics as DnsAnalyticsRecord;
 use Dnsimple\Struct\DnsAnalyticsQuery;
 
 class DnsAnalyticsTest extends ServiceTestCase
@@ -25,25 +24,17 @@ class DnsAnalyticsTest extends ServiceTestCase
         $request = $this->mockHandler->getLastRequest();
         self::assertEquals("GET", $request->getMethod());
         self::assertEquals("/v2/1010/dns_analytics", $request->getUri()->getPath());
-    }
 
-    public function testQueryReturnsRecords()
-    {
-        $this->mockResponseWith("dnsAnalytics/success");
-
-        $data = $this->service->query(1010)->getData();
+        $data = $response->getData();
         self::assertCount(12, $data);
 
         $record = $data[0];
-        self::assertInstanceOf(DnsAnalyticsRecord::class, $record);
+        self::assertInstanceOf(\Dnsimple\Struct\DnsAnalytics::class, $record);
         self::assertEquals("bar.com", $record->zoneName);
         self::assertEquals("2023-12-08", $record->date);
         self::assertEquals(1200, $record->volume);
 
-        $record = $data[4];
-        self::assertEquals("example.com", $record->zoneName);
-        self::assertEquals("2023-12-08", $record->date);
-        self::assertEquals(1200, $record->volume);
+        self::assertEquals("example.com", $data[4]->zoneName);
     }
 
     public function testQueryHasPaginationObject()

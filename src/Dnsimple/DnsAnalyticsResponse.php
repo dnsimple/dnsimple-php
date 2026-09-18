@@ -19,7 +19,7 @@ class DnsAnalyticsResponse extends Response
      */
     public function getData()
     {
-        $data = json_decode($this->_httpResponse->getBody())->data;
+        $data = $this->getJson()->data;
         return array_map(function($row) use ($data) {
             return new DnsAnalytics((object) array_combine($data->headers, $row));
         }, $data->rows);
@@ -32,6 +32,6 @@ class DnsAnalyticsResponse extends Response
      */
     public function getQuery()
     {
-        return new DnsAnalyticsQuery(json_decode($this->_httpResponse->getBody())->query);
+        return new DnsAnalyticsQuery($this->getJson()->query);
     }
 }

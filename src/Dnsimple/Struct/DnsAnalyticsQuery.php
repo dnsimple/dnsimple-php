@@ -5,6 +5,7 @@ namespace Dnsimple\Struct;
 
 /**
  * Represents the query parameters that produced a DNS Analytics result
+ *
  * @package Dnsimple\Struct
  */
 class DnsAnalyticsQuery

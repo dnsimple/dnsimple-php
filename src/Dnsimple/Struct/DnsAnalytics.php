@@ -6,8 +6,6 @@ namespace Dnsimple\Struct;
 /**
  * Represents a DNS Analytics record
  *
- * The groupings of the query set which fields have a value.
- *
  * @package Dnsimple\Struct
  */
 class DnsAnalytics
