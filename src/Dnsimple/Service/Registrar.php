@@ -180,7 +180,7 @@ class Registrar extends ClientService
     }
 
     /**
-     * Restores a domain that can no longer be renewed.
+     * Restores a domain that can no longer be renewed, if the registry supports this function.
      *
      * You are charged the restore fee when the restore completes.
      *

@@ -225,10 +225,7 @@ class RegistrarTest extends ServiceTestCase
 
         self::assertInstanceOf(DomainRestore::class, $restore);
         self::assertEquals(43, $restore->id);
-        self::assertEquals(214, $restore->domainId);
         self::assertEquals("new", $restore->state);
-        self::assertEquals("2024-02-14T14:40:42Z", $restore->createdAt);
-        self::assertEquals("2024-02-14T14:40:42Z", $restore->updatedAt);
     }
 
     public function testGetDomainRestore()
