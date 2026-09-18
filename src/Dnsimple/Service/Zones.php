@@ -9,6 +9,7 @@ use Dnsimple\Struct\Zone;
 use Dnsimple\Struct\ZoneDistribution;
 use Dnsimple\Struct\ZoneFile;
 use Dnsimple\Struct\ZoneRecord;
+use Dnsimple\Struct\ZoneRecordsBatchChange;
 
 /**
  * The Zones Service handles the zones endpoint of the DNSimple API.
@@ -189,6 +190,23 @@ class Zones extends ClientService
     {
         $response = $this->get("/{$account}/zones/{$zone}/records/{$record}/distribution");
         return new Response($response, ZoneDistribution::class);
+    }
+
+    /**
+     * Creates, updates, and deletes records in the zone in one atomic request.
+     *
+     * @see https://developer.dnsimple.com/v2/zones/records/#batchChangeZoneRecords
+     *
+     * @param int $account The account id
+     * @param string $zone The zone name
+     * @param array $attributes The record changes, with the optional "creates", "updates", and "deletes" keys. Refer to the documentation for the list of available fields.
+     * @return Response The created records, the updated records, and the IDs of the deleted records
+     * @throws DnsimpleException When something goes wrong
+     */
+    public function batchChangeZoneRecords($account, $zone, array $attributes): Response
+    {
+        $response = $this->post("/{$account}/zones/{$zone}/batch", $attributes);
+        return new Response($response, ZoneRecordsBatchChange::class);
     }
 
     /**

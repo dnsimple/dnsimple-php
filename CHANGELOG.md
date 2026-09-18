@@ -7,6 +7,7 @@ This project uses [Semantic Versioning 2.0.0](http://semver.org/), the format is
 ### Added
 
 - Added `restoreDomain` and `getDomainRestore` to restore a domain and retrieve a domain restore. (#182)
+- Added `batchChangeZoneRecords` to create, update, and delete zone records in one atomic request. (#185)
 
 ## 7.1.0 - 2026-09-17
 
