@@ -24,8 +24,8 @@ class ZoneRecordsBatchChange
 
     public function __construct($data)
     {
-        $this->creates = array_map(function($args) { return new ZoneRecord($args); }, $data->creates ?? []);
-        $this->updates = array_map(function($args) { return new ZoneRecord($args); }, $data->updates ?? []);
-        $this->deletes = array_map(function($args) { return new ZoneRecordId($args); }, $data->deletes ?? []);
+        $this->creates = array_map(function($args) { return new ZoneRecord($args); }, $data->creates);
+        $this->updates = array_map(function($args) { return new ZoneRecord($args); }, $data->updates);
+        $this->deletes = array_map(function($args) { return new ZoneRecordId($args); }, $data->deletes);
     }
 }
