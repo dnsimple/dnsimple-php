@@ -38,7 +38,7 @@ class Domains extends ClientService
     /**
      * Creates a domain in the account.
      *
-     * @see https://developer.dnsimple.com/v2/domains/#create
+     * @see https://developer.dnsimple.com/v2/domains/#createDomain
      *
      * @param int $account The account ID
      * @param array $attributes The domain attributes. Refer to the documentation for the list of available fields.
@@ -281,7 +281,7 @@ class Domains extends ClientService
     /**
      * Initiate a push for the domain.
      *
-     * @see https://developer.dnsimple.com/v2/domains/pushes/#initiate
+     * @see https://developer.dnsimple.com/v2/domains/pushes/#initiateDomainPush
      *
      * @param int $account The account id
      * @param int|string $domain The domain name or id

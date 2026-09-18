@@ -18,7 +18,7 @@ class Billing extends ClientService
     /**
      * Lists the billing charges the current authenticated entity has access to.
      *
-     * @see https://developer.dnsimple.com/v2/billing/#listCharges
+     * @see https://developer.dnsimple.com/v2/billing-charges/#listCharges
      *
      * @return Response The response containing the list of charges
      * @throws DnsimpleException When something goes wrong
