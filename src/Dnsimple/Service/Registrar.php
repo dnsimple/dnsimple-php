@@ -355,7 +355,7 @@ class Registrar extends ClientService
     /**
      * Create a new registrant change
      * 
-     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#startRegistrantChange
+     * @see https://developer.dnsimple.com/v2/registrar/registrant-changes/#createRegistrantChange
      * 
      * @param int $account The account id
      * @param array $attributes The registrant change attributes
