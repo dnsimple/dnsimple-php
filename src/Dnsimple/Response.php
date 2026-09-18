@@ -15,7 +15,7 @@ class Response
     /**
      * @var ResponseInterface $_httpResponse The raw http response
      */
-    private $_httpResponse;
+    protected $_httpResponse;
 
     /**
      * @var mixed The structure that will be created with the data in the request body

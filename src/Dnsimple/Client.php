@@ -9,6 +9,7 @@ use Dnsimple\Service\Accounts;
 use Dnsimple\Service\Billing;
 use Dnsimple\Service\Certificates;
 use Dnsimple\Service\Contacts;
+use Dnsimple\Service\DnsAnalytics;
 use Dnsimple\Service\Domains;
 use Dnsimple\Service\Identity;
 use Dnsimple\Service\Oauth;
@@ -130,6 +131,10 @@ class Client
      * @var Billing The service handling the Billing API
      */
     public $billing;
+    /**
+     * @var DnsAnalytics The service handling the DNS Analytics API
+     */
+    public $dnsAnalytics;
 
     /**
      * Client constructor.
@@ -290,6 +295,7 @@ class Client
         $this->billing = new Billing($this);
         $this->certificates = new Certificates($this);
         $this->contacts = new Contacts($this);
+        $this->dnsAnalytics = new DnsAnalytics($this);
         $this->domains = new Domains($this);
         $this->identity = new Identity($this);
         $this->oauth = new Oauth($this);
