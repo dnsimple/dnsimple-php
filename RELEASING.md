@@ -22,7 +22,7 @@ A new release is not necessary for changes to `composer.lock` because [they do n
    - **MINOR** version for backwards-compatible functionality additions
    - **PATCH** version for backwards-compatible bug fixes
 
-   Check the `## Unreleased` section in `CHANGELOG.md` for entries tagged `(requires major version)`. Any such entry requires a **MAJOR** version, whatever the other entries are. Raising the minimum supported PHP version is always a breaking change, so its changelog entry must carry this tag.
+   Check the `## Unreleased` section in `CHANGELOG.md` for entries prefixed with `**BREAKING**:`. Any such entry requires a **MAJOR** version, whatever the other entries are. Raising the minimum supported PHP version is always a breaking change, so its changelog entry must carry this prefix.
 
 2. **Update the version file** with the new version
 
