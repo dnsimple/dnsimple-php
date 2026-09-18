@@ -12,15 +12,15 @@ class DnsAnalyticsQuery
     /**
      * @var int The account id
      */
-    public $account_id;
+    public $accountId;
     /**
      * @var string|null The start date of the query
      */
-    public $start_date;
+    public $startDate;
     /**
      * @var string|null The end date of the query
      */
-    public $end_date;
+    public $endDate;
     /**
      * @var string The sort policy
      */
@@ -32,7 +32,7 @@ class DnsAnalyticsQuery
     /**
      * @var int The number of entries per page
      */
-    public $per_page;
+    public $perPage;
     /**
      * @var string|null The groupings
      */
@@ -40,12 +40,12 @@ class DnsAnalyticsQuery
 
     public function __construct($data)
     {
-        $this->account_id = $data->account_id;
-        $this->start_date = $data->start_date;
-        $this->end_date = $data->end_date;
+        $this->accountId = $data->account_id;
+        $this->startDate = $data->start_date;
+        $this->endDate = $data->end_date;
         $this->sort = $data->sort;
         $this->page = $data->page;
-        $this->per_page = $data->per_page;
+        $this->perPage = $data->per_page;
         $this->groupings = $data->groupings;
     }
 }

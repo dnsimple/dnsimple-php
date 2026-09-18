@@ -15,7 +15,7 @@ class DnsAnalytics
     /**
      * @var string|null The zone name
      */
-    public $zone_name;
+    public $zoneName;
     /**
      * @var string|null The date of the queries
      */
@@ -27,7 +27,7 @@ class DnsAnalytics
 
     public function __construct($data)
     {
-        $this->zone_name = $data->zone_name ?? null;
+        $this->zoneName = $data->zone_name ?? null;
         $this->date = $data->date ?? null;
         $this->volume = $data->volume ?? null;
     }

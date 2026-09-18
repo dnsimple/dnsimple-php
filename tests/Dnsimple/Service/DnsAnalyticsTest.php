@@ -36,12 +36,12 @@ class DnsAnalyticsTest extends ServiceTestCase
 
         $record = $data[0];
         self::assertInstanceOf(DnsAnalyticsRecord::class, $record);
-        self::assertEquals("bar.com", $record->zone_name);
+        self::assertEquals("bar.com", $record->zoneName);
         self::assertEquals("2023-12-08", $record->date);
         self::assertEquals(1200, $record->volume);
 
         $record = $data[4];
-        self::assertEquals("example.com", $record->zone_name);
+        self::assertEquals("example.com", $record->zoneName);
         self::assertEquals("2023-12-08", $record->date);
         self::assertEquals(1200, $record->volume);
     }
@@ -65,12 +65,12 @@ class DnsAnalyticsTest extends ServiceTestCase
         $query = $this->service->query(1010)->getQuery();
 
         self::assertInstanceOf(DnsAnalyticsQuery::class, $query);
-        self::assertEquals(1, $query->account_id);
-        self::assertEquals("2023-12-08", $query->start_date);
-        self::assertEquals("2024-01-08", $query->end_date);
+        self::assertEquals(1, $query->accountId);
+        self::assertEquals("2023-12-08", $query->startDate);
+        self::assertEquals("2024-01-08", $query->endDate);
         self::assertEquals("zone_name:asc,date:asc", $query->sort);
         self::assertEquals(0, $query->page);
-        self::assertEquals(100, $query->per_page);
+        self::assertEquals(100, $query->perPage);
         self::assertEquals("zone_name,date", $query->groupings);
     }
 
